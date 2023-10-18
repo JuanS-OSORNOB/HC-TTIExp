@@ -21,3 +21,7 @@ if()
     message(STATUS "Configuring HC-TTIExp with tests")
     add_subdirectory(test)
 endif()
+
+#Create package configuration file
+include(CMakePackageConfigHelpers)
+configure_package_config_file(cmake/HCTTIExpProjConfig.cmake.in HCTTIExpProjConfig.cmake INSTALL_DESTINATION cmake/)
