@@ -1,0 +1,3 @@
+//Options and settings exported to source code
+#define HCTTIExpProj_VERSION_MAJOR @HCTTIExpProj_VERSION_MAJOR@
+#define HCTTIExpProj_VERSION_MINOR @HCTTIExpProj_VERSION_MINOR@
