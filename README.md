@@ -7,5 +7,13 @@ HC-TTIExp also allows for simulation of multi-phase fluid flow in the meshed dom
 
 A test case for the Atrato basin of northwestern Colombia is found.
 
+To configure the compilation environment (you can choose whether to have executables and tests)
+```
+cmake-gui
+```
+To generate the project files
+```
+make
+```
 <b>For any required information please contact<b>:
 * Juan Sebastián Osorno Bolívar (juansebosornob@gmail.com)
