@@ -1,6 +1,6 @@
-#include <basic/message.h>
+#include <basic/expulsionsim.h>
 int main()
 {
-    print_version();
+    
     return 1;
 }

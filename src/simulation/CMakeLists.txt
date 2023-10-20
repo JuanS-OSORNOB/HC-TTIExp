@@ -1,10 +1,8 @@
-set(target_name basic)
+set(target_name simulation)
 add_library(${target_name} STATIC "")
 target_sources(${target_name}
- PRIVATE "${PROJECT_SOURCE_DIR}/src/basic/errorhandling.cpp"
- PRIVATE "${PROJECT_SOURCE_DIR}/include/basic/errorhandling.h"
- PRIVATE "${PROJECT_SOURCE_DIR}/include/basic/logger.cpp"
- PRIVATE "${PROJECT_SOURCE_DIR}/include/basic/logger.h"
+ PRIVATE "${PROJECT_SOURCE_DIR}/src/simulation/simulation.cpp"
+ PRIVATE "${PROJECT_SOURCE_DIR}/include/simulation/simulation.h"
 )
 target_include_directories(${target_name}
  PUBLIC
