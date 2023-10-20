@@ -13,11 +13,11 @@ cd HC-TTIExp
 mkdir build
 cd build
 ```
-To configure the compilation environment (you can choose whether to have executables and tests)
+To configure and generate the compilation environment (you can choose whether to have executables and tests)
 ```
 cmake .. OR cmake-gui (if you want to specify environment paths like dependency libraries or installation location)
 ```
-To generate the compiled files
+To compile the files
 ```
 make -J (use the J flag if you want to allocate multiple cores of the computer for this operation, e.g.: -J7)
 ```
