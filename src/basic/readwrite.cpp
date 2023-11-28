@@ -1,6 +1,11 @@
+#include <HCTTIExpProjConfig.h>
 #include <basic/readwrite.h>
+
 #include <fstream>
 #include <iostream>
+#include <vector>
+#include <string>
+
 bool readfiles::readkineticfile(const std::string& kinFilename, double& kinArg1, double& kinArg2, double& kinArg3){
     std::ifstream kinFile(kinFilename);
     if(!kinFile.is_open())
@@ -35,7 +40,7 @@ bool readfiles::readlithofile(const std::string& lithoFilename, std::vector <dou
         lithoFile >> lithoArg1[i] >>lithoArg2[i] >>lithoArg3[i] >>lithoArg4[i];
     }
 
-    lithoFile.close()
+    lithoFile.close();
 
     return true;//Indicate success
 }

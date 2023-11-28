@@ -1,8 +1,14 @@
-#include<basic/message.h>
 #include <basic/readwrite.h>
+#include <thermal_effects/tti.h>
+
+#include <string>
+#include <vector>
+#include <iostream>
+#include <fstream>
 
 int main() {
-    hello_world();
+    std::cout << "WHAT THE FUUUUCK" << std::endl;
+    
     // Read kinetic properties from the first file
     std::string kinFilename = "kinetic_properties.txt";
     double kinArg1, kinArg2, kinArg3;
