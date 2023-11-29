@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LOGGER_H
+#define LOGGER_H
 
 class Logger
 {
@@ -7,3 +8,5 @@ class Logger
         ~Logger();
     private:
 };
+
+#endif

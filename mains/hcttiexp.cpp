@@ -1,5 +1,7 @@
 #include <basic/readwrite.h>
+#include <basic/message.h>
 #include <thermal_effects/tti.h>
+#include <basic/message.h>
 
 #include <string>
 #include <vector>
@@ -7,9 +9,9 @@
 #include <fstream>
 
 int main() {
-    std::cout << "WHAT THE FUUUUCK" << std::endl;
-    
-    // Read kinetic properties from the first file
+    hello_world();
+    print_version();
+/*     // Read kinetic properties from the first file
     std::string kinFilename = "kinetic_properties.txt";
     double kinArg1, kinArg2, kinArg3;
     if(!readkineticfile(kinFilename, kinArg1, kinArg2, kinArg3))
@@ -33,6 +35,6 @@ int main() {
         // Output the result for each component
         std::cout << "Result for Component " << (i + 1) << ": " << result << std::endl;
     }
-
+ */
     return 0;
 }

@@ -1,5 +1,5 @@
-#pragma once
-void print_version();
+#ifndef ERRORHANDLING_H
+#define ERRORHANDLING_H
 
 class Errorhandler
 {
@@ -8,3 +8,4 @@ class Errorhandler
         ~Errorhandler();
     private:
 };
+#endif

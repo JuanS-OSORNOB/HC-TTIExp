@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TTI_H
+#define TTI_H
 class TTI
 {
     public:
@@ -18,7 +19,8 @@ class TTI
      
      * @return double 
      */
-    double ttiarr(double arg1, double arg2, double arg3, double arg4, double arg5, double arg6, double arg7) {};
+    double ttiarr(double arg1, double arg2, double arg3, double arg4, double arg5, double arg6, double arg7);
     
     private:
 };
+#endif

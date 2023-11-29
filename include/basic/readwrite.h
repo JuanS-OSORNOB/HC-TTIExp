@@ -1,4 +1,8 @@
-#pragma once
+#ifndef READWRITE_H
+#define READWRITE_H
+
+#include <string>
+#include <vector>
 class readfiles
 {
     public:
@@ -12,7 +16,7 @@ class readfiles
          * @return true 
          * @return false 
          */
-        bool readkineticfile(const std::string& kinFilename, double& kinArg1, double& kinArg2, double& kinArg3){};
+        bool readkineticfile(const std::string& kinFilename, double& kinArg1, double& kinArg2, double& kinArg3);
         /**
          * @brief 
          * This function reads the lithological file and extracts the arguments that will be employed in computing TTIArr
@@ -24,5 +28,6 @@ class readfiles
          * @return true 
          * @return false 
          */
-        bool readlithofile(const std::string& lithoFilename, std::vector<double>& lithoArg1, std::vector<double>& lithoArg2, std::vector<double>& lithoArg3, std::vector<double>& lithoArg4){};
+        bool readlithofile(const std::string& lithoFilename, std::vector<double>& lithoArg1, std::vector<double>& lithoArg2, std::vector<double>& lithoArg3, std::vector<double>& lithoArg4);
 };
+#endif

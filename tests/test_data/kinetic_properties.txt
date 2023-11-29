@@ -1,0 +1,2 @@
+#Sample kinetic file
+#E (kJ/mol) A (1/m.y.)  R (J/K*mol)

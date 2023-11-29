@@ -10,7 +10,7 @@ bool readfiles::readkineticfile(const std::string& kinFilename, double& kinArg1,
     std::ifstream kinFile(kinFilename);
     if(!kinFile.is_open())
     {
-        std::cerr << "Error opening kinetic properties file\n";
+        std::cerr << "Error opening kinetic properties file" << kinFilename << "\n";
         return false;//Indicate failure
     }
 

@@ -18,18 +18,23 @@ add_subdirectory(src/simulation)
 add_subdirectory(src/thermal_effects)
 add_subdirectory(src/visualization)
 
+# Set CMP0079 policy to NEW
+cmake_policy(SET CMP0079 NEW)
+
 #Add the executables
 option(HCTTIExp_WITH_EXECUTABLES "Compile mains" ON)
 if(HCTTIExp_WITH_EXECUTABLES)
     message(STATUS "Configuring HC-TTIExp with executables")
     add_subdirectory(mains)
+    target_link_libraries(HCTTIExp PRIVATE basic fluid_properties media_properties simulation thermal_effects visualization)
 endif()
+
 #Add tests
 option(HCTTIExp_WITH_TESTS "Compile tests" ON)
 if()
     enable_testing()
     message(STATUS "Configuring HC-TTIExp with tests")
-    add_subdirectory(test)
+    add_subdirectory(tests)
 endif()
 
 #Create package configuration file

@@ -1,3 +1,4 @@
+#Set the library name
 set(target_name basic)
 add_library(${target_name} STATIC "")
 target_sources(${target_name}
@@ -5,6 +6,10 @@ target_sources(${target_name}
  PRIVATE "${PROJECT_SOURCE_DIR}/include/basic/errorhandling.h"
  PRIVATE "${PROJECT_SOURCE_DIR}/src/basic/logger.cpp"
  PRIVATE "${PROJECT_SOURCE_DIR}/include/basic/logger.h"
+ PRIVATE "${PROJECT_SOURCE_DIR}/src/basic/message.cpp"
+ PRIVATE "${PROJECT_SOURCE_DIR}/include/basic/message.h"
+ PRIVATE "${PROJECT_SOURCE_DIR}/src/basic/readwrite.cpp"
+ PRIVATE "${PROJECT_SOURCE_DIR}/include/basic/readwrite.h"
 )
 target_include_directories(${target_name}
  PUBLIC

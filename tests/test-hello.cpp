@@ -1,6 +1,6 @@
-#include <basic/expulsionsim.h>
+#include <basic/message.h>
 int main()
 {
-    
+    hello_world();
     return 0;
 }
