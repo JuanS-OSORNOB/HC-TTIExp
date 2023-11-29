@@ -31,7 +31,7 @@ endif()
 
 #Add tests
 option(HCTTIExp_WITH_TESTS "Compile tests" ON)
-if()
+if(HCTTIExp_WITH_TESTS)
     enable_testing()
     message(STATUS "Configuring HC-TTIExp with tests")
     add_subdirectory(tests)

@@ -1,6 +1,8 @@
 #include <basic/message.h>
+
 int main()
 {
     print_version();
-    return 1;
+    
+    return 0;
 }

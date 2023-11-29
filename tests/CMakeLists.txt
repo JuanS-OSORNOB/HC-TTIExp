@@ -9,6 +9,6 @@ target_link_libraries(test_version PUBLIC basic)
 add_test(NAME test_version COMMAND test_version)
 
 #Third test
-add_executable(test_readlitho test-readlitho.cpp)
-target_link_libraries(test_readlitho PUBLIC basic)
-add_test(NAME test_readlitho COMMAND test_readlitho)
+add_executable(test_readkinetic test-readkinetic.cpp)
+target_link_libraries(test_readkinetic PUBLIC basic)
+add_test(NAME test_readkinetic COMMAND test_readkinetic)

@@ -14,9 +14,12 @@ target_sources(${target_name}
 target_include_directories(${target_name}
  PUBLIC
  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+ $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/basic> #Include this library
  $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}>
  $<INSTALL_INTERFACE:include>
 )
+
+
 #Export the target
 export(TARGETS ${target_name} FILE $(PROJECT_BINARY_DIR)/${target_name}_target.cmake)
 
