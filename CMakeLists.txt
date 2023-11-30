@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.10)
 project(HCTTIExpProj VERSION 1.0)
 
 #Specify the C++ standard and use the cmake_cxx_standard variable
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 #Export configuration to source code

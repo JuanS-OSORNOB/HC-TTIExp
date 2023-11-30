@@ -1,23 +1,57 @@
 #include <HCTTIExpProjConfig.h>
 #include <basic/readwrite.h>
 
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <vector>
 #include <string>
 
-bool readfiles::readkineticfile(const std::string& kinFilename, double& kinArg1, double& kinArg2, double& kinArg3){
-    std::ifstream kinFile(kinFilename);
-    if(!kinFile.is_open())
-    {
-        std::cerr << "Error opening kinetic properties file" << kinFilename << "\n";
-        return false;//Indicate failure
-    }
+bool readfiles::readkineticfile(const std::string& kinFilename, double& kinArg1, double& kinArg2, double& kinArg3) {
+    std::cout << "Filepath: " << kinFilename << "\n"; // Checking for file existence
 
-    kinFile >> kinArg1 >> kinArg2 >> kinArg3;
-    kinFile.close();
-    return true;//Indicate success
+    if (!std::filesystem::exists(kinFilename)) {
+        std::cerr << "Error: File does not exist: " << kinFilename << "\n";
+        return false; // Indicate failure
+    } else {
+        std::ifstream kinFile(kinFilename, std::ios::in);
+
+        if (!kinFile.is_open()) {
+            std::cerr << "Error: Could not open kinetic properties file: " << kinFilename << "\n";
+            return false; // Indicate failure
+        }
+
+        // Skip header lines starting with '#'
+        std::string line;
+        while (std::getline(kinFile, line)) {
+            if (line.empty() || line[0] != '#')
+                break;
+        }
+
+        // Read the kinetic parameters
+        if (kinFile >> kinArg1 >> kinArg2 >> kinArg3) {
+            std::cout << "The following kinetic parameters will be used for computation of the TTI:\n";
+            std::cout << "E = " << kinArg1 << "\n";
+            std::cout << "A = " << kinArg2 << "\n";
+            std::cout << "R = " << kinArg3 << "\n";
+            kinFile.close();
+            return true; // Indicate success
+        } else {
+            if (kinFile.eof()) {
+                std::cerr << "Error: End of file reached while reading kinetic parameters from file: " << kinFilename << "\n";
+            } else if (kinFile.fail()) {
+                std::cerr << "Error: Invalid format while reading kinetic parameters from file: " << kinFilename << "\n";
+            } else {
+                std::cerr << "Error: Unknown error occurred while reading kinetic parameters from file: " << kinFilename << "\n";
+            }
+
+            kinFile.close();
+            return false; // Indicate failure
+        }
+    }
 }
+
+
 
 bool readfiles::readlithofile(const std::string& lithoFilename, std::vector <double>& lithoArg1, std::vector<double>& lithoArg2, std::vector<double>& lithoArg3, std::vector<double>& lithoArg4)
 {

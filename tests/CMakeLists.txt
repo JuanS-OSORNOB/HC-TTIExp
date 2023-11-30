@@ -1,3 +1,7 @@
+# Copy test data to build directory
+#The test data lies in the source dir and is not copied into the build folder when constructing binaries
+#file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 #First test
 add_executable(test_hello test-hello.cpp)
 target_link_libraries(test_hello PUBLIC basic)

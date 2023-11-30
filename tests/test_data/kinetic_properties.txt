@@ -1,3 +1,2 @@
-#Sample kinetic file
-#E (kJ/mol) A (1/m.y.)  R (J/K*mol)
+#Kinetic file example
 143.4   7.017E+20   8.314
