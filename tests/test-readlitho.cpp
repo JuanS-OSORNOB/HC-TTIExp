@@ -5,15 +5,15 @@
 
 int main() {
     std::string executableDirectory = std::filesystem::path(__FILE__).parent_path().string();
-    std::string kinFilename = executableDirectory + "/test_data/kinetic_properties.txt";
+    std::string kinFilename = executableDirectory + "/test_data/litho_properties.txt";
 
     Readfiles reader;
-    std::vector<KineticData> data = reader.readkineticfile(kinFilename);
+    std::vector<LithoData> data = reader.readlithofile(kinFilename);
 
     // Print the contents of the data vector
     std::cout << "Data vector contents:" << std::endl;
     for (const auto& entry : data) {
-        std::cout << "Column1: " << entry.column1 << " Column2: " << entry.column2 << " Column3: " << entry.column3 << std::endl;
+        std::cout << "Column1: " << entry.column1 << " Column2: " << entry.column2 << " Column3: " << entry.column3 << " Column4: " << entry.column4 << std::endl;
     }
 
 

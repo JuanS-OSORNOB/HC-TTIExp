@@ -26,7 +26,8 @@ option(HCTTIExp_WITH_EXECUTABLES "Compile mains" ON)
 if(HCTTIExp_WITH_EXECUTABLES)
     message(STATUS "Configuring HC-TTIExp with executables")
     add_subdirectory(mains)
-    target_link_libraries(HCTTIExp PRIVATE basic fluid_properties media_properties simulation thermal_effects visualization)
+    find_package(Catch2 REQUIRED)
+    target_link_libraries(HCTTIExp PRIVATE  ${Catch2_INCLUDE_DIRS} basic fluid_properties media_properties simulation thermal_effects visualization)
 endif()
 
 #Add tests
