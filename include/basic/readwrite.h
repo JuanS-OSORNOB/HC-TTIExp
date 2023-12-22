@@ -5,14 +5,13 @@
 #include <vector>
 /**
  * @brief 
- * 
+ * Structure of the kinetic data based on the columns of my file.
 * @param column1 E: Activation energy (kJ/mol)
 * @param column2 A: Pre-exponential/frequency factor (1/m.y.)
 * @param column3 R: Ideal gas constant (J/K*mol)
  */
 struct KineticData
 {
-    // Define your data structure based on the columns in your file
     double column1;
     double column2;
     double column3;
@@ -27,7 +26,6 @@ struct KineticData
  */
 struct LithoData
 {
-    // Define your data structure based on the columns in your file
     double column1;
     double column2;
     double column3;
