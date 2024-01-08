@@ -2,17 +2,19 @@
 #include <basic/message.h>
 #include <thermal_effects/tti.h>
 #include <basic/message.h>
+#include <media_properties/mediaproperties.h>
 
 #include <string>
 #include <vector>
 #include <iostream>
 #include <fstream>
-//#include <boost/version.hpp>
 
 int main() {
+    using namespace HCTTIEXP;
     hello_world();
     print_version();
-    //std::cout << "Boost version: " << BOOST_VERSION << std::endl;
+    Mediaproperties mediaproperties;
+    mediaproperties.generategrid();
     
 
 

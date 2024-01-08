@@ -14,24 +14,23 @@ namespace HCTTIEXP
 {
     using namespace dealii;
 
-    void mediaproperties::generategrid(){
-        Triangulation<2> triangulation;
-        GridGenerator::subdivided_hyper_rectangle(
-        triangulation,
-        {10, 5}, /* repetitions */
-        Point<2>(0, 0), /* lower left corner */
-        Point<2>(10, 5) /* upper right corner */
-        );
-        triangulation.refine_global(2);  // Refine the mesh globally (example value)
-        //Output the mesh
+    void Mediaproperties::generategrid()
+    {
+        Triangulation<2, 2> triangulation;
+
+        // Define the number of subdivisions in each direction
+        std::vector<unsigned int> repetitions = {4, 3};
+
+        // Define the two diagonally opposite corner points
+        Point<2> p1(0, 0);
+        Point<2> p2(145, 9);
+
+        // Create a subdivided hyperrectangle mesh
+        GridGenerator::subdivided_hyper_rectangle(triangulation, repetitions, p1, p2, true);
+
+        // Output the mesh for visualization (optional)
         std::ofstream out("mesh.vtk");
         GridOut grid_out;
         grid_out.write_vtk(triangulation, out);
-
     }
-    
-    
-
-
-
 }

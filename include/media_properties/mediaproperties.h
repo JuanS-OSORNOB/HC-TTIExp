@@ -4,28 +4,14 @@ namespace HCTTIEXP
 {
     //using namespace dealii;
     
-    class mediaproperties
+    class Mediaproperties
     {
     private:
         /* data */
     public:
-        mediaproperties(/* args */);
-        ~mediaproperties();
         void generategrid();
 
 
     };
-    
-    mediaproperties::mediaproperties(/* args */)
-    {
-    }
-    
-    mediaproperties::~mediaproperties()
-    {
-    }
-    
 } // namespace HCTTIEXP
-
-
-
 #endif
