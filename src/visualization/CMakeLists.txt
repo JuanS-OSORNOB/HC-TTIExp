@@ -10,6 +10,7 @@ target_include_directories(${target_name}
  $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}>
  $<INSTALL_INTERFACE:include>
 )
+deal_ii_setup_target(${target_name})
 #Export the target
 export(TARGETS ${target_name} FILE $(PROJECT_BINARY_DIR)/${target_name}_target.cmake)
 

@@ -2,7 +2,7 @@
 #define MEDIAPROPERTIES_H
 namespace HCTTIEXP
 {
-    using namespace dealii;
+    //using namespace dealii;
     
     class mediaproperties
     {

@@ -7,10 +7,15 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+//#include <boost/version.hpp>
 
 int main() {
     hello_world();
     print_version();
+    //std::cout << "Boost version: " << BOOST_VERSION << std::endl;
+    
+
+
 /*     // Read kinetic properties from the first file
     std::string kinFilename = "kinetic_properties.txt";
     double kinArg1, kinArg2, kinArg3;

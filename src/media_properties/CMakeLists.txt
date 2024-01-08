@@ -11,13 +11,13 @@ target_include_directories(${target_name}
  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
  $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}>
  $<INSTALL_INTERFACE:include>
- ${DEAL_II_INCLUDE_DIRS} #include Deal.II directories
- ${VTK_INCLUDE_DIRS} #include VTK directories
+ #${DEAL_II_INCLUDE_DIRS} #include Deal.II directories
+ #${VTK_INCLUDE_DIRS} #include VTK directories
 )
-#Link against Deal.II library
-target_link_libraries(media_properties PRIVATE ${DEAL_II_LIBRARIES})
+
 #Link against VTK library
-target_link_libraries(media_properties PRIVATE ${VTK_LIBRARIES})
+#target_link_libraries(media_properties PRIVATE ${VTK_LIBRARIES})
+deal_ii_setup_target(${target_name})
 
 #Export the target
 export(TARGETS ${target_name} FILE $(PROJECT_BINARY_DIR)/${target_name}_target.cmake)
