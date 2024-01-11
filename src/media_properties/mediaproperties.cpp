@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-
+#include <set>
 //#include <deal.II/grid/tria.h>
 
 #include <vtkSmartPointer.h>
@@ -26,7 +26,7 @@ namespace HCTTIEXP
         return reader.readlithofile(lithoFilename);
     }
    
-   LayerProperties Mediaproperties::populateLayerProperties(const std::vector<LithoData>& lithoDataVector)
+    LayerProperties Mediaproperties::populateLayerProperties(const std::vector<LithoData>& lithoDataVector)
     {
         LayerProperties layerProperties;
 
@@ -41,7 +41,7 @@ namespace HCTTIEXP
         return layerProperties;
     }
 
-    void Mediaproperties::modifygrid(const std::string& gridFilename, const std::string& lithoFilename)
+    void Mediaproperties::modifygrid(const std::string& gridFilename, const std::string& lithoFilename, const std::string& outgridFilename)
     {
         /*1 Load VTU*/
         std::cout << "Loading the grid at: " << gridFilename << std::endl;
@@ -67,13 +67,24 @@ namespace HCTTIEXP
         vtkSmartPointer<vtkIntArray> layer_id_array = vtkIntArray::SafeDownCast(pointData->GetArray("layer_id"));//Converts the pointer of the base class to a pointer of the derived class.
         vtkSmartPointer<vtkIntArray> fault_id_array = vtkIntArray::SafeDownCast(pointData->GetArray("fault_id"));
         
+        std::cout << "Unique values in layer_id:" << std::endl;
+        std::set<int> uniqueLayerIds;
+        for (vtkIdType i = 0; i < layer_id_array->GetNumberOfTuples(); ++i)
+        {
+            int value = layer_id_array->GetValue(i);
+            uniqueLayerIds.insert(value);
+        }
+        for (const auto& uniqueValue : uniqueLayerIds)
+        {
+            std::cout << uniqueValue << std::endl;
+        }
         /*3 Get the data array for density and viscosity*/
         vtkSmartPointer<vtkDoubleArray> density_array = vtkDoubleArray::SafeDownCast(pointData->GetArray("density"));
         vtkSmartPointer<vtkDoubleArray> viscosity_array = vtkDoubleArray::SafeDownCast(pointData->GetArray("viscosity"));
         //vtkSmartPointer<vtkDoubleArray> pattern_array = vtkDoubleArray::SafeDownCast(pointData->GetArray("pattern"));
         
         /*4 Load temperature range and exposure time vectors*/
-        std::cout << "Loading the lithological file at: " << lithoFilename << std::endl;
+        std::cout << "\nLoading the lithological file at: " << lithoFilename << std::endl;
         std::vector<LithoData> lithoDataVector = readlithofile(lithoFilename);
         std::cout << "Contents of lithoDataVector:" << std::endl;
         for (const auto& lithoData : lithoDataVector)
@@ -101,6 +112,41 @@ namespace HCTTIEXP
         }
         
         /*5 Loop through each point in the grid*/
+        // Assume you have vtkDoubleArray for temperatureRange and exposureTime
+        
+        vtkSmartPointer<vtkDoubleArray> temperatureRangeArray = vtkSmartPointer<vtkDoubleArray>::New();
+        vtkSmartPointer<vtkDoubleArray> exposureTimeArray = vtkSmartPointer<vtkDoubleArray>::New();
+        temperatureRangeArray->SetName("temperatureRange");
+        exposureTimeArray->SetName("exposureTime");
+
+        for (vtkIdType pointId = 0; pointId < unstructuredGrid->GetNumberOfPoints(); ++pointId)
+        {
+            // Get lithology_id for the current point
+            int lithologyId = layer_id_array->GetValue(pointId);
+
+            // Find the corresponding index in layerProperties.lithology_id
+            auto it = std::find(layerProperties.lithology_id.begin(), layerProperties.lithology_id.end(), lithologyId);
+
+            // If lithologyId is found in layerProperties.lithology_id, associate temperatureRange and exposureTime
+            if (it != layerProperties.lithology_id.end())
+            {
+                size_t index = std::distance(layerProperties.lithology_id.begin(), it);
+
+                // Append the values to the temperatureRange and exposureTime arrays
+                temperatureRangeArray->InsertNextTuple1(layerProperties.temperatureRange[index]);
+                exposureTimeArray->InsertNextTuple1(layerProperties.exposureTime[index]);
+            }
+            else
+            {
+                std::cerr << "Error: Could not find lithology_id " << lithologyId << " in layerProperties.lithology_id." << std::endl;
+                // Handle the case where lithologyId is not found, e.g., set default values or handle error.
+            }
+        }
+
+        // Add the arrays to the point data
+        pointData->AddArray(temperatureRangeArray);
+        pointData->AddArray(exposureTimeArray);
+
         
         /*for (vtkIdType i = 0; i < unstructuredGrid->GetNumberOfPoints(); i++)
         {   
@@ -127,6 +173,13 @@ namespace HCTTIEXP
         }
         */
         std::cout << "It worked" << std::endl;
-
+        
+        /*6 Save the modified grid to a new VTU file*/
+        std::cout << "Saving the modified grid to a new VTU file." << std::endl;
+        vtkSmartPointer<vtkXMLUnstructuredGridWriter> writer = vtkSmartPointer<vtkXMLUnstructuredGridWriter>::New();
+        const char* outfileName = outgridFilename.c_str();
+        writer->SetFileName(outfileName);
+        writer->SetInputData(unstructuredGrid);
+        writer->Write();
     }
 }// namespace HCTTIEXP

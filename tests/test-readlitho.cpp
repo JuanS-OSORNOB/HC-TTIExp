@@ -7,7 +7,7 @@ int main() {
     using namespace HCTTIEXP;
     
     std::string executableDirectory = std::filesystem::path(__FILE__).parent_path().string();
-    std::string lithoFilename = executableDirectory + "/test_data/litho_properties.txt";
+    std::string lithoFilename = executableDirectory + "/test_data/test_litho_properties.txt";
 
     Readfiles reader;
     std::vector<LithoData> data = reader.readlithofile(lithoFilename);

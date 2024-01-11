@@ -16,10 +16,10 @@ int main() {
     hello_world();
     print_version();
     Mediaproperties mediaproperties;
-    //std::string executableDirectory = std::filesystem::path(__FILE__).parent_path().string();
-    std::string gridFilename = /*executableDirectory +*/ "/home/juanse/Documents/FAIStokesTraining2021/FAIStokes_GUI/CORTE_NS.vtu";
-    std::string lithoFilename = /*executableDirectory +*/ "/home/juanse/Documents/GitHub/HC-TTIExp/tests/test_data/litho_properties.txt";
-    mediaproperties.modifygrid(gridFilename, lithoFilename);
+    std::string gridFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/CORTE_NS.vtu";
+    std::string lithoFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/litho_properties.txt";
+    std::string outgridFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/mod_CORTE_NS.vtu";
+    mediaproperties.modifygrid(gridFilename, lithoFilename, outgridFilename);
     
 
 

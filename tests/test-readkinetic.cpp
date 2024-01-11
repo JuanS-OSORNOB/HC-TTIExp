@@ -7,7 +7,7 @@ int main() {
     using namespace HCTTIEXP;
     
     std::string executableDirectory = std::filesystem::path(__FILE__).parent_path().string();
-    std::string kinFilename = executableDirectory + "/test_data/kinetic_properties.txt";
+    std::string kinFilename = executableDirectory + "/test_data/test_kinetic_properties.txt";
 
     Readfiles reader;
     std::vector<KineticData> data = reader.readkineticfile(kinFilename);
