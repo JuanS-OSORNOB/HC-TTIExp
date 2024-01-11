@@ -15,9 +15,9 @@ target_include_directories(${target_name}
  #${VTK_INCLUDE_DIRS} #include VTK directories
 )
 
-#Link against VTK library
-#target_link_libraries(media_properties PRIVATE ${VTK_LIBRARIES})
+#Link against Deal.II and VTK library
 deal_ii_setup_target(${target_name})
+target_link_libraries(${target_name} ${VTK_LIBRARIES})
 
 #Export the target
 export(TARGETS ${target_name} FILE $(PROJECT_BINARY_DIR)/${target_name}_target.cmake)

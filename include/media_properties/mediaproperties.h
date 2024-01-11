@@ -1,17 +1,27 @@
 #ifndef MEDIAPROPERTIES_H
 #define MEDIAPROPERTIES_H
+
+#include <basic/readwrite.h>
+#include <vector>
+#include <string>
 namespace HCTTIEXP
 {
-    //using namespace dealii;
-    
+    struct LayerProperties
+    {
+    std::vector<double> lithology_id;
+    std::vector<double> temperatureRange;
+    std::vector<double> exposureTime;
+    };
+
     class Mediaproperties
     {
     private:
-        /* data */
+        // Function to read litho file and return std::vector<LithoData>
+        std::vector<LithoData> readlithofile(const std::string& lithoFilename);
+        // Function to populate LayerProperties from std::vector<LithoData>
+        LayerProperties populateLayerProperties(const std::vector<LithoData>& lithoDataVector);
     public:
-        void generategrid();
-
-
+        void modifygrid(const std::string& gridFilename, const std::string& lithoFilename);
     };
 } // namespace HCTTIEXP
 #endif

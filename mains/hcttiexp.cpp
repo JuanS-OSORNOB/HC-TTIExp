@@ -4,6 +4,7 @@
 #include <basic/message.h>
 #include <media_properties/mediaproperties.h>
 
+#include <filesystem>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -11,10 +12,14 @@
 
 int main() {
     using namespace HCTTIEXP;
+    
     hello_world();
     print_version();
     Mediaproperties mediaproperties;
-    mediaproperties.generategrid();
+    //std::string executableDirectory = std::filesystem::path(__FILE__).parent_path().string();
+    std::string gridFilename = /*executableDirectory +*/ "/home/juanse/Documents/FAIStokesTraining2021/FAIStokes_GUI/CORTE_NS.vtu";
+    std::string lithoFilename = /*executableDirectory +*/ "/home/juanse/Documents/GitHub/HC-TTIExp/tests/test_data/litho_properties.txt";
+    mediaproperties.modifygrid(gridFilename, lithoFilename);
     
 
 
