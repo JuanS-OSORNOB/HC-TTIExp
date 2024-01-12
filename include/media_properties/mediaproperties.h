@@ -4,6 +4,10 @@
 #include <basic/readwrite.h>
 #include <vector>
 #include <string>
+
+#include <vtkSmartPointer.h>
+#include <vtkUnstructuredGrid.h>
+
 namespace HCTTIEXP
 {
     struct LayerProperties
@@ -21,7 +25,7 @@ namespace HCTTIEXP
         // Function to populate LayerProperties from std::vector<LithoData>
         LayerProperties populateLayerProperties(const std::vector<LithoData>& lithoDataVector);
     public:
-        void modifygrid(const std::string& gridFilename, const std::string& lithoFilename, const std::string& outgridFilename);
+        vtkSmartPointer<vtkUnstructuredGrid> modifygrid(const std::string& gridFilename, const std::string& lithoFilename, const std::string& outgridFilename);
     };
 } // namespace HCTTIEXP
 #endif

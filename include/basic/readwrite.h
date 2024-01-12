@@ -7,7 +7,7 @@
 namespace HCTTIEXP
 {
     /**
-     * @brief 
+     * @brief * Structure of the lithological data based on the columns of a file.
      * @param column1 Tn: Initial exposure absolute temperature (K = C+273).
      * @param column2 Tn+1: Final exposure absolute temperature (K = C+273).
      * @param column3 tn: Initial time of exposure for every 10~C interval.
@@ -26,8 +26,7 @@ namespace HCTTIEXP
     };
 
     /**
-     * @brief 
-     * Structure of the kinetic data based on the columns of my file.
+    * @brief Structure of the kinetic data based on the columns of a file.
     * @param column1 E: Activation energy (kJ/mol)
     * @param column2 A: Pre-exponential/frequency factor (1/m.y.)
     * @param column3 R: Ideal gas constant (J/K*mol)
