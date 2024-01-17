@@ -1,7 +1,6 @@
 #include <basic/readwrite.h>
 #include <basic/message.h>
 #include <thermal_effects/tti.h>
-#include <basic/message.h>
 #include <media_properties/mediaproperties.h>
 
 #include <filesystem>
@@ -22,8 +21,8 @@ int main() {
     mediaproperties.modifygrid(gridFilename, lithoFilename, outgridFilename);
     
 
-
-/*     // Read kinetic properties from the first file
+    /*
+     // Read kinetic properties from the first file
     std::string kinFilename = "kinetic_properties.txt";
     double kinArg1, kinArg2, kinArg3;
     if(!readkineticfile(kinFilename, kinArg1, kinArg2, kinArg3))
@@ -38,7 +37,9 @@ int main() {
     {
         return 1;//Handle the error
     }
+    */
 
+    /*
     // Iterate over components of lithology vectors
     for (int i = 0; i < vectorSize; ++i) {
         // Call the function to compute the formula with all five arguments
@@ -47,6 +48,6 @@ int main() {
         // Output the result for each component
         std::cout << "Result for Component " << (i + 1) << ": " << result << std::endl;
     }
- */
+    */
     return 0;
 }

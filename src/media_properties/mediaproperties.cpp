@@ -119,6 +119,7 @@ namespace HCTTIEXP
         printer4.printUniqueValues();
         UniqueValuesPrinter printer2(fault_id_array, "fault_id");
         printer2.printUniqueValues();
+
         /*4 Load temperature range and exposure time vectors*/
         std::cout << "\nLoading the lithological file at: " << lithoFilename << std::endl;
         std::vector<LithoData> lithoDataVector = readlithofile(lithoFilename);
@@ -146,6 +147,10 @@ namespace HCTTIEXP
             << " Exposure Time: " << layerProperties.exposureTime[i] 
             << std::endl;
         }
+        
+        /*5 Create a vector to store modified grids*/
+        std::vector<vtkSmartPointer<vtkUnstructuredGrid>> modifiedGrids;
+
         
         /*5 Loop through each point in the grid and assign temperature range and exposure time based on layuer_id*/
         // Assume you have vtkDoubleArray for temperatureRange and exposureTime
