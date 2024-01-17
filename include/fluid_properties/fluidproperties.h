@@ -18,10 +18,10 @@ namespace HCTTIEXP
     {
         private:
         // Function to read fluid file and return std::vector<FluidData>
-        std::vector<KineticData> readkineticfile(const std::string& fluidFilename);
+            std::vector<KineticData> readkineticfile(const std::string& fluidFilename);
+            KineticProperties populateFluidProperties(const std::vector<KineticData>& fluidDataVector);
         public:
-        KineticProperties populateFluidProperties(const std::vector<KineticData>& fluidDataVector);
-        
+            Fluidproperties(const std::string& fluidFilename);
     };
 }// namespace HCTTIEXP
 #endif
