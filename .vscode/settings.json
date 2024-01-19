@@ -70,7 +70,8 @@
         "unordered_set": "cpp",
         "ranges": "cpp",
         "shared_mutex": "cpp",
-        "cfenv": "cpp"
+        "cfenv": "cpp",
+        "*.txx": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

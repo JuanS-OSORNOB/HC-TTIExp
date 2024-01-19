@@ -21,8 +21,6 @@ namespace HCTTIEXP
         double column3;
         double column4;
         double column5;
-        double temperature_range;
-        double time_range;
     };
 
     /**
@@ -49,6 +47,7 @@ namespace HCTTIEXP
              * @return std::vector<LithoData> 
              */
             std::vector<LithoData> readlithofile(const std::string& filename);
+            
             /**
              * @brief  
              * This function reads the kinetic file and extracts the arguments that will be employed in computing TTIArr
@@ -56,6 +55,7 @@ namespace HCTTIEXP
              * @return std::vector<Data> 
              */
             std::vector<KineticData> readkineticfile(const std::string& filename);
+
     };
 }// namespace HCTTIEXP
 #endif

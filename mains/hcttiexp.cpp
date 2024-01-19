@@ -18,7 +18,7 @@ int main() {
     std::string gridFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/CORTE_NS.vtu";
     std::string lithoFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/litho_properties.txt";
     std::string outgridFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/mod_CORTE_NS.vtu";
-    mediaproperties.modifygrid(gridFilename, lithoFilename, outgridFilename);
+    mediaproperties.modifygrid(gridFilename, lithoFilename);
     
 
     /*
@@ -48,6 +48,14 @@ int main() {
         // Output the result for each component
         std::cout << "Result for Component " << (i + 1) << ": " << result << std::endl;
     }
-    */
+
+    
+        std::cout << "Saving the modified grid to a new VTU file at: " << outgridFilename << std::endl;
+        vtkSmartPointer<vtkXMLUnstructuredGridWriter> writer = vtkSmartPointer<vtkXMLUnstructuredGridWriter>::New();
+        const char* outfileName = outgridFilename.c_str();
+        writer->SetFileName(outfileName);
+        writer->SetInputData(unstructuredGrid);
+        writer->Write();
+        std::cout << "It worked" << std::endl;*/    
     return 0;
 }

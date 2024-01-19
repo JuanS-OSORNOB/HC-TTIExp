@@ -30,10 +30,6 @@ namespace HCTTIEXP
             std::istringstream iss(line);
             LithoData data;    
             iss >> data.column1 >> data.column2 >> data.column3 >> data.column4 >> data.column5;
-            // Combine columns 1 and 2
-            data.temperature_range = data.column2 - data.column1;
-            // Combine columns 3 and 4
-            data.time_range = data.column4 - data.column3;
             // Add data to the vector
             dataVector.push_back(data);
         }
