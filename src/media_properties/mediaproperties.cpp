@@ -24,24 +24,22 @@ namespace HCTTIEXP
 
     UniqueTRangesCalculator::UniqueTRangesCalculator(const LayerProperties& data) : layerProperties(data) {}
 
-    void UniqueTRangesCalculator::calculateUniqueTRanges()
-    {
+    void UniqueTRangesCalculator::calculateUniqueTRanges() {
+        std::cout << "lithology_id size: " << layerProperties.lithology_id.size() << std::endl;
         for (std::size_t i = 0; i < layerProperties.lithology_id.size(); ++i) {
             std::pair<double, double> tRange = std::make_pair(layerProperties.initial_temperature[i], layerProperties.final_temperature[i]);
-            uniqueTRanges[tRange]++;
+            uniqueTRanges.insert(tRange);
         }
     }
 
-    void UniqueTRangesCalculator::printUniqueTRanges() const
-    {
-        std::cout << "Elements in uniqueTRanges:\n";
-        for (const auto& entry : uniqueTRanges) {
-            std::cout << "Key: (" << entry.first.first << ", " << entry.first.second
-                      << "), Value: " << entry.second << '\n';
+    void UniqueTRangesCalculator::printUniqueTRanges() const {
+        std::cout << "Elements in uniqueTRanges: " << uniqueTRanges.size() << std::endl;
+        for (const auto& tRange : uniqueTRanges) {
+            std::cout << "Temperature Range: (" << tRange.first << ", " << tRange.second << ")" << std::endl;
         }
     }
     
-    Mediaproperties::Mediaproperties() : uniqueTRanges(LayerProperties{}){};
+    //Mediaproperties::Mediaproperties() : uniqueTRanges(LayerProperties{}){};
 
     std::vector<LithoData> Mediaproperties::readlithofile(const std::string& lithoFilename)
     {
@@ -126,22 +124,23 @@ namespace HCTTIEXP
         {
             std::cout
             << "Index " << i
-            << " Layer_id: " << layerProperties.lithology_id[i] 
-            << " Initial temperature: " << layerProperties.initial_temperature[i]
-            << " Final temperature: " << layerProperties.final_temperature[i]
-            << "Initial time: " << layerProperties.initial_time[i]
-            << "Initial time: " << layerProperties.final_time[i]
+            << " Layer_id : " << layerProperties.lithology_id[i] 
+            << " Initial temperature : " << layerProperties.initial_temperature[i]
+            << " Final temperature : " << layerProperties.final_temperature[i]
+            << "Initial time : " << layerProperties.initial_time[i]
+            << "Final time : " << layerProperties.final_time[i]
             << std::endl;
         }
+        /*6 Loop through each temperature range in uniqueTRange and for each loop go trough of each point in the grid based on layer_id */
+        UniqueTRangesCalculator uniqueTRanges(layerProperties);
+        uniqueTRanges.calculateUniqueTRanges();
+        uniqueTRanges.printUniqueTRanges();
                 
-        /*6 Create a vectors to store modified grids*/
+        /*7 Create a vectors to store modified grids*/
         std::vector<vtkSmartPointer<vtkUnstructuredGrid>> modifiedGrids;
         vtkSmartPointer<vtkUnstructuredGrid> modifiedGrid = vtkSmartPointer<vtkUnstructuredGrid>::New();
 
         
-        /*7 Loop through each temperature range in uniqueTRange and for each loop go trough of each point in the grid based on layer_id */
-        uniqueTRanges.calculateUniqueTRanges();
-        uniqueTRanges.printUniqueTRanges();
         
         /*{
             modifiedGrids.push_back(modifiedGrid);

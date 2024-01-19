@@ -2,9 +2,10 @@
 #define MEDIAPROPERTIES_H
 
 #include <basic/readwrite.h>
-#include <vector>
 #include <string>
-#include <map>
+#include <set>
+#include <iostream>
+#include <vector>
 
 #include <vtkSmartPointer.h>
 #include <vtkUnstructuredGrid.h>
@@ -28,7 +29,7 @@ namespace HCTTIEXP
 
     private:
         LayerProperties layerProperties;
-        std::map<std::pair<double, double>, int> uniqueTRanges;
+        std::set<std::pair<double, double>> uniqueTRanges;
     };
 
     class Mediaproperties
@@ -40,7 +41,7 @@ namespace HCTTIEXP
             // Function to populate LayerProperties from std::vector<LithoData>
             LayerProperties populateLayerProperties(const std::vector<LithoData>& lithoDataVector);
         public:
-            Mediaproperties(); 
+            Mediaproperties() : uniqueTRanges(LayerProperties{}){};
             std::vector<vtkSmartPointer<vtkUnstructuredGrid>> modifygrid(const std::string& gridFilename, const std::string& lithoFilename);//const std::string& outgridFilename
     };
 } // namespace HCTTIEXP
