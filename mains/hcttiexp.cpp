@@ -2,6 +2,7 @@
 #include <basic/message.h>
 #include <thermal_effects/tti.h>
 #include <media_properties/mediaproperties.h>
+#include <thermal_effects/tti.h>
 
 #include <filesystem>
 #include <string>
@@ -19,43 +20,6 @@ int main() {
     std::string lithoFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/litho_properties_2.txt";
     //std::string outgridFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/mod_CORTE_NS.vtu";
     mediaproperties.modifygrid(gridFilename, lithoFilename);
-    
-
-    /*
-     // Read kinetic properties from the first file
-    std::string kinFilename = "kinetic_properties.txt";
-    double kinArg1, kinArg2, kinArg3;
-    if(!readkineticfile(kinFilename, kinArg1, kinArg2, kinArg3))
-    {
-        return 1;//Handle the error
-    }
-
-    // Read lithology properties from the file
-    std::string lithoFilename = "lithologic_properties.txt";
-    std::vector<double> lithoArg1, lithoArg2, lithoArg3, lithoArg4;
-    if(!readlithofile(lithoFilename, lithoArg1, lithoArg2, lithoArg3, lithoArg4))
-    {
-        return 1;//Handle the error
-    }
-    */
-
-    /*
-    // Iterate over components of lithology vectors
-    for (int i = 0; i < vectorSize; ++i) {
-        // Call the function to compute the formula with all five arguments
-        double result = ttiarr(kinArg1, kinArg2, kinArg3, lithoArg1[i], lithoArg2[i], lithoArg3[i], lithoArg4[i]);
-
-        // Output the result for each component
-        std::cout << "Result for Component " << (i + 1) << ": " << result << std::endl;
-    }
-
-    
-        std::cout << "Saving the modified grid to a new VTU file at: " << outgridFilename << std::endl;
-        vtkSmartPointer<vtkXMLUnstructuredGridWriter> writer = vtkSmartPointer<vtkXMLUnstructuredGridWriter>::New();
-        const char* outfileName = outgridFilename.c_str();
-        writer->SetFileName(outfileName);
-        writer->SetInputData(unstructuredGrid);
-        writer->Write();
-        std::cout << "It worked" << std::endl;*/    
+      
     return 0;
 }

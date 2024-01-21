@@ -200,10 +200,13 @@ namespace HCTTIEXP
                 lithologyInitialTimes[lithology] = initialtime;
                 lithologyFinalTimes[lithology] = finaltime;
             }
-
-            // Iterate over each point of the grid and add lithology-specific arrays
+            //Create empty arrays with the same size as original grid
             std::vector<double> initialTimeArray(modifiedGridCopy->GetNumberOfPoints(), 0.0);
             std::vector<double> finalTimeArray(modifiedGridCopy->GetNumberOfPoints(), 0.0);
+            //Create defined arrays with the same size as original grid
+            std::vector<double> initialTempArray(modifiedGridCopy->GetNumberOfPoints(), initialTemp);
+            std::vector<double> finalTempArray(modifiedGridCopy->GetNumberOfPoints(), finalTemp);
+            // Iterate over each point of the grid and add lithology-specific arrays
             for (vtkIdType i = 0; i < modifiedGridCopy->GetNumberOfPoints(); i++)
             {
                 // Assuming 'layer_id_array' is already defined
@@ -227,6 +230,8 @@ namespace HCTTIEXP
             
             addScalarArrayToGrid(modifiedGridCopy, initialTimeArray, "initialtime");
             addScalarArrayToGrid(modifiedGridCopy, finalTimeArray, "finaltime");
+            addScalarArrayToGrid(modifiedGridCopy, initialTempArray, "initialtemp");
+            addScalarArrayToGrid(modifiedGridCopy, finalTempArray, "finaltemp");
             modifiedGrids.push_back(modifiedGridCopy);// Add the modified grid copy to the grids vector
 
 
