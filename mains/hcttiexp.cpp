@@ -11,6 +11,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <numeric>
 
 #include <vtkPointData.h>
 #include <vtkDoubleArray.h>
@@ -38,14 +39,20 @@ int main() {
 
     //Create instance of TTI
     TTI tti;
+    std::cout << "\nComputing the TTI ..." << std::endl;
+    
+    //Create a map to store TTI values for each layer_id
+    std::map<int, std::vector<double>> layerTTIMap;
 
     //Iterate over each modified grid to compute TTI values
     for (size_t i = 0; i < modifiedGrids.size(); ++i)
     {
+        std::cout << "  Grid " << i << std::endl;
         // Access the modified grid
         vtkSmartPointer<vtkUnstructuredGrid> modifiedGrid = modifiedGrids[i];
 
         // Access arrays in the modified grid
+        vtkDataArray* layerIdArray = modifiedGrid->GetPointData()->GetArray("layer_id");
         vtkDataArray* initialTimeArray = modifiedGrid->GetPointData()->GetArray("initialtime");
         vtkDataArray* finalTimeArray = modifiedGrid->GetPointData()->GetArray("finaltime");
         vtkDataArray* initialTempArray = modifiedGrid->GetPointData()->GetArray("initialtemp");
@@ -76,6 +83,9 @@ int main() {
             );
 
             ttiArray[j] = ttiValue;
+            //Accesing the value for the current point and pushing back the TTI to the map
+            int layerId = layerIdArray->GetTuple1(j);
+            layerTTIMap[layerId].push_back(ttiValue);
         }
         
         // Create a new array to store the computed TTI values
@@ -100,6 +110,20 @@ int main() {
         writer->Write();
     }
 
+    //Compute the sum of TTI values for each layer_id
+    std::map<int, double> layerTTISumMap;
+    for (const auto& entry : layerTTIMap)
+    {
+        int layerId = entry.first;
+        const std::vector<double>& ttiValues = entry.second;
+        //Sum the TTI values for the current layer_id
+        double ttiSum = std::accumulate(ttiValues.begin(), ttiValues.end(), 0.0);
+        //Store the sum in the map
+        layerTTISumMap[layerId] = ttiSum;
+        double expressionResult = 100 * (1.0 - std::exp(-ttiSum));
+        std::cout << "Layer " << layerId << ". Sum TTI = " << ttiSum << ", Oil expulsed: " << expressionResult << "%" << std::endl;
+    }
+    
 
     return 0;
 }
