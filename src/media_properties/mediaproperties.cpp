@@ -7,6 +7,7 @@
 #include <fstream>
 #include <vector>
 #include <set>
+#include <filesystem>
 //#include <deal.II/grid/tria.h>
 
 #include <vtkXMLUnstructuredGridWriter.h>
@@ -236,7 +237,12 @@ namespace HCTTIEXP
 
 
             // Save the modified grid to a new VTU file with a different identifier
-            std::string fileName = "modified_" + std::to_string(initialTemp) + "_" + std::to_string(finalTemp) + ".vtu";
+            std::filesystem::path filePath(gridFilename);//Extract original filename without path and without extension
+            std::string originalfilename = filePath.stem().string();
+            //Adjust the path as needed
+            int roundedInitialTemp = std::round(initialTemp);
+            int roundedFinalTemp = std::round(finalTemp);
+            std::string fileName = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/results/" + originalfilename + "_" + std::to_string(roundedInitialTemp) + "_" + std::to_string(roundedFinalTemp) + ".vtu";
             modifiedGridFileNames.push_back(fileName);
 
             vtkSmartPointer<vtkXMLUnstructuredGridWriter> writer = vtkSmartPointer<vtkXMLUnstructuredGridWriter>::New();

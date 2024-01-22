@@ -43,6 +43,8 @@ int main() {
     
     //Create a map to store TTI values for each layer_id
     std::map<int, std::vector<double>> layerTTIMap;
+    //Create a map to store original temperature ranges
+    std::map<int, std::pair<double, double>> originalTempRangesMap;
 
     //Iterate over each modified grid to compute TTI values
     for (size_t i = 0; i < modifiedGrids.size(); ++i)
@@ -52,6 +54,7 @@ int main() {
         vtkSmartPointer<vtkUnstructuredGrid> modifiedGrid = modifiedGrids[i];
 
         // Access arrays in the modified grid
+        int layerId = 0; //A punctual one needs to be declared to store in the map and then apply it to the filename
         vtkDataArray* layerIdArray = modifiedGrid->GetPointData()->GetArray("layer_id");
         vtkDataArray* initialTimeArray = modifiedGrid->GetPointData()->GetArray("initialtime");
         vtkDataArray* finalTimeArray = modifiedGrid->GetPointData()->GetArray("finaltime");
@@ -86,6 +89,8 @@ int main() {
             //Accesing the value for the current point and pushing back the TTI to the map
             int layerId = layerIdArray->GetTuple1(j);
             layerTTIMap[layerId].push_back(ttiValue);
+
+            originalTempRangesMap[layerId] = {initialTemp, finalTemp};
         }
         
         // Create a new array to store the computed TTI values
@@ -100,8 +105,11 @@ int main() {
 
 
         // Save (write) the modified grid to a new file
+        std::filesystem::path filePath(gridFilename);//Extract original filename without path and without extension
+        std::string originalfilename = filePath.stem().string();
+
         std::stringstream filenameStream;
-        filenameStream << "TTI_" << i << ".vtu";  // Modify as needed
+        filenameStream << "/home/juanse/Documents/GitHub/HC-TTIExp/mains/results/TTI_" << originalfilename << "_" << originalTempRangesMap[layerId].first << "_" << originalTempRangesMap[layerId].second << ".vtu";  // Modify as needed
         std::string outputFilename = filenameStream.str();
 
         vtkSmartPointer<vtkXMLUnstructuredGridWriter> writer = vtkSmartPointer<vtkXMLUnstructuredGridWriter>::New();
@@ -120,8 +128,8 @@ int main() {
         double ttiSum = std::accumulate(ttiValues.begin(), ttiValues.end(), 0.0);
         //Store the sum in the map
         layerTTISumMap[layerId] = ttiSum;
-        double expressionResult = 100 * (1.0 - std::exp(-ttiSum));
-        std::cout << "Layer " << layerId << ". Sum TTI = " << ttiSum << ", Oil expulsed: " << expressionResult << "%" << std::endl;
+        double oilexpulsed_perc = 100 * (1.0 - std::exp(-ttiSum));
+        std::cout << "Layer " << layerId << ". Sum TTI = " << ttiSum << ", Oil expulsed: " << oilexpulsed_perc << "%" << std::endl;
     }
     
 
