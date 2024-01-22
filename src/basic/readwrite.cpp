@@ -52,7 +52,7 @@ namespace HCTTIEXP
         while (std::getline(file, line))
         
         {
-            std::cout << "Loading the kinetic file at: " << filename << std::endl;
+            //std::cout << "Loading the kinetic file at: " << filename << std::endl;
             // Skip lines starting with "#"
             if (line.size() > 0 && line[0] == '#') {
                 continue;

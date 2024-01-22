@@ -93,8 +93,8 @@ namespace HCTTIEXP
         grid->GetPointData()->AddArray(scalarArray);
     }
     
-    //std::vector<vtkSmartPointer<vtkUnstructuredGrid>> 
-    std::vector<std::string> Mediaproperties::modifygrid(const std::string& gridFilename, const std::string& lithoFilename)
+    // std::vector<std::string>
+    std::vector<vtkSmartPointer<vtkUnstructuredGrid>> Mediaproperties::modifygrid(const std::string& gridFilename, const std::string& lithoFilename)
     {
         /*1 Load VTU*/
         std::cout << "Loading the grid at: " << gridFilename << std::endl;
@@ -246,7 +246,7 @@ namespace HCTTIEXP
         }
         /*9 Return the modified grid*/
         std::cout << "Total number of modified grids: " << modifiedGrids.size() << std::endl;
-        //return modifiedGrids;
-        return modifiedGridFileNames;
+        return modifiedGrids;
+        //return modifiedGridFileNames;
     }
 }// namespace HCTTIEXP

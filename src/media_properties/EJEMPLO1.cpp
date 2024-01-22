@@ -58,10 +58,10 @@ int main()
     // Step 5: Create a new VTK dataset
     vtkSmartPointer<vtkDataSet> newDataset = vtkSmartPointer<vtkDataSet>::Take(dataset->NewInstance());
     newDataset->ShallowCopy(dataset);
-
+    // Add the TTI array to the modified grid
     newDataset->GetCellData()->AddArray(computedValues);
 
-    // Step 6: Write the results to a new VTK file
+    // Step 6: Save (write) the modified grid to a new file
     vtkSmartPointer<vtkDataSetWriter> writer = vtkSmartPointer<vtkDataSetWriter>::New();
     writer->SetFileName("output_file.vtu");
     writer->SetInputData(newDataset);

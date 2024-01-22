@@ -54,8 +54,8 @@ namespace HCTTIEXP
             void addScalarArrayToGrid(vtkSmartPointer<vtkUnstructuredGrid>& grid, const std::vector<double>& values, const char* arrayName);
         public:
             Mediaproperties() : uniqueTRanges(LayerProperties{}){};
-            //std::vector<vtkSmartPointer<vtkUnstructuredGrid>> 
-            std::vector<std::string> modifygrid(const std::string& gridFilename, const std::string& lithoFilename);//const std::string& outgridFilename
+            //std::vector<std::string>
+            std::vector<vtkSmartPointer<vtkUnstructuredGrid>> modifygrid(const std::string& gridFilename, const std::string& lithoFilename);//const std::string& outgridFilename
     };
 } // namespace HCTTIEXP
 #endif

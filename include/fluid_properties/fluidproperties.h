@@ -21,6 +21,7 @@ namespace HCTTIEXP
             std::vector<KineticData> readkineticfile(const std::string& fluidFilename);
             KineticProperties populateFluidProperties(const std::vector<KineticData>& fluidDataVector);
         public:
+            KineticProperties kineticProperties;
             Fluidproperties(const std::string& fluidFilename);
     };
 }// namespace HCTTIEXP
