@@ -32,12 +32,9 @@ int main() {
     std::string kinFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/kinetic_properties.txt";
     Fluidproperties fluidProperties(kinFilename);
     // Access the kinetic properties
-    //double activationEnergy = fluidProperties.kineticProperties.activationenergy[0];
-    //double exponentialFactor = fluidProperties.kineticProperties.exponentialfactor[0];
-    //double idealGasConstant = fluidProperties.kineticProperties.idealgasconstant[0];
-    double activationEnergy = 143.4;
-    double exponentialFactor = 7.017e+20;
-    double idealGasConstant = 8.311;
+    double activationEnergy = fluidProperties.kineticProperties.activationenergy[0];
+    double exponentialFactor = fluidProperties.kineticProperties.exponentialfactor[0];
+    double idealGasConstant = fluidProperties.kineticProperties.idealgasconstant[0];
 
     //Create instance of TTI
     TTI tti;
@@ -69,22 +66,19 @@ int main() {
 
             // Compute TTI value using the TTI class and other variables
             double ttiValue = tti.ttiarr(
-                activationEnergy, 
                 exponentialFactor, 
-                idealGasConstant, 
-                finalTime, 
-                initialTime, 
-                finalTemp, 
-                initialTemp
+                finalTime,
+                initialTime,
+                finalTemp,
+                initialTemp,
+                idealGasConstant,
+                activationEnergy
             );
 
             ttiArray[j] = ttiValue;
         }
         
         // Create a new array to store the computed TTI values
-        //Mediaproperties mediaproperties;
-        //mediaproperties.addScalarArrayToGrid(modifiedGrid, ttiArray, "TTI");
-
         vtkSmartPointer<vtkDoubleArray> scalarArray = vtkSmartPointer<vtkDoubleArray>::New();
         scalarArray->SetNumberOfComponents(1);
         scalarArray->SetName("TTI");

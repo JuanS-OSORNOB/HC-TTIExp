@@ -43,7 +43,7 @@ namespace HCTTIEXP
             << std::endl;
         }
 
-        KineticProperties kineticProperties = populateFluidProperties(fluidDataVector);
+        kineticProperties = populateFluidProperties(fluidDataVector);
         std::cout << "Contents of fluidProperties:" << std::endl;
         for (size_t i = 0; i < kineticProperties.activationenergy.size(); ++i)
         {
