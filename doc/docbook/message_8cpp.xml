@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_message_8cpp" xml:lang="en-US">
+<title>/home/juanse/Documents/GitHub/HC-TTIExp/src/basic/message.cpp File Reference</title>
+<indexterm><primary>/home/juanse/Documents/GitHub/HC-TTIExp/src/basic/message.cpp</primary></indexterm>
+<programlisting>#include &lt;HCTTIExpProjConfig.h&gt;
+#include &lt;basic/message.h&gt;
+#include &lt;iostream&gt;
+</programlisting>Include dependency graph for message.cpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="message_8cpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_message_8cpp_1a15addf2dde60b9dccc2f1b1da89f3e96">hello_world</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_message_8cpp_1a6302aaae12249e8ea16bfdc7de892f21">print_version</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_message_8cpp_1a15addf2dde60b9dccc2f1b1da89f3e96"/>    <section>
+    <title>hello_world()</title>
+<indexterm><primary>hello_world</primary><secondary>message.cpp</secondary></indexterm>
+<indexterm><primary>message.cpp</primary><secondary>hello_world</secondary></indexterm>
+<para><computeroutput>void hello_world ( )</computeroutput></para><para>
+Definition at line 5 of file message.cpp.</para>
+    </section><anchor xml:id="_message_8cpp_1a6302aaae12249e8ea16bfdc7de892f21"/>    <section>
+    <title>print_version()</title>
+<indexterm><primary>print_version</primary><secondary>message.cpp</secondary></indexterm>
+<indexterm><primary>message.cpp</primary><secondary>print_version</secondary></indexterm>
+<para><computeroutput>void print_version ( )</computeroutput></para><para>
+Definition at line 10 of file message.cpp.</para>
+</section>
+</section>
+</section>

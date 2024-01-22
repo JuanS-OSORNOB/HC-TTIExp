@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="struct_layer_properties" kind="struct" language="C++" prot="public">
+    <compoundname>LayerProperties</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_layer_properties_1a8190fb291f7188e2c493a193ebc9574f" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; LayerProperties::temperatureRange</definition>
+        <argsstring></argsstring>
+        <name>temperatureRange</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO1.cpp" line="10" column="17" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO1.cpp" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_layer_properties_1a7daa9960667bffe13aca9f7c691dd8c5" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; LayerProperties::exposureTime</definition>
+        <argsstring></argsstring>
+        <name>exposureTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO1.cpp" line="11" column="17" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO1.cpp" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO1.cpp" line="9" column="1" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO1.cpp" bodystart="9" bodyend="12"/>
+    <listofallmembers>
+      <member refid="struct_layer_properties_1a7daa9960667bffe13aca9f7c691dd8c5" prot="public" virt="non-virtual"><scope>LayerProperties</scope><name>exposureTime</name></member>
+      <member refid="struct_layer_properties_1a8190fb291f7188e2c493a193ebc9574f" prot="public" virt="non-virtual"><scope>LayerProperties</scope><name>temperatureRange</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

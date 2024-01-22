@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="_e_j_e_m_p_l_o1_8cpp" kind="file" language="C++">
+    <compoundname>EJEMPLO1.cpp</compoundname>
+    <includes local="no">vtkSmartPointer.h</includes>
+    <includes local="no">vtkDataSetReader.h</includes>
+    <includes local="no">vtkDataSetWriter.h</includes>
+    <includes local="no">vtkDoubleArray.h</includes>
+    <includes local="no">vtkIntArray.h</includes>
+    <includes local="no">vtkPoints.h</includes>
+    <includes local="no">vtkCellData.h</includes>
+    <incdepgraph>
+      <node id="7">
+        <label>vtkPoints.h</label>
+      </node>
+      <node id="8">
+        <label>vtkCellData.h</label>
+      </node>
+      <node id="1">
+        <label>/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO1.cpp</label>
+        <link refid="_e_j_e_m_p_l_o1_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>vtkIntArray.h</label>
+      </node>
+      <node id="4">
+        <label>vtkDataSetWriter.h</label>
+      </node>
+      <node id="3">
+        <label>vtkDataSetReader.h</label>
+      </node>
+      <node id="5">
+        <label>vtkDoubleArray.h</label>
+      </node>
+      <node id="2">
+        <label>vtkSmartPointer.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_layer_properties" prot="public">LayerProperties</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_e_j_e_m_p_l_o1_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int main</definition>
+        <argsstring>()</argsstring>
+        <name>main</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO1.cpp" line="14" column="5" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO1.cpp" bodystart="14" bodyend="71"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;vtkSmartPointer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkDataSetReader.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkDataSetWriter.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkDoubleArray.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkIntArray.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkPoints.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkCellData.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="struct_layer_properties" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_layer_properties" kindref="compound">LayerProperties</ref><sp/>{</highlight></codeline>
+<codeline lineno="10" refid="struct_layer_properties_1a8190fb291f7188e2c493a193ebc9574f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="struct_layer_properties_1a8190fb291f7188e2c493a193ebc9574f" kindref="member">temperatureRange</ref>;</highlight></codeline>
+<codeline lineno="11" refid="struct_layer_properties_1a7daa9960667bffe13aca9f7c691dd8c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="struct_layer_properties_1a7daa9960667bffe13aca9f7c691dd8c5" kindref="member">exposureTime</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="_e_j_e_m_p_l_o1_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_e_j_e_m_p_l_o1_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" kindref="member">main</ref>()</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Step<sp/>1:<sp/>Read<sp/>the<sp/>VTK<sp/>file</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>vtkSmartPointer&lt;vtkDataSetReader&gt;<sp/>reader<sp/>=<sp/>vtkSmartPointer&lt;vtkDataSetReader&gt;::New();</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>reader-&gt;SetFileName(</highlight><highlight class="stringliteral">&quot;your_file.vtu&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>reader-&gt;Update();</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>vtkDataSet*<sp/>dataset<sp/>=<sp/>reader-&gt;GetOutput();</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Step<sp/>2:<sp/>Load<sp/>temperature<sp/>range<sp/>and<sp/>exposure<sp/>time<sp/>vectors</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Assuming<sp/>temperatureRange<sp/>and<sp/>exposureTime<sp/>are<sp/>vectors<sp/>of<sp/>the<sp/>same<sp/>size,<sp/>but<sp/>not<sp/>necessarily<sp/>the<sp/>same<sp/>size<sp/>as<sp/>layer_id</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/>temperatureRange;<sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>from<sp/>your<sp/>data<sp/>source</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/>exposureTime;<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>from<sp/>your<sp/>data<sp/>source</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Step<sp/>3:<sp/>Associate<sp/>properties<sp/>with<sp/>layer_id</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>std::map&lt;int,<sp/>LayerProperties&gt;<sp/>layerPropertiesMap;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(vtkIdType<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>temperatureRange.size();<sp/>++i)</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>layerId<sp/>=<sp/></highlight><highlight class="comment">/*<sp/>Obtain<sp/>layer_id<sp/>from<sp/>your<sp/>data<sp/>source<sp/>*/</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>layerPropertiesMap[layerId].temperatureRange.push_back(temperatureRange[i]);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>layerPropertiesMap[layerId].exposureTime.push_back(exposureTime[i]);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Step<sp/>4:<sp/>Perform<sp/>computations</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>vtkDoubleArray*<sp/>densityArray<sp/>=<sp/></highlight><highlight class="keyword">dynamic_cast&lt;</highlight><highlight class="normal">vtkDoubleArray*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(dataset-&gt;GetCellData()-&gt;GetArray(</highlight><highlight class="stringliteral">&quot;density&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>vtkDoubleArray*<sp/>viscosityArray<sp/>=<sp/></highlight><highlight class="keyword">dynamic_cast&lt;</highlight><highlight class="normal">vtkDoubleArray*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(dataset-&gt;GetCellData()-&gt;GetArray(</highlight><highlight class="stringliteral">&quot;viscosity&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>vtkIntArray*<sp/>faultIdArray<sp/>=<sp/></highlight><highlight class="keyword">dynamic_cast&lt;</highlight><highlight class="normal">vtkIntArray*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(dataset-&gt;GetCellData()-&gt;GetArray(</highlight><highlight class="stringliteral">&quot;fault_id&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>vtkSmartPointer&lt;vtkDoubleArray&gt;<sp/>computedValues<sp/>=<sp/>vtkSmartPointer&lt;vtkDoubleArray&gt;::New();</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>computedValues-&gt;SetName(</highlight><highlight class="stringliteral">&quot;computed_values&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(vtkIdType<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>dataset-&gt;GetNumberOfCells();<sp/>++i)</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>layerId<sp/>=<sp/></highlight><highlight class="comment">/*<sp/>Obtain<sp/>layer_id<sp/>from<sp/>your<sp/>data<sp/>source<sp/>*/</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>temperature<sp/>=<sp/>layerPropertiesMap[layerId].temperatureRange[i<sp/>%<sp/>layerPropertiesMap[layerId].temperatureRange.size()];</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>exposure<sp/>=<sp/>layerPropertiesMap[layerId].exposureTime[i<sp/>%<sp/>layerPropertiesMap[layerId].exposureTime.size()];</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Your<sp/>computation<sp/>based<sp/>on<sp/>density,<sp/>viscosity,<sp/>fault_id,<sp/>temperature,<sp/>and<sp/>exposure</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/></highlight><highlight class="comment">/*<sp/>Your<sp/>computation<sp/>here<sp/>*/</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>computedValues-&gt;InsertNextValue(result);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Step<sp/>5:<sp/>Create<sp/>a<sp/>new<sp/>VTK<sp/>dataset</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>vtkSmartPointer&lt;vtkDataSet&gt;<sp/>newDataset<sp/>=<sp/>vtkSmartPointer&lt;vtkDataSet&gt;::Take(dataset-&gt;NewInstance());</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>newDataset-&gt;ShallowCopy(dataset);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Add<sp/>the<sp/>TTI<sp/>array<sp/>to<sp/>the<sp/>modified<sp/>grid</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>newDataset-&gt;GetCellData()-&gt;AddArray(computedValues);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Step<sp/>6:<sp/>Save<sp/>(write)<sp/>the<sp/>modified<sp/>grid<sp/>to<sp/>a<sp/>new<sp/>file</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>vtkSmartPointer&lt;vtkDataSetWriter&gt;<sp/>writer<sp/>=<sp/>vtkSmartPointer&lt;vtkDataSetWriter&gt;::New();</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>writer-&gt;SetFileName(</highlight><highlight class="stringliteral">&quot;output_file.vtu&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>writer-&gt;SetInputData(newDataset);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>writer-&gt;Write();</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO1.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="errorhandling_8cpp" kind="file" language="C++">
+    <compoundname>errorhandling.cpp</compoundname>
+    <includes local="no">HCTTIExpProjConfig.h</includes>
+    <includes local="no">basic/errorhandling.h</includes>
+    <includes local="no">iostream</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>HCTTIExpProjConfig.h</label>
+      </node>
+      <node id="3">
+        <label>basic/errorhandling.h</label>
+      </node>
+      <node id="4">
+        <label>iostream</label>
+      </node>
+      <node id="1">
+        <label>/home/juanse/Documents/GitHub/HC-TTIExp/src/basic/errorhandling.cpp</label>
+        <link refid="errorhandling_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;HCTTIExpProjConfig.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;basic/errorhandling.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal">Errorhandler::Errorhandler(){};</highlight></codeline>
+<codeline lineno="6"><highlight class="normal">Errorhandler::~Errorhandler(){};</highlight></codeline>
+    </programlisting>
+    <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/basic/errorhandling.cpp"/>
+  </compounddef>
+</doxygen>

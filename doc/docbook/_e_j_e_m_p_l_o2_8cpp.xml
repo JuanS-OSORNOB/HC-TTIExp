@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__e_j_e_m_p_l_o2_8cpp" xml:lang="en-US">
+<title>/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp File Reference</title>
+<indexterm><primary>/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp</primary></indexterm>
+<programlisting>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;sstream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;vtkSmartPointer.h&gt;
+#include &lt;vtkXMLUnstructuredGridReader.h&gt;
+#include &lt;vtkXMLUnstructuredGridWriter.h&gt;
+#include &lt;vtkIntArray.h&gt;
+#include &lt;vtkDoubleArray.h&gt;
+#include &lt;vtkPointData.h&gt;
+#include &lt;vtkUnstructuredGrid.h&gt;
+</programlisting>Include dependency graph for EJEMPLO2.cpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_e_j_e_m_p_l_o2_8cpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_struct_litho_data">LithoData</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_struct_your_namespace_1_1_layer_properties">YourNamespace::LayerProperties</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_your_namespace_1_1_your_class">YourNamespace::YourClass</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespace_your_namespace">YourNamespace</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

@@ -1,3 +1,13 @@
+/**
+ * @file readwrite.h
+ * @author Juan Sebastian Osorno Bolivar (juansebosornob@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2024-01-22
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef READWRITE_H
 #define READWRITE_H
 
@@ -36,7 +46,10 @@ namespace HCTTIEXP
         double column3;
     };
     
-    
+    /**
+     * @brief 
+     * This class is in charge of reading files and storing everything in a vector that will be later parsed by the corresponding structs.
+     */
     class Readfiles
     {
         public:

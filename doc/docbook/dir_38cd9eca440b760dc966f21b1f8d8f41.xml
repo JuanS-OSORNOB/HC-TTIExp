@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_38cd9eca440b760dc966f21b1f8d8f41" xml:lang="en-US">
+<title>/home/juanse/Documents/GitHub/HC-TTIExp/src/basic Directory Reference</title>
+<indexterm><primary>/home/juanse/Documents/GitHub/HC-TTIExp/src/basic Directory Reference</primary></indexterm>
+<simplesect>
+    <title>Files    </title>
+        <itemizedlist>
+            <listitem><para>file <link linkend="_errorhandling_8cpp">errorhandling.cpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_logger_8cpp">logger.cpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_message_8cpp">message.cpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_readwrite_8cpp">readwrite.cpp</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

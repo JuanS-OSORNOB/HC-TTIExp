@@ -1,3 +1,13 @@
+/**
+ * @file tti.h
+ * @author Juan Sebastian Osorno Bolivar (juansebosornob@gmail.com)
+ * @brief File to handle thermal effects
+ * @version 0.1
+ * @date 2024-01-22
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef TTI_H
 #define TTI_H
 namespace HCTTIEXP

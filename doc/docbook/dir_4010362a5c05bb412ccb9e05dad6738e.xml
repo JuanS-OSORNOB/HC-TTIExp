@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_4010362a5c05bb412ccb9e05dad6738e" xml:lang="en-US">
+<title>/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties Directory Reference</title>
+<indexterm><primary>/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties Directory Reference</primary></indexterm>
+<simplesect>
+    <title>Files    </title>
+        <itemizedlist>
+            <listitem><para>file <link linkend="__e_j_e_m_p_l_o1_8cpp">EJEMPLO1.cpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__e_j_e_m_p_l_o2_8cpp">EJEMPLO2.cpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_mediaproperties_8cpp">mediaproperties.cpp</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

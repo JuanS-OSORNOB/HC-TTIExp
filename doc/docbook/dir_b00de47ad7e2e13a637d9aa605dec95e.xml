@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_b00de47ad7e2e13a637d9aa605dec95e" xml:lang="en-US">
+<title>/home/juanse/Documents/GitHub/HC-TTIExp/src/visualization Directory Reference</title>
+<indexterm><primary>/home/juanse/Documents/GitHub/HC-TTIExp/src/visualization Directory Reference</primary></indexterm>
+<simplesect>
+    <title>Files    </title>
+        <itemizedlist>
+            <listitem><para>file <link linkend="_visualization_8cpp">visualization.cpp</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

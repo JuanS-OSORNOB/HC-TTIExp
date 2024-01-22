@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tti_8cpp" xml:lang="en-US">
+<title>/home/juanse/Documents/GitHub/HC-TTIExp/src/thermal_effects/tti.cpp File Reference</title>
+<indexterm><primary>/home/juanse/Documents/GitHub/HC-TTIExp/src/thermal_effects/tti.cpp</primary></indexterm>
+<programlisting>#include &lt;HCTTIExpProjConfig.h&gt;
+#include &lt;thermal_effects/tti.h&gt;
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+</programlisting>Include dependency graph for tti.cpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="tti_8cpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespace_h_c_t_t_i_e_x_p">HCTTIEXP</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

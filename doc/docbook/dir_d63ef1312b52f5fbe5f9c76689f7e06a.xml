@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_d63ef1312b52f5fbe5f9c76689f7e06a" xml:lang="en-US">
+<title>/home/juanse/Documents/GitHub/HC-TTIExp/src/thermal_effects Directory Reference</title>
+<indexterm><primary>/home/juanse/Documents/GitHub/HC-TTIExp/src/thermal_effects Directory Reference</primary></indexterm>
+<simplesect>
+    <title>Files    </title>
+        <itemizedlist>
+            <listitem><para>file <link linkend="_tti_8cpp">tti.cpp</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
