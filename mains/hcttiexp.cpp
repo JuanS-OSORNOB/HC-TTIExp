@@ -26,8 +26,9 @@ int main() {
     Mediaproperties mediaproperties;
     std::string gridFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/CORTE_NS.vtu";
     std::string lithoFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/litho_properties_2.txt";
+    std::string layerinfoFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/layerinfo.txt";
     //std::string outgridFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/mod_CORTE_NS.vtu";
-    std::vector<vtkSmartPointer<vtkUnstructuredGrid>> modifiedGrids = mediaproperties.modifygrid(gridFilename, lithoFilename);
+    std::vector<vtkSmartPointer<vtkUnstructuredGrid>> modifiedGrids = mediaproperties.modifygrid(layerinfoFilename, gridFilename, lithoFilename);
 
     //Read the kinetic file
     std::string kinFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/kinetic_properties.txt";

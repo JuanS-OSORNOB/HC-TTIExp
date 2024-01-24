@@ -10,15 +10,15 @@
 #include <filesystem>
 //#include <deal.II/grid/tria.h>
 
-#include <vtkXMLUnstructuredGridWriter.h>
 #include <vtkSmartPointer.h>
+#include <vtkPointData.h>
+#include <vtkCellData.h>
 #include <vtkIntArray.h>
 #include <vtkDoubleArray.h>
+#include <vtkStringArray.h>
+#include <vtkUnstructuredGrid.h>
 #include <vtkXMLUnstructuredGridReader.h>
 #include <vtkXMLUnstructuredGridWriter.h>
-#include <vtkUnstructuredGrid.h>
-#include <vtkCellData.h>
-#include <vtkPointData.h>
 
 namespace HCTTIEXP
 {
@@ -56,6 +56,67 @@ namespace HCTTIEXP
             std::cout << "Temperature Range: (" << tRange.first << ", " << tRange.second << ")" << std::endl;
         }
     }
+
+
+    std::map<int, std::string> Mediaproperties::readLayerInfo(const std::string& filename)
+    {
+        std::map<int, std::string> layerMap;
+
+        std::ifstream file(filename);
+        if (!file.is_open())
+        {
+            std::cerr << "Error opening file: " << filename << std::endl;
+            return layerMap;
+        }
+
+        int layerId;
+        std::string layerName;
+        while (file >> layerName >> layerId)
+        {
+            layerMap[layerId] = layerName;
+        }
+
+        file.close();
+        return layerMap;
+    }
+
+    #include <vtkIntArray.h>
+#include <vtkStringArray.h>
+
+// Assuming layerMap is a std::unordered_map<int, std::string> containing layer_id and layer_name mapping.
+
+    void Mediaproperties::addLayerNameArrayToGrid(vtkSmartPointer<vtkUnstructuredGrid>& grid, const std::map<int, std::string>& layerMap)
+    {
+        // Get the point data from the grid
+        vtkSmartPointer<vtkPointData> pointData = grid->GetPointData();
+
+        // Get the existing layer_id array from the grid
+        vtkSmartPointer<vtkIntArray> layerIdArray = vtkIntArray::SafeDownCast(pointData->GetArray("layer_id"));
+
+        // Create a new array for layer_name
+        vtkSmartPointer<vtkStringArray> layerNameArray = vtkSmartPointer<vtkStringArray>::New();
+        layerNameArray->SetName("LayerName");
+        layerNameArray->SetNumberOfComponents(1);
+        layerNameArray->SetNumberOfTuples(grid->GetNumberOfPoints());
+
+        // Populate the layer_name array based on layer_id
+        for (vtkIdType i = 0; i < grid->GetNumberOfPoints(); ++i) {
+            int layerId = layerIdArray->GetValue(i);
+            auto it = layerMap.find(layerId);
+            if (it != layerMap.end()) {
+                const std::string& layerName = it->second;
+                layerNameArray->SetValue(i, layerName.c_str());
+            } else {
+                // Handle the case where layer ID is not found, set a default value or handle error.
+                layerNameArray->SetValue(i, "");
+            }
+        }
+
+        // Add the layer_name array to the point data
+        pointData->AddArray(layerNameArray);
+    }
+
+
 
     std::vector<LithoData> Mediaproperties::readlithofile(const std::string& lithoFilename)
     {
@@ -95,9 +156,13 @@ namespace HCTTIEXP
     }
     
     // std::vector<std::string>
-    std::vector<vtkSmartPointer<vtkUnstructuredGrid>> Mediaproperties::modifygrid(const std::string& gridFilename, const std::string& lithoFilename)
+    std::vector<vtkSmartPointer<vtkUnstructuredGrid>> Mediaproperties::modifygrid(const std::string& layerinfoFilename, const std::string& gridFilename, const std::string& lithoFilename)
     {
-        /*1 Load VTU*/
+        /*1 Read the general layer info*/
+        std::string layerInfoFilename = layerinfoFilename;
+        std::map<int, std::string> layerMap = readLayerInfo(layerInfoFilename);
+
+        /*2 Load VTU*/
         std::cout << "Loading the grid at: " << gridFilename << std::endl;
         const char* fileName = gridFilename.c_str();
         // Create a reader
@@ -116,8 +181,11 @@ namespace HCTTIEXP
             const char* arrayName=pointData->GetArrayName(i);
             std::cout<<"Array "<<i+1<<": "<<arrayName<<std::endl;
         }
+
+        /*3  Add layer name array to the grid based on layer ID*/
+        addLayerNameArrayToGrid(unstructuredGrid, layerMap);
         
-        /*2 Get the data array for layer_id and fault_id, density and viscosity*/
+        /*4 Get the data array for layer_id and fault_id, density and viscosity*/
         vtkSmartPointer<vtkIntArray> layer_id_array = vtkIntArray::SafeDownCast(pointData->GetArray("layer_id"));//Converts the pointer of the base class to a pointer of the derived class.
         vtkSmartPointer<vtkIntArray> fault_id_array = vtkIntArray::SafeDownCast(pointData->GetArray("fault_id"));
         vtkSmartPointer<vtkDoubleArray> density_array = vtkDoubleArray::SafeDownCast(pointData->GetArray("density"));
@@ -133,7 +201,7 @@ namespace HCTTIEXP
         UniqueValuesPrinter printer2(fault_id_array, "fault_id");
         printer2.printUniqueValues();
 
-        /*3 Load temperature range and exposure time vectors*/
+        /*5 Load temperature range and exposure time vectors*/
         std::cout << "\nLoading the lithological file at: " << lithoFilename << std::endl;
         std::vector<LithoData> lithoDataVector = readlithofile(lithoFilename);
         std::cout << "Contents of lithoDataVector:" << std::endl;
@@ -148,7 +216,7 @@ namespace HCTTIEXP
             << std::endl;
         }
 
-        /*4 Populate layer properties*/
+        /*6 Populate layer properties*/
         LayerProperties layerProperties = populateLayerProperties(lithoDataVector);
         std::cout << "Contents of layerProperties:" << std::endl;
         for (size_t i = 0; i < layerProperties.lithology_id.size(); ++i)
@@ -162,17 +230,16 @@ namespace HCTTIEXP
             << " Final time : " << layerProperties.final_time[i]
             << std::endl;
         }
-        /*6 Loop through each temperature range in uniqueTRange and for each loop go trough of each point in the grid based on layer_id */
+        /*7 Compute unique temperature ranges */
         UniqueTRangesCalculator uniqueTRanges(layerProperties);
         uniqueTRanges.calculateUniqueTRanges();
         uniqueTRanges.printUniqueTRanges();
                 
-        /*7 Create a vectors to store modified grids*/
+        /*8 Create a vectors to store modified grids*/
         std::vector<vtkSmartPointer<vtkUnstructuredGrid>> modifiedGrids;
         vtkSmartPointer<vtkUnstructuredGrid> modifiedGrid = vtkSmartPointer<vtkUnstructuredGrid>::New();
         
-        /*8 Loop through each unique temp range, loop through each point in the grid and assign initial time and final time based on layer_id*/
-        //DEFINE
+        /*9 Loop through each unique temp range, loop through each point in the grid and assign initial time and final time based on layer_id*/
         std::cout << "\nMODIFYING GRIDS" << std::endl;
         const auto& mapTemprangestolitho = uniqueTRanges.getUniqueRangestoLithology();//mapa
         std::vector<std::string> modifiedGridFileNames; // Vector to store file names
@@ -201,10 +268,10 @@ namespace HCTTIEXP
                 lithologyInitialTimes[lithology] = initialtime;
                 lithologyFinalTimes[lithology] = finaltime;
             }
-            //Create empty arrays with the same size as original grid
+            //Create EMPTY arrays with the same size as original grid
             std::vector<double> initialTimeArray(modifiedGridCopy->GetNumberOfPoints(), 0.0);
             std::vector<double> finalTimeArray(modifiedGridCopy->GetNumberOfPoints(), 0.0);
-            //Create defined arrays with the same size as original grid
+            //Create DEFINED arrays with the same size as original grid
             std::vector<double> initialTempArray(modifiedGridCopy->GetNumberOfPoints(), initialTemp);
             std::vector<double> finalTempArray(modifiedGridCopy->GetNumberOfPoints(), finalTemp);
             // Iterate over each point of the grid and add lithology-specific arrays
@@ -250,7 +317,7 @@ namespace HCTTIEXP
             writer->SetInputData(modifiedGridCopy);
             writer->Write();
         }
-        /*9 Return the modified grid*/
+        /*10 Return the modified grids*/
         std::cout << "Total number of modified grids: " << modifiedGrids.size() << std::endl;
         return modifiedGrids;
         //return modifiedGridFileNames;

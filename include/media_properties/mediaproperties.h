@@ -23,6 +23,11 @@
 
 namespace HCTTIEXP
 {
+    struct LayerInfo
+    {
+        std::string layerName;
+        int layerId;
+    };
     /**
      * @brief 
      * The struct handles the media properties
@@ -98,6 +103,10 @@ namespace HCTTIEXP
     class Mediaproperties
     {
         private:
+            std::map<int, std::string> readLayerInfo(const std::string& filename);
+
+            void addLayerNameArrayToGrid(vtkSmartPointer<vtkUnstructuredGrid>& grid, const std::map<int, std::string>& layerMap);
+
             /**
              * @brief 
              * Instance of UniqueTRangesCalculator
@@ -139,7 +148,7 @@ namespace HCTTIEXP
              * @param lithoFilename 
              * @return std::vector<vtkSmartPointer<vtkUnstructuredGrid>> 
              */
-            std::vector<vtkSmartPointer<vtkUnstructuredGrid>> modifygrid(const std::string& gridFilename, const std::string& lithoFilename);//const std::string& outgridFilename
+            std::vector<vtkSmartPointer<vtkUnstructuredGrid>> modifygrid(const std::string& layerinfoFilename, const std::string& gridFilename, const std::string& lithoFilename);//const std::string& outgridFilename
     };
 } // namespace HCTTIEXP
 #endif
