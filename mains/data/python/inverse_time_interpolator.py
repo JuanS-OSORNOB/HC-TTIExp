@@ -53,15 +53,15 @@ class TimeInterpolatorPlotter:
                 result_str = f"{inverse_interpolated_z} {inverse_interpolated_t}"
                 file.write(result_str + "\n")
 
-        print(f"Results saved to {output_file_path}\n")
+        print(f"Results saved to {output_file_path}")
 
-    def plot_inverse_t(self):
-        plt.plot(self.t_values, self.z_values, marker='o', linestyle='-', color='b', label='Z vs t')
+    def plot_inverse_t(self, label=None):
+        plt.plot(self.t_values, self.z_values, marker='o', linestyle='-', color='b', label=f'Layer {label}')
         
         if self.results_inverse_t:
             inverted_t_values = [result[1] for result in self.results_inverse_t]
             inverted_z_values = [result[0] for result in self.results_inverse_t]
-            plt.scatter(inverted_t_values, inverted_z_values, marker='x', color='r', label='Inverse Interpolated Values')
+            plt.scatter(inverted_t_values, inverted_z_values, marker='x', color='r', label='Inverse Interpolated Values - Layer {label}')
 
         plt.xlabel('t')
         plt.ylabel('Z')
@@ -72,6 +72,6 @@ class TimeInterpolatorPlotter:
 
     def save_plot_inverse_t(self, save_path):
         plt.savefig(save_path)
-
+        print(f"Figure saved to {save_path}\n")
     def show_plot_inverse_t(self):
         plt.show()
