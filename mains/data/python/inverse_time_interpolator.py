@@ -55,13 +55,14 @@ class TimeInterpolatorPlotter:
 
         print(f"Results saved to {output_file_path}")
 
-    def plot_inverse_t(self, label=None):
-        plt.plot(self.t_values, self.z_values, marker='o', linestyle='-', color='b', label=f'Layer {label}')
-        
+    def plot_inverse_t(self, label=None, linecolor=None, scattercolor=None):
+        #Plot Z vs t values
+        plt.plot(self.t_values, self.z_values, marker='o', linestyle='-', color=linecolor, label=f'Layer {label}')
+        #Plot inverted Z vs t values as scatter
         if self.results_inverse_t:
             inverted_t_values = [result[1] for result in self.results_inverse_t]
             inverted_z_values = [result[0] for result in self.results_inverse_t]
-            plt.scatter(inverted_t_values, inverted_z_values, marker='x', color='r', label='Inverse Interpolated Values - Layer {label}')
+            plt.scatter(inverted_t_values, inverted_z_values, marker='x', color=scattercolor, label=f'Inverse Interpolated Values - Layer {label}')
 
         plt.xlabel('t')
         plt.ylabel('Z')

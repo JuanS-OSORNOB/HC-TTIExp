@@ -7,7 +7,10 @@ if __name__ == "__main__":
         
 
         plt.figure(figsize=(12, 8))
-        for layer_number in layers_to_process:
+        #Define a colormap for layers
+        cmap = plt.cm.get_cmap('tab10', len(layers_to_process)+1) #One colormap for the line plot
+        cmap2 = plt.cm.get_cmap('inferno', len(layers_to_process)+1) #Another colormap for the scatter
+        for idx, layer_number in enumerate(layers_to_process):
             data_file_path = f"/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/burial_history/burial_history_layer_{layer_number}.txt"
             output_file_path = f"/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/burial_history/inversion/burial_history_layer_{layer_number}_with_inverse_time.txt"
             output_plot_path = f"/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/burial_history/inversion/burial_history_layer_{layer_number}_with_inverse_time.png"
@@ -20,7 +23,7 @@ if __name__ == "__main__":
             plotter.save_results_inverse_t(output_file_path)
             # Plot, save and show the inverse t plot. 
             #COMMENT THE LAST TWO IF YOU WANT TO PLOT EVERYTHING IN A SINGLE FIGURE
-            plotter.plot_inverse_t(label=layer_number)
+            plotter.plot_inverse_t(label=layer_number, linecolor = cmap(idx), scattercolor=cmap2(idx))
             #plotter.save_plot_inverse_t(output_plot_path)
             #plotter.show_plot_inverse_t()
 
