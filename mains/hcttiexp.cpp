@@ -24,14 +24,15 @@ int main() {
     hello_world();
     print_version();
     Mediaproperties mediaproperties;
-    std::string gridFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/CORTE_NS.vtu";
-    std::string lithoFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/litho_properties_2.txt";
     std::string layerinfoFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/layerinfo.txt";
+    //Change grid and litho file  (TYPE_IIA, TYPE_IIB, TYPE_IIC, TYPE_IID) according to needs
+    std::string gridFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/grids/CORTE_NS.vtu";
+    std::string lithoFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/litho_properties/type_IID_litho_properties.txt";
     //std::string outgridFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/mod_CORTE_NS.vtu";
     std::vector<vtkSmartPointer<vtkUnstructuredGrid>> modifiedGrids = mediaproperties.modifygrid(layerinfoFilename, gridFilename, lithoFilename);
 
-    //Read the kinetic file
-    std::string kinFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/kinetic_properties.txt";
+    //Read the kinetic file, change according to needs: TYPE_IIA, TYPE_IIB, TYPE_IIC, TYPE_IID
+    std::string kinFilename = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/data/kinetic_properties/type_IID_kinetic_properties.txt";
     Fluidproperties fluidProperties(kinFilename);
     // Access the kinetic properties
     double activationEnergy = fluidProperties.kineticProperties.activationenergy[0];
@@ -110,7 +111,8 @@ int main() {
         std::string originalfilename = filePath.stem().string();
 
         std::stringstream filenameStream;
-        filenameStream << "/home/juanse/Documents/GitHub/HC-TTIExp/mains/results/TTI_" << originalfilename << "_" << originalTempRangesMap[layerId].first << "_" << originalTempRangesMap[layerId].second << ".vtu";  // Modify as needed
+        //Change results path according to needs: TYPE_IIA, TYPE_IIB, TYPE_IIC, TYPE_IID 
+        filenameStream << "/home/juanse/Documents/GitHub/HC-TTIExp/mains/results/TYPE_IID/TTI_" << originalfilename << "_" << originalTempRangesMap[layerId].first << "_" << originalTempRangesMap[layerId].second << ".vtu";  // Modify as needed
         std::string outputFilename = filenameStream.str();
 
         vtkSmartPointer<vtkXMLUnstructuredGridWriter> writer = vtkSmartPointer<vtkXMLUnstructuredGridWriter>::New();

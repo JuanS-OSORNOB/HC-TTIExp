@@ -83,7 +83,7 @@ namespace HCTTIEXP
     #include <vtkIntArray.h>
 #include <vtkStringArray.h>
 
-// Assuming layerMap is a std::unordered_map<int, std::string> containing layer_id and layer_name mapping.
+    // Assuming layerMap is a std::unordered_map<int, std::string> containing layer_id and layer_name mapping.
 
     void Mediaproperties::addLayerNameArrayToGrid(vtkSmartPointer<vtkUnstructuredGrid>& grid, const std::map<int, std::string>& layerMap)
     {
@@ -309,7 +309,7 @@ namespace HCTTIEXP
             //Adjust the path as needed
             int roundedInitialTemp = std::round(initialTemp);
             int roundedFinalTemp = std::round(finalTemp);
-            std::string fileName = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/results/" + originalfilename + "_" + std::to_string(roundedInitialTemp) + "_" + std::to_string(roundedFinalTemp) + ".vtu";
+            std::string fileName = "/home/juanse/Documents/GitHub/HC-TTIExp/mains/results/TYPE_IID/" + originalfilename + "_" + std::to_string(roundedInitialTemp) + "_" + std::to_string(roundedFinalTemp) + ".vtu";
             modifiedGridFileNames.push_back(fileName);
 
             vtkSmartPointer<vtkXMLUnstructuredGridWriter> writer = vtkSmartPointer<vtkXMLUnstructuredGridWriter>::New();
