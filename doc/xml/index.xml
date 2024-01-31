@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.1" xml:lang="en-US">
+  <compound refid="struct_layer_properties" kind="struct"><name>LayerProperties</name>
+    <member refid="struct_layer_properties_1a8190fb291f7188e2c493a193ebc9574f" kind="variable"><name>temperatureRange</name></member>
+    <member refid="struct_layer_properties_1a7daa9960667bffe13aca9f7c691dd8c5" kind="variable"><name>exposureTime</name></member>
+  </compound>
+  <compound refid="struct_your_namespace_1_1_layer_properties" kind="struct"><name>YourNamespace::LayerProperties</name>
+    <member refid="struct_your_namespace_1_1_layer_properties_1a6845d1b684950082fcede162cc9891ff" kind="variable"><name>lithology_id</name></member>
+    <member refid="struct_your_namespace_1_1_layer_properties_1aaff7ddef7ab563f95353ddd9916623c5" kind="variable"><name>temperatureRange</name></member>
+    <member refid="struct_your_namespace_1_1_layer_properties_1a4729d64d5d019379573f50d63c5a72d4" kind="variable"><name>exposureTime</name></member>
+  </compound>
+  <compound refid="struct_litho_data" kind="struct"><name>LithoData</name>
+    <member refid="struct_litho_data_1ae70a3e17647b367f98fef58c300e092a" kind="variable"><name>column1</name></member>
+    <member refid="struct_litho_data_1a0571c5e826cfb0ea43c49af60564363f" kind="variable"><name>column2</name></member>
+    <member refid="struct_litho_data_1ae1ab0a26c08cb88df55578b9635eda20" kind="variable"><name>column3</name></member>
+    <member refid="struct_litho_data_1af0832c739dbe4b3afc97cebf43e63e4a" kind="variable"><name>column4</name></member>
+    <member refid="struct_litho_data_1afad56c9de1a4f22139af4422172bc8ba" kind="variable"><name>column5</name></member>
+    <member refid="struct_litho_data_1a99eefd5c863bc69665892abbae5c57b5" kind="variable"><name>temperature_range</name></member>
+    <member refid="struct_litho_data_1a3d84d23f8baf0feadec6cb5644f43bb1" kind="variable"><name>time_range</name></member>
+  </compound>
+  <compound refid="class_your_namespace_1_1_your_class" kind="class"><name>YourNamespace::YourClass</name>
+    <member refid="class_your_namespace_1_1_your_class_1ae31510f7e63d8e588b6b68eb1202bcb1" kind="function"><name>modifyGrids</name></member>
+    <member refid="class_your_namespace_1_1_your_class_1a58c138805b17b10a6c2a51d0725b8316" kind="function"><name>addScalarArrayToGrid</name></member>
+  </compound>
+  <compound refid="namespace_h_c_t_t_i_e_x_p" kind="namespace"><name>HCTTIEXP</name>
+  </compound>
+  <compound refid="namespace_your_namespace" kind="namespace"><name>YourNamespace</name>
+  </compound>
+  <compound refid="errorhandling_8cpp" kind="file"><name>errorhandling.cpp</name>
+  </compound>
+  <compound refid="logger_8cpp" kind="file"><name>logger.cpp</name>
+  </compound>
+  <compound refid="message_8cpp" kind="file"><name>message.cpp</name>
+    <member refid="message_8cpp_1a15addf2dde60b9dccc2f1b1da89f3e96" kind="function"><name>hello_world</name></member>
+    <member refid="message_8cpp_1a6302aaae12249e8ea16bfdc7de892f21" kind="function"><name>print_version</name></member>
+  </compound>
+  <compound refid="readwrite_8cpp" kind="file"><name>readwrite.cpp</name>
+  </compound>
+  <compound refid="fluidproperties_8cpp" kind="file"><name>fluidproperties.cpp</name>
+  </compound>
+  <compound refid="_e_j_e_m_p_l_o1_8cpp" kind="file"><name>EJEMPLO1.cpp</name>
+    <member refid="_e_j_e_m_p_l_o1_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="_e_j_e_m_p_l_o2_8cpp" kind="file"><name>EJEMPLO2.cpp</name>
+  </compound>
+  <compound refid="mediaproperties_8cpp" kind="file"><name>mediaproperties.cpp</name>
+  </compound>
+  <compound refid="simulation_8cpp" kind="file"><name>simulation.cpp</name>
+  </compound>
+  <compound refid="tti_8cpp" kind="file"><name>tti.cpp</name>
+  </compound>
+  <compound refid="visualization_8cpp" kind="file"><name>visualization.cpp</name>
+  </compound>
+  <compound refid="dir_38cd9eca440b760dc966f21b1f8d8f41" kind="dir"><name>/home/juanse/Documents/GitHub/HC-TTIExp/src/basic</name>
+  </compound>
+  <compound refid="dir_0d9a86413da4c85b0ab6657597eb4c1b" kind="dir"><name>/home/juanse/Documents/GitHub/HC-TTIExp/src/fluid_properties</name>
+  </compound>
+  <compound refid="dir_4010362a5c05bb412ccb9e05dad6738e" kind="dir"><name>/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties</name>
+  </compound>
+  <compound refid="dir_d73d1ee04cc237a5854777ea99c55872" kind="dir"><name>/home/juanse/Documents/GitHub/HC-TTIExp/src/simulation</name>
+  </compound>
+  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>/home/juanse/Documents/GitHub/HC-TTIExp/src</name>
+  </compound>
+  <compound refid="dir_d63ef1312b52f5fbe5f9c76689f7e06a" kind="dir"><name>/home/juanse/Documents/GitHub/HC-TTIExp/src/thermal_effects</name>
+  </compound>
+  <compound refid="dir_b00de47ad7e2e13a637d9aa605dec95e" kind="dir"><name>/home/juanse/Documents/GitHub/HC-TTIExp/src/visualization</name>
+  </compound>
+</doxygenindex>

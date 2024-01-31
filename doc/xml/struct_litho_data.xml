@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="struct_litho_data" kind="struct" language="C++" prot="public">
+    <compoundname>LithoData</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_litho_data_1ae70a3e17647b367f98fef58c300e092a" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int LithoData::column1</definition>
+        <argsstring></argsstring>
+        <name>column1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="16" column="9" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_litho_data_1a0571c5e826cfb0ea43c49af60564363f" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double LithoData::column2</definition>
+        <argsstring></argsstring>
+        <name>column2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="17" column="12" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_litho_data_1ae1ab0a26c08cb88df55578b9635eda20" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double LithoData::column3</definition>
+        <argsstring></argsstring>
+        <name>column3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="18" column="12" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_litho_data_1af0832c739dbe4b3afc97cebf43e63e4a" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int LithoData::column4</definition>
+        <argsstring></argsstring>
+        <name>column4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="19" column="9" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_litho_data_1afad56c9de1a4f22139af4422172bc8ba" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double LithoData::column5</definition>
+        <argsstring></argsstring>
+        <name>column5</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="20" column="12" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_litho_data_1a99eefd5c863bc69665892abbae5c57b5" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double LithoData::temperature_range</definition>
+        <argsstring></argsstring>
+        <name>temperature_range</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="21" column="12" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_litho_data_1a3d84d23f8baf0feadec6cb5644f43bb1" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double LithoData::time_range</definition>
+        <argsstring></argsstring>
+        <name>time_range</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="22" column="12" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="15" column="1" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" bodystart="15" bodyend="23"/>
+    <listofallmembers>
+      <member refid="struct_litho_data_1ae70a3e17647b367f98fef58c300e092a" prot="public" virt="non-virtual"><scope>LithoData</scope><name>column1</name></member>
+      <member refid="struct_litho_data_1a0571c5e826cfb0ea43c49af60564363f" prot="public" virt="non-virtual"><scope>LithoData</scope><name>column2</name></member>
+      <member refid="struct_litho_data_1ae1ab0a26c08cb88df55578b9635eda20" prot="public" virt="non-virtual"><scope>LithoData</scope><name>column3</name></member>
+      <member refid="struct_litho_data_1af0832c739dbe4b3afc97cebf43e63e4a" prot="public" virt="non-virtual"><scope>LithoData</scope><name>column4</name></member>
+      <member refid="struct_litho_data_1afad56c9de1a4f22139af4422172bc8ba" prot="public" virt="non-virtual"><scope>LithoData</scope><name>column5</name></member>
+      <member refid="struct_litho_data_1a99eefd5c863bc69665892abbae5c57b5" prot="public" virt="non-virtual"><scope>LithoData</scope><name>temperature_range</name></member>
+      <member refid="struct_litho_data_1a3d84d23f8baf0feadec6cb5644f43bb1" prot="public" virt="non-virtual"><scope>LithoData</scope><name>time_range</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

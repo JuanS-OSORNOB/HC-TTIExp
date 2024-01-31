@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_struct_your_namespace_1_1_layer_properties" xml:lang="en-US">
+<title>YourNamespace::LayerProperties Struct Reference</title>
+<indexterm><primary>YourNamespace::LayerProperties</primary></indexterm>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::vector&lt; int &gt; <link linkend="_struct_your_namespace_1_1_layer_properties_1a6845d1b684950082fcede162cc9891ff">lithology_id</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; double &gt; <link linkend="_struct_your_namespace_1_1_layer_properties_1aaff7ddef7ab563f95353ddd9916623c5">temperatureRange</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; double &gt; <link linkend="_struct_your_namespace_1_1_layer_properties_1a4729d64d5d019379573f50d63c5a72d4">exposureTime</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line 27 of file EJEMPLO2.cpp.</para>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_struct_your_namespace_1_1_layer_properties_1a4729d64d5d019379573f50d63c5a72d4"/>    <section>
+    <title>exposureTime</title>
+<indexterm><primary>exposureTime</primary><secondary>YourNamespace::LayerProperties</secondary></indexterm>
+<indexterm><primary>YourNamespace::LayerProperties</primary><secondary>exposureTime</secondary></indexterm>
+<para><computeroutput>std::vector&lt;double&gt; YourNamespace::LayerProperties::exposureTime</computeroutput></para><para>
+Definition at line 30 of file EJEMPLO2.cpp.</para>
+    </section><anchor xml:id="_struct_your_namespace_1_1_layer_properties_1a6845d1b684950082fcede162cc9891ff"/>    <section>
+    <title>lithology_id</title>
+<indexterm><primary>lithology_id</primary><secondary>YourNamespace::LayerProperties</secondary></indexterm>
+<indexterm><primary>YourNamespace::LayerProperties</primary><secondary>lithology_id</secondary></indexterm>
+<para><computeroutput>std::vector&lt;int&gt; YourNamespace::LayerProperties::lithology_id</computeroutput></para><para>
+Definition at line 28 of file EJEMPLO2.cpp.</para>
+    </section><anchor xml:id="_struct_your_namespace_1_1_layer_properties_1aaff7ddef7ab563f95353ddd9916623c5"/>    <section>
+    <title>temperatureRange</title>
+<indexterm><primary>temperatureRange</primary><secondary>YourNamespace::LayerProperties</secondary></indexterm>
+<indexterm><primary>YourNamespace::LayerProperties</primary><secondary>temperatureRange</secondary></indexterm>
+<para><computeroutput>std::vector&lt;double&gt; YourNamespace::LayerProperties::temperatureRange</computeroutput></para><para>
+Definition at line 29 of file EJEMPLO2.cpp.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/<link linkend="__e_j_e_m_p_l_o2_8cpp">EJEMPLO2.cpp</link></section>
+</section>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_38cd9eca440b760dc966f21b1f8d8f41" kind="dir">
+    <compoundname>/home/juanse/Documents/GitHub/HC-TTIExp/src/basic</compoundname>
+    <innerfile refid="errorhandling_8cpp">errorhandling.cpp</innerfile>
+    <innerfile refid="logger_8cpp">logger.cpp</innerfile>
+    <innerfile refid="message_8cpp">message.cpp</innerfile>
+    <innerfile refid="readwrite_8cpp">readwrite.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/basic/"/>
+  </compounddef>
+</doxygen>

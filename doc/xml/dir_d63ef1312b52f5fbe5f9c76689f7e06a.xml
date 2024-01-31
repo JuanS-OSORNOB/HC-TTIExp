@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_d63ef1312b52f5fbe5f9c76689f7e06a" kind="dir">
+    <compoundname>/home/juanse/Documents/GitHub/HC-TTIExp/src/thermal_effects</compoundname>
+    <innerfile refid="tti_8cpp">tti.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/thermal_effects/"/>
+  </compounddef>
+</doxygen>

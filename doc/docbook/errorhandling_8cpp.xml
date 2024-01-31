@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_errorhandling_8cpp" xml:lang="en-US">
+<title>/home/juanse/Documents/GitHub/HC-TTIExp/src/basic/errorhandling.cpp File Reference</title>
+<indexterm><primary>/home/juanse/Documents/GitHub/HC-TTIExp/src/basic/errorhandling.cpp</primary></indexterm>
+<programlisting>#include &lt;HCTTIExpProjConfig.h&gt;
+#include &lt;basic/errorhandling.h&gt;
+#include &lt;iostream&gt;
+</programlisting>Include dependency graph for errorhandling.cpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="errorhandling_8cpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>

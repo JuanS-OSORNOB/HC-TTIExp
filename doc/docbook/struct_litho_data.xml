@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_struct_litho_data" xml:lang="en-US">
+<title>LithoData Struct Reference</title>
+<indexterm><primary>LithoData</primary></indexterm>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_struct_litho_data_1ae70a3e17647b367f98fef58c300e092a">column1</link></para>
+</listitem>
+            <listitem><para>double <link linkend="_struct_litho_data_1a0571c5e826cfb0ea43c49af60564363f">column2</link></para>
+</listitem>
+            <listitem><para>double <link linkend="_struct_litho_data_1ae1ab0a26c08cb88df55578b9635eda20">column3</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_struct_litho_data_1af0832c739dbe4b3afc97cebf43e63e4a">column4</link></para>
+</listitem>
+            <listitem><para>double <link linkend="_struct_litho_data_1afad56c9de1a4f22139af4422172bc8ba">column5</link></para>
+</listitem>
+            <listitem><para>double <link linkend="_struct_litho_data_1a99eefd5c863bc69665892abbae5c57b5">temperature_range</link></para>
+</listitem>
+            <listitem><para>double <link linkend="_struct_litho_data_1a3d84d23f8baf0feadec6cb5644f43bb1">time_range</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line 15 of file EJEMPLO2.cpp.</para>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_struct_litho_data_1ae70a3e17647b367f98fef58c300e092a"/>    <section>
+    <title>column1</title>
+<indexterm><primary>column1</primary><secondary>LithoData</secondary></indexterm>
+<indexterm><primary>LithoData</primary><secondary>column1</secondary></indexterm>
+<para><computeroutput>int LithoData::column1</computeroutput></para><para>
+Definition at line 16 of file EJEMPLO2.cpp.</para>
+    </section><anchor xml:id="_struct_litho_data_1a0571c5e826cfb0ea43c49af60564363f"/>    <section>
+    <title>column2</title>
+<indexterm><primary>column2</primary><secondary>LithoData</secondary></indexterm>
+<indexterm><primary>LithoData</primary><secondary>column2</secondary></indexterm>
+<para><computeroutput>double LithoData::column2</computeroutput></para><para>
+Definition at line 17 of file EJEMPLO2.cpp.</para>
+    </section><anchor xml:id="_struct_litho_data_1ae1ab0a26c08cb88df55578b9635eda20"/>    <section>
+    <title>column3</title>
+<indexterm><primary>column3</primary><secondary>LithoData</secondary></indexterm>
+<indexterm><primary>LithoData</primary><secondary>column3</secondary></indexterm>
+<para><computeroutput>double LithoData::column3</computeroutput></para><para>
+Definition at line 18 of file EJEMPLO2.cpp.</para>
+    </section><anchor xml:id="_struct_litho_data_1af0832c739dbe4b3afc97cebf43e63e4a"/>    <section>
+    <title>column4</title>
+<indexterm><primary>column4</primary><secondary>LithoData</secondary></indexterm>
+<indexterm><primary>LithoData</primary><secondary>column4</secondary></indexterm>
+<para><computeroutput>int LithoData::column4</computeroutput></para><para>
+Definition at line 19 of file EJEMPLO2.cpp.</para>
+    </section><anchor xml:id="_struct_litho_data_1afad56c9de1a4f22139af4422172bc8ba"/>    <section>
+    <title>column5</title>
+<indexterm><primary>column5</primary><secondary>LithoData</secondary></indexterm>
+<indexterm><primary>LithoData</primary><secondary>column5</secondary></indexterm>
+<para><computeroutput>double LithoData::column5</computeroutput></para><para>
+Definition at line 20 of file EJEMPLO2.cpp.</para>
+    </section><anchor xml:id="_struct_litho_data_1a99eefd5c863bc69665892abbae5c57b5"/>    <section>
+    <title>temperature_range</title>
+<indexterm><primary>temperature_range</primary><secondary>LithoData</secondary></indexterm>
+<indexterm><primary>LithoData</primary><secondary>temperature_range</secondary></indexterm>
+<para><computeroutput>double LithoData::temperature_range</computeroutput></para><para>
+Definition at line 21 of file EJEMPLO2.cpp.</para>
+    </section><anchor xml:id="_struct_litho_data_1a3d84d23f8baf0feadec6cb5644f43bb1"/>    <section>
+    <title>time_range</title>
+<indexterm><primary>time_range</primary><secondary>LithoData</secondary></indexterm>
+<indexterm><primary>LithoData</primary><secondary>time_range</secondary></indexterm>
+<para><computeroutput>double LithoData::time_range</computeroutput></para><para>
+Definition at line 22 of file EJEMPLO2.cpp.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/<link linkend="__e_j_e_m_p_l_o2_8cpp">EJEMPLO2.cpp</link></section>
+</section>

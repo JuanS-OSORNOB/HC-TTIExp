@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_namespace_your_namespace" xml:lang="en-US">
+<title>YourNamespace Namespace Reference</title>
+<indexterm><primary>YourNamespace</primary></indexterm>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_struct_your_namespace_1_1_layer_properties">LayerProperties</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_your_namespace_1_1_your_class">YourClass</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

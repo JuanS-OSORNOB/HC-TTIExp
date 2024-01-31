@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="struct_your_namespace_1_1_layer_properties" kind="struct" language="C++" prot="public">
+    <compoundname>YourNamespace::LayerProperties</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_your_namespace_1_1_layer_properties_1a6845d1b684950082fcede162cc9891ff" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; YourNamespace::LayerProperties::lithology_id</definition>
+        <argsstring></argsstring>
+        <name>lithology_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="28" column="21" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" bodystart="28" bodyend="-1"/>
+        <referencedby refid="class_your_namespace_1_1_your_class_1ae31510f7e63d8e588b6b68eb1202bcb1" compoundref="_e_j_e_m_p_l_o2_8cpp" startline="36" endline="72">YourNamespace::YourClass::modifyGrids</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_your_namespace_1_1_layer_properties_1aaff7ddef7ab563f95353ddd9916623c5" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; YourNamespace::LayerProperties::temperatureRange</definition>
+        <argsstring></argsstring>
+        <name>temperatureRange</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="29" column="21" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" bodystart="29" bodyend="-1"/>
+        <referencedby refid="class_your_namespace_1_1_your_class_1ae31510f7e63d8e588b6b68eb1202bcb1" compoundref="_e_j_e_m_p_l_o2_8cpp" startline="36" endline="72">YourNamespace::YourClass::modifyGrids</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_your_namespace_1_1_layer_properties_1a4729d64d5d019379573f50d63c5a72d4" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; YourNamespace::LayerProperties::exposureTime</definition>
+        <argsstring></argsstring>
+        <name>exposureTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="30" column="21" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" bodystart="30" bodyend="-1"/>
+        <referencedby refid="class_your_namespace_1_1_your_class_1ae31510f7e63d8e588b6b68eb1202bcb1" compoundref="_e_j_e_m_p_l_o2_8cpp" startline="36" endline="72">YourNamespace::YourClass::modifyGrids</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="27" column="5" bodyfile="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" bodystart="27" bodyend="31"/>
+    <listofallmembers>
+      <member refid="struct_your_namespace_1_1_layer_properties_1a4729d64d5d019379573f50d63c5a72d4" prot="public" virt="non-virtual"><scope>YourNamespace::LayerProperties</scope><name>exposureTime</name></member>
+      <member refid="struct_your_namespace_1_1_layer_properties_1a6845d1b684950082fcede162cc9891ff" prot="public" virt="non-virtual"><scope>YourNamespace::LayerProperties</scope><name>lithology_id</name></member>
+      <member refid="struct_your_namespace_1_1_layer_properties_1aaff7ddef7ab563f95353ddd9916623c5" prot="public" virt="non-virtual"><scope>YourNamespace::LayerProperties</scope><name>temperatureRange</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

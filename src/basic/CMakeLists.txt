@@ -1,15 +1,25 @@
+#Set the library name
 set(target_name basic)
 add_library(${target_name} STATIC "")
 target_sources(${target_name}
+ PRIVATE "${PROJECT_SOURCE_DIR}/src/basic/errorhandling.cpp"
+ PRIVATE "${PROJECT_SOURCE_DIR}/include/basic/errorhandling.h"
+ PRIVATE "${PROJECT_SOURCE_DIR}/src/basic/logger.cpp"
+ PRIVATE "${PROJECT_SOURCE_DIR}/include/basic/logger.h"
  PRIVATE "${PROJECT_SOURCE_DIR}/src/basic/message.cpp"
  PRIVATE "${PROJECT_SOURCE_DIR}/include/basic/message.h"
+ PRIVATE "${PROJECT_SOURCE_DIR}/src/basic/readwrite.cpp"
+ PRIVATE "${PROJECT_SOURCE_DIR}/include/basic/readwrite.h"
 )
 target_include_directories(${target_name}
  PUBLIC
  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+ $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/basic> #Include this library
  $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}>
  $<INSTALL_INTERFACE:include>
 )
+deal_ii_setup_target(${target_name})
+
 #Export the target
 export(TARGETS ${target_name} FILE $(PROJECT_BINARY_DIR)/${target_name}_target.cmake)
 

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespace_your_namespace" kind="namespace" language="C++">
+    <compoundname>YourNamespace</compoundname>
+    <innerclass refid="struct_your_namespace_1_1_layer_properties" prot="public">YourNamespace::LayerProperties</innerclass>
+    <innerclass refid="class_your_namespace_1_1_your_class" prot="public">YourNamespace::YourClass</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp" line="25" column="1"/>
+  </compounddef>
+</doxygen>

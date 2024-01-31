@@ -7,13 +7,21 @@ HC-TTIExp also allows for simulation of multi-phase fluid flow in the meshed dom
 
 A test case for the Atrato basin of northwestern Colombia is found.
 
-To configure the compilation environment (you can choose whether to have executables and tests)
+
+<i>Simple steps to install HC-TTIExp<i>:
 ```
-cmake-gui
+cd HC-TTIExp
+mkdir build
+cd build
 ```
-To generate the project files
+To configure and generate the compilation environment (you can choose whether to have executables and tests)
 ```
-make
+cmake .. OR cmake-gui (if you want to specify environment paths like dependency libraries or installation location)
 ```
+To compile the files
+```
+make -J (use the J flag if you want to allocate multiple cores of the computer for this operation, e.g.: -J7)
+```
+
 <b>For any required information please contact<b>:
 * Juan Sebastián Osorno Bolívar (juansebosornob@gmail.com)

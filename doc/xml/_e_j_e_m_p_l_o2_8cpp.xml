@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="_e_j_e_m_p_l_o2_8cpp" kind="file" language="C++">
+    <compoundname>EJEMPLO2.cpp</compoundname>
+    <includes local="no">iostream</includes>
+    <includes local="no">fstream</includes>
+    <includes local="no">sstream</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vtkSmartPointer.h</includes>
+    <includes local="no">vtkXMLUnstructuredGridReader.h</includes>
+    <includes local="no">vtkXMLUnstructuredGridWriter.h</includes>
+    <includes local="no">vtkIntArray.h</includes>
+    <includes local="no">vtkDoubleArray.h</includes>
+    <includes local="no">vtkPointData.h</includes>
+    <includes local="no">vtkUnstructuredGrid.h</includes>
+    <incdepgraph>
+      <node id="8">
+        <label>vtkXMLUnstructuredGridReader.h</label>
+      </node>
+      <node id="12">
+        <label>vtkPointData.h</label>
+      </node>
+      <node id="6">
+        <label>string</label>
+      </node>
+      <node id="10">
+        <label>vtkIntArray.h</label>
+      </node>
+      <node id="3">
+        <label>fstream</label>
+      </node>
+      <node id="13">
+        <label>vtkUnstructuredGrid.h</label>
+      </node>
+      <node id="5">
+        <label>vector</label>
+      </node>
+      <node id="4">
+        <label>sstream</label>
+      </node>
+      <node id="1">
+        <label>/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp</label>
+        <link refid="_e_j_e_m_p_l_o2_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>vtkDoubleArray.h</label>
+      </node>
+      <node id="2">
+        <label>iostream</label>
+      </node>
+      <node id="9">
+        <label>vtkXMLUnstructuredGridWriter.h</label>
+      </node>
+      <node id="7">
+        <label>vtkSmartPointer.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_litho_data" prot="public">LithoData</innerclass>
+    <innerclass refid="struct_your_namespace_1_1_layer_properties" prot="public">YourNamespace::LayerProperties</innerclass>
+    <innerclass refid="class_your_namespace_1_1_your_class" prot="public">YourNamespace::YourClass</innerclass>
+    <innernamespace refid="namespace_your_namespace">YourNamespace</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fstream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sstream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkSmartPointer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkXMLUnstructuredGridReader.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkXMLUnstructuredGridWriter.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkIntArray.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkDoubleArray.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkPointData.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vtkUnstructuredGrid.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Assuming<sp/>you<sp/>have<sp/>a<sp/>LithoData<sp/>struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="struct_litho_data" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_litho_data" kindref="compound">LithoData</ref><sp/>{</highlight></codeline>
+<codeline lineno="16" refid="struct_litho_data_1ae70a3e17647b367f98fef58c300e092a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_litho_data_1ae70a3e17647b367f98fef58c300e092a" kindref="member">column1</ref>;<sp/><sp/></highlight><highlight class="comment">//<sp/>Assuming<sp/>column1<sp/>corresponds<sp/>to<sp/>layer_id</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="struct_litho_data_1a0571c5e826cfb0ea43c49af60564363f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="struct_litho_data_1a0571c5e826cfb0ea43c49af60564363f" kindref="member">column2</ref>;<sp/><sp/></highlight><highlight class="comment">//<sp/>Assuming<sp/>column2<sp/>corresponds<sp/>to<sp/>temperature</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="struct_litho_data_1ae1ab0a26c08cb88df55578b9635eda20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="struct_litho_data_1ae1ab0a26c08cb88df55578b9635eda20" kindref="member">column3</ref>;<sp/><sp/></highlight><highlight class="comment">//<sp/>Assuming<sp/>column3<sp/>corresponds<sp/>to<sp/>exposure</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="struct_litho_data_1af0832c739dbe4b3afc97cebf43e63e4a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_litho_data_1af0832c739dbe4b3afc97cebf43e63e4a" kindref="member">column4</ref>;<sp/><sp/></highlight><highlight class="comment">//<sp/>Assuming<sp/>column4<sp/>corresponds<sp/>to<sp/>another<sp/>property<sp/>(e.g.,<sp/>fault_id)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="struct_litho_data_1afad56c9de1a4f22139af4422172bc8ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="struct_litho_data_1afad56c9de1a4f22139af4422172bc8ba" kindref="member">column5</ref>;<sp/><sp/></highlight><highlight class="comment">//<sp/>Placeholder<sp/>for<sp/>additional<sp/>properties,<sp/>adjust<sp/>accordingly</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="struct_litho_data_1a99eefd5c863bc69665892abbae5c57b5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="struct_litho_data_1a99eefd5c863bc69665892abbae5c57b5" kindref="member">temperature_range</ref>;<sp/><sp/></highlight><highlight class="comment">//<sp/>Assuming<sp/>temperature_range<sp/>is<sp/>a<sp/>double</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="struct_litho_data_1a3d84d23f8baf0feadec6cb5644f43bb1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="struct_litho_data_1a3d84d23f8baf0feadec6cb5644f43bb1" kindref="member">time_range</ref>;<sp/><sp/></highlight><highlight class="comment">//<sp/>Assuming<sp/>time_range<sp/>is<sp/>a<sp/>double</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="namespace_your_namespace" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_your_namespace" kindref="compound">YourNamespace</ref><sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="struct_your_namespace_1_1_layer_properties" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_your_namespace_1_1_layer_properties" kindref="compound">LayerProperties</ref><sp/>{</highlight></codeline>
+<codeline lineno="28" refid="struct_your_namespace_1_1_layer_properties_1a6845d1b684950082fcede162cc9891ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;int&gt;<sp/><ref refid="struct_your_namespace_1_1_layer_properties_1a6845d1b684950082fcede162cc9891ff" kindref="member">lithology_id</ref>;</highlight></codeline>
+<codeline lineno="29" refid="struct_your_namespace_1_1_layer_properties_1aaff7ddef7ab563f95353ddd9916623c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="struct_your_namespace_1_1_layer_properties_1aaff7ddef7ab563f95353ddd9916623c5" kindref="member">temperatureRange</ref>;</highlight></codeline>
+<codeline lineno="30" refid="struct_your_namespace_1_1_layer_properties_1a4729d64d5d019379573f50d63c5a72d4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="struct_your_namespace_1_1_layer_properties_1a4729d64d5d019379573f50d63c5a72d4" kindref="member">exposureTime</ref>;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="class_your_namespace_1_1_your_class" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_your_namespace_1_1_your_class" kindref="compound">YourClass</ref><sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Function<sp/>to<sp/>be<sp/>used<sp/>in<sp/>main</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="class_your_namespace_1_1_your_class_1ae31510f7e63d8e588b6b68eb1202bcb1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;vtkSmartPointer&lt;vtkUnstructuredGrid&gt;&gt;<sp/><ref refid="class_your_namespace_1_1_your_class_1ae31510f7e63d8e588b6b68eb1202bcb1" kindref="member">modifyGrids</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>gridFilename,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>lithoFilename)<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>data<sp/>from<sp/>your<sp/>LithoData<sp/>vector</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;LithoData&gt;<sp/>lithoDataVector<sp/>=<sp/>readlithofile(lithoFilename);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Process<sp/>the<sp/>loaded<sp/>data<sp/>and<sp/>populate<sp/>LayerProperties</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_your_namespace_1_1_layer_properties" kindref="compound">LayerProperties</ref><sp/>layerProperties<sp/>=<sp/>populateLayerProperties(lithoDataVector);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>VTU</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vtkSmartPointer&lt;vtkXMLUnstructuredGridReader&gt;<sp/>reader<sp/>=</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vtkSmartPointer&lt;vtkXMLUnstructuredGridReader&gt;::New();</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>reader-&gt;SetFileName(gridFilename.c_str());</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>reader-&gt;Update();</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vtkSmartPointer&lt;vtkUnstructuredGrid&gt;<sp/>unstructuredGrid<sp/>=<sp/>reader-&gt;GetOutput();</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>a<sp/>vector<sp/>to<sp/>store<sp/>modified<sp/>grids</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;vtkSmartPointer&lt;vtkUnstructuredGrid&gt;&gt;<sp/>modifiedGrids;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Loop<sp/>through<sp/>each<sp/>temperature<sp/>range<sp/>and<sp/>exposure<sp/>time<sp/>in<sp/>layerProperties</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>layerProperties.<ref refid="struct_your_namespace_1_1_layer_properties_1a6845d1b684950082fcede162cc9891ff" kindref="member">lithology_id</ref>.size();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>structure<sp/>of<sp/>the<sp/>original<sp/>grid</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vtkSmartPointer&lt;vtkUnstructuredGrid&gt;<sp/>modifiedGrid<sp/>=<sp/>vtkSmartPointer&lt;vtkUnstructuredGrid&gt;::New();</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>modifiedGrid-&gt;ShallowCopy(unstructuredGrid);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>the<sp/>temperature<sp/>range<sp/>and<sp/>exposure<sp/>time<sp/>for<sp/>the<sp/>current<sp/>iteration</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>temperature<sp/>=<sp/>layerProperties.<ref refid="struct_your_namespace_1_1_layer_properties_1aaff7ddef7ab563f95353ddd9916623c5" kindref="member">temperatureRange</ref>[i];</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>exposure<sp/>=<sp/>layerProperties.<ref refid="struct_your_namespace_1_1_layer_properties_1a4729d64d5d019379573f50d63c5a72d4" kindref="member">exposureTime</ref>[i];</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Add<sp/>temperature<sp/>range<sp/>and<sp/>exposure<sp/>time<sp/>arrays<sp/>to<sp/>the<sp/>point<sp/>data</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_your_namespace_1_1_your_class_1a58c138805b17b10a6c2a51d0725b8316" kindref="member">addScalarArrayToGrid</ref>(modifiedGrid,<sp/>temperature,<sp/></highlight><highlight class="stringliteral">&quot;temperatureRange&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_your_namespace_1_1_your_class_1a58c138805b17b10a6c2a51d0725b8316" kindref="member">addScalarArrayToGrid</ref>(modifiedGrid,<sp/>exposure,<sp/></highlight><highlight class="stringliteral">&quot;exposureTime&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Add<sp/>the<sp/>modified<sp/>grid<sp/>to<sp/>the<sp/>vector</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>modifiedGrids.push_back(modifiedGrid);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>modifiedGrids;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Helper<sp/>function<sp/>to<sp/>add<sp/>a<sp/>scalar<sp/>array<sp/>to<sp/>the<sp/>point<sp/>data<sp/>of<sp/>a<sp/>grid</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="class_your_namespace_1_1_your_class_1a58c138805b17b10a6c2a51d0725b8316" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_your_namespace_1_1_your_class_1a58c138805b17b10a6c2a51d0725b8316" kindref="member">addScalarArrayToGrid</ref>(vtkSmartPointer&lt;vtkUnstructuredGrid&gt;&amp;<sp/>grid,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>arrayName)<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vtkSmartPointer&lt;vtkDoubleArray&gt;<sp/>scalarArray<sp/>=<sp/>vtkSmartPointer&lt;vtkDoubleArray&gt;::New();</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>scalarArray-&gt;SetNumberOfComponents(1);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>scalarArray-&gt;SetName(arrayName);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>scalarArray-&gt;FillComponent(0,<sp/>value);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grid-&gt;GetPointData()-&gt;AddArray(scalarArray);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>of<sp/>namespace<sp/>YourNamespace</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/EJEMPLO2.cpp"/>
+  </compounddef>
+</doxygen>

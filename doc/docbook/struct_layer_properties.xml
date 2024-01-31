@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_struct_layer_properties" xml:lang="en-US">
+<title>LayerProperties Struct Reference</title>
+<indexterm><primary>LayerProperties</primary></indexterm>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::vector&lt; double &gt; <link linkend="_struct_layer_properties_1a8190fb291f7188e2c493a193ebc9574f">temperatureRange</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; double &gt; <link linkend="_struct_layer_properties_1a7daa9960667bffe13aca9f7c691dd8c5">exposureTime</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line 9 of file EJEMPLO1.cpp.</para>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_struct_layer_properties_1a7daa9960667bffe13aca9f7c691dd8c5"/>    <section>
+    <title>exposureTime</title>
+<indexterm><primary>exposureTime</primary><secondary>LayerProperties</secondary></indexterm>
+<indexterm><primary>LayerProperties</primary><secondary>exposureTime</secondary></indexterm>
+<para><computeroutput>std::vector&lt;double&gt; LayerProperties::exposureTime</computeroutput></para><para>
+Definition at line 11 of file EJEMPLO1.cpp.</para>
+    </section><anchor xml:id="_struct_layer_properties_1a8190fb291f7188e2c493a193ebc9574f"/>    <section>
+    <title>temperatureRange</title>
+<indexterm><primary>temperatureRange</primary><secondary>LayerProperties</secondary></indexterm>
+<indexterm><primary>LayerProperties</primary><secondary>temperatureRange</secondary></indexterm>
+<para><computeroutput>std::vector&lt;double&gt; LayerProperties::temperatureRange</computeroutput></para><para>
+Definition at line 10 of file EJEMPLO1.cpp.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties/<link linkend="__e_j_e_m_p_l_o1_8cpp">EJEMPLO1.cpp</link></section>
+</section>

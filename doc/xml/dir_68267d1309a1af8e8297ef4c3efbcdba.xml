@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
+    <compoundname>/home/juanse/Documents/GitHub/HC-TTIExp/src</compoundname>
+    <innerdir refid="dir_38cd9eca440b760dc966f21b1f8d8f41">/home/juanse/Documents/GitHub/HC-TTIExp/src/basic</innerdir>
+    <innerdir refid="dir_0d9a86413da4c85b0ab6657597eb4c1b">/home/juanse/Documents/GitHub/HC-TTIExp/src/fluid_properties</innerdir>
+    <innerdir refid="dir_4010362a5c05bb412ccb9e05dad6738e">/home/juanse/Documents/GitHub/HC-TTIExp/src/media_properties</innerdir>
+    <innerdir refid="dir_d73d1ee04cc237a5854777ea99c55872">/home/juanse/Documents/GitHub/HC-TTIExp/src/simulation</innerdir>
+    <innerdir refid="dir_d63ef1312b52f5fbe5f9c76689f7e06a">/home/juanse/Documents/GitHub/HC-TTIExp/src/thermal_effects</innerdir>
+    <innerdir refid="dir_b00de47ad7e2e13a637d9aa605dec95e">/home/juanse/Documents/GitHub/HC-TTIExp/src/visualization</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/juanse/Documents/GitHub/HC-TTIExp/src/"/>
+  </compounddef>
+</doxygen>
