@@ -3,17 +3,56 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
+class Filewriter:
+    def __init__(self):
+        self.simu_lines_to_write = []
+        self.sens_lines_to_write = []
+    def add_simulation_line(self, line):
+        self.simu_lines_to_write.append(line)
+    
+    def add_sensitivity_line(self, line):
+        self.sens_lines_to_write.append(line)
+    
+    def write_simulation_results(self, simulationpath):
+        filename = f"simulation_results.txt"
+        filepath = os.path.join(simulationpath, filename)
+        with open(filepath, 'w') as file:
+            for line in self.sens_lines_to_write:
+                file.write(line + '\n')
+    
+    def write_sensitivity_results(self, sensitivitypath):
+        filename = f"sensitivity_results.txt"
+        filepath = os.path.join(sensitivitypath, sensitivity_parameter, filename)
+        with open(filepath, 'w') as file:
+            for line in self.sens_lines_to_write:
+                file.write(line + '\n')
+
 class ReservoirMonteCarloSimulation:
-    def __init__(self, num_simulations, mean_porosity, std_dev_porosity, mean_water_saturation, std_dev_water_saturation):
+    def __init__(self, jobname, num_simulations, mean_porosity, std_dev_porosity, mean_water_saturation, std_dev_water_saturation):
         #Script dir
         self.script_dir = os.path.dirname(__file__)
+        self.jobname = jobname
         self.num_simulations = num_simulations
         self.mean_porosity = mean_porosity
         self.std_dev_porosity = std_dev_porosity
         self.mean_water_saturation = mean_water_saturation
         self.std_dev_water_saturation = std_dev_water_saturation
         self.permeability_values = np.zeros(num_simulations)
-    """TImur's 1968 equation: https://petrophysicsequations.blogspot.com/p/permeability-timur-1968-timur-1968-also.html"""
+
+        #Output file path
+        self.filepath = os.path.join(self.script_dir, 'Monte Carlo')
+        if not os.path.exists(self.filepath):
+            os.makedirs(self.filepath)
+        #Output figure path for Simulation Results
+        self.simulationpath = os.path.join(self.filepath, self.jobname, 'Simulation_results')
+        if not os.path.exists(self.simulationpath):
+            os.makedirs(self.simulationpath)
+        #Output figure path for Sensitivity results
+        self.sensitivitypath = os.path.join(self.filepath, self.jobname, 'Sensitivity_results')
+        if not os.path.exists(self.sensitivitypath):
+            os.makedirs(self.sensitivitypath)
+        
+    """Timur's 1968 equation: https://petrophysicsequations.blogspot.com/p/permeability-timur-1968-timur-1968-also.html"""
     def timur_equation(self, porosity, water_saturation):
         return (0.93 * porosity**2.2 / water_saturation)**2
     """Compute permeability with Timur's equation"""
@@ -23,7 +62,7 @@ class ReservoirMonteCarloSimulation:
     """Plot the histogram of the simulation"""
     def plot_histogram(self):
         hist_figname = f"hist_run_{run}.png"
-        hist_filepath = os.path.join(simulation.script_dir, hist_figname)
+        hist_filepath = os.path.join(self.simulationpath, hist_figname)
         plt.hist(self.permeability_values, bins=50, color='blue', alpha=0.7)
         plt.title('Distribución de permeabilidad - Cuenca Atrato')
         plt.xlabel('Permeabilidad')
@@ -35,10 +74,12 @@ class ReservoirMonteCarloSimulation:
         mean_perm = np.mean(self.permeability_values)
         std_dev_perm = np.std(self.permeability_values)
         return mean_perm, std_dev_perm
+    
+        
     """Sensitivity analysis: Run the simulation with updated parameter (either Phi or Sw), store and compare"""
     """@parameter_value: Linear space from min to max with step"""
     """@parameter_name: Either phi or sw"""
-    def sensitivity_analysis(self, parameter_values, sensitivity_parameter):
+    def sensitivity_analysis(self, sensitivity_parameter, parameter_values):
         sensitivity_results = []
         for value in parameter_values:
             # Create arrays of constant values for porosity and water saturation from initialized values of the class
@@ -63,32 +104,47 @@ class ReservoirMonteCarloSimulation:
         plt.title(f'Analisis de sensibilidad de {sensitivity_parameter} - Cuenca Atrato')
         plt.xlabel('Porosidad')
         plt.legend()
+        figurepath = os.path.join(self.sensitivitypath, sensitivity_parameter)
+        if not os.path.exists(figurepath):
+            os.makedirs(figurepath)
         sensitivity_figname = f'sensitivity_analysis_{sensitivity_parameter}_run_{run}.png'
-        plt.savefig(os.path.join(simulation.script_dir, sensitivity_figname))
+        plt.savefig(os.path.join(figurepath, sensitivity_figname))
         #plt.show()
 
 
+
+
+
 if __name__ == "__main__":
-    #OPOGADO
+    ##############################
+    #JOB
+    jobname = 'opogado'
     num_simulations = 10000
-    
+
     mean_porosity = 0.12
     std_dev_porosity = 0.02
     
     mean_water_saturation = 0.904
     std_dev_water_saturation = 0.05
-    
+    ##############################
     #Perform analysis over multiple runs
-    for run in range(1, 11):
-        simulation = ReservoirMonteCarloSimulation(num_simulations, mean_porosity, std_dev_porosity,
+    montecarloresults = Filewriter()
+    montecarloresults.add_simulation_line(f"#Mean_Perm Std_dev_Perm")
+    
+    sensitivityresults = Filewriter()
+    sensitivityresults.add_sensitivity_line(f"#Value Mean_Perm Std_dev_Perm")
+    for run in range(1, 7):
+        simulation = ReservoirMonteCarloSimulation(jobname, num_simulations, mean_porosity, std_dev_porosity,
                                                    mean_water_saturation, std_dev_water_saturation)
         # Run the Monte Carlo simulation
         porosity_samples = np.random.normal(mean_porosity, std_dev_porosity, num_simulations)
         water_saturation_samples = np.random.normal(mean_water_saturation, std_dev_water_saturation, num_simulations)
         simulation.run_simulation(porosity_samples, water_saturation_samples)
-        # Analyze and print the results of the Monte Carlo simulation
+        # Analyze, print and write the results of the Monte Carlo simulation
         mean_perm, std_dev_perm = simulation.analyze_results()
         print(f"RUN {run} - MONTE CARLO SIMULATION RESULTS\n    Mean Permeability: {mean_perm}, Standard Deviation of Permeability: {std_dev_perm}")
+        line = f"{mean_perm} {std_dev_perm}"
+        montecarloresults.add_simulation_line(line)
         # Plot the histogram of permeability values
         plt.figure(figsize=(10, 6))
         simulation.plot_histogram()
@@ -96,13 +152,18 @@ if __name__ == "__main__":
 
         # Perform sensitivity analysis
         print(f"    SENSITIVITY ANALYSIS")
-        parameter_values = np.linspace(0.10, 0.30, 10)
-        sensitivity_parameter = "phi"
-        sensitivity_results = simulation.sensitivity_analysis(parameter_values, sensitivity_parameter)
+        sensitivity_parameter = 'sw'
+        parameter_values = np.linspace(0.7, 1, 10)
+        sensitivity_results = simulation.sensitivity_analysis(sensitivity_parameter, parameter_values)
         for i, result in enumerate(sensitivity_results):
             print(f"    {i + 1} - For a value of {sensitivity_parameter}={result[0]}; Mean permeability={result[1]}, Std dev permeability={result[2]}")
+            line = f"{result[0]}, {result[1]}, {result[2]}"
+            montecarloresults.add_sensitivity_line(line)
         #Plot the sensitivity result
         plt.figure(figsize=(10, 6))
         simulation.plot_sensitivity(sensitivity_results)
         plt.close()
+    montecarloresults.write_simulation_results(simulation.simulationpath)
+    sensitivityresults.write_sensitivity_results(simulation.sensitivitypath)
+    
         
