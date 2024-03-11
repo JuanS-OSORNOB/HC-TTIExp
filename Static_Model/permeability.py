@@ -3,30 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-class Filewriter:
-    def __init__(self):
-        self.simu_lines_to_write = []
-        self.sens_lines_to_write = []
-    def add_simulation_line(self, line):
-        self.simu_lines_to_write.append(line)
-    
-    def add_sensitivity_line(self, line):
-        self.sens_lines_to_write.append(line)
-    
-    def write_simulation_results(self, simulationpath):
-        filename = f"simulation_results.txt"
-        filepath = os.path.join(simulationpath, filename)
-        with open(filepath, 'w') as file:
-            for line in self.sens_lines_to_write:
-                file.write(line + '\n')
-    
-    def write_sensitivity_results(self, sensitivitypath):
-        filename = f"sensitivity_results.txt"
-        filepath = os.path.join(sensitivitypath, sensitivity_parameter, filename)
-        with open(filepath, 'w') as file:
-            for line in self.sens_lines_to_write:
-                file.write(line + '\n')
-
 class ReservoirMonteCarloSimulation:
     def __init__(self, jobname, num_simulations, mean_porosity, std_dev_porosity, mean_water_saturation, std_dev_water_saturation):
         #Script dir
@@ -111,29 +87,52 @@ class ReservoirMonteCarloSimulation:
         plt.savefig(os.path.join(figurepath, sensitivity_figname))
         #plt.show()
 
+class Simulationresults:
+    def __init__(self):
+        self.simu_lines_to_write = []
+    
+    def add_simulation_line(self, line):
+        self.simu_lines_to_write.append(line)
+    
+    def write_simulation_results(self, simulationpath):
+            filename = f"simulation_results.txt"
+            filepath = os.path.join(simulationpath, filename)
+            with open(filepath, 'w') as file:
+                for line in self.simu_lines_to_write:
+                    file.write(line + '\n')
 
+class Sensitivityresults:
+    def __init__(self):
+        self.sens_lines_to_write = []
 
-
+    def add_sensitivity_line(self, line):
+        self.sens_lines_to_write.append(line)
+        
+    def write_sensitivity_results(self, sensitivitypath):
+        filename = f"sensitivity_results.txt"
+        filepath = os.path.join(sensitivitypath, sensitivity_parameter, filename)
+        with open(filepath, 'w') as file:
+            for line in self.sens_lines_to_write:
+                file.write(line + '\n')
 
 if __name__ == "__main__":
     ##############################
     #JOB
-    jobname = 'opogado'
+    jobname = 'buchado'
     num_simulations = 10000
 
-    mean_porosity = 0.12
+    mean_porosity = 0.145
     std_dev_porosity = 0.02
     
-    mean_water_saturation = 0.904
+    mean_water_saturation = 1.0
     std_dev_water_saturation = 0.05
     ##############################
-    #Perform analysis over multiple runs
-    montecarloresults = Filewriter()
+    montecarloresults = Simulationresults()
     montecarloresults.add_simulation_line(f"#Mean_Perm Std_dev_Perm")
     
-    sensitivityresults = Filewriter()
+    sensitivityresults = Sensitivityresults()
     sensitivityresults.add_sensitivity_line(f"#Value Mean_Perm Std_dev_Perm")
-    for run in range(1, 7):
+    for run in range(1, 11):
         simulation = ReservoirMonteCarloSimulation(jobname, num_simulations, mean_porosity, std_dev_porosity,
                                                    mean_water_saturation, std_dev_water_saturation)
         # Run the Monte Carlo simulation
@@ -153,12 +152,12 @@ if __name__ == "__main__":
         # Perform sensitivity analysis
         print(f"    SENSITIVITY ANALYSIS")
         sensitivity_parameter = 'sw'
-        parameter_values = np.linspace(0.7, 1, 10)
+        parameter_values = np.linspace(0.45, 0.7, 10)
         sensitivity_results = simulation.sensitivity_analysis(sensitivity_parameter, parameter_values)
         for i, result in enumerate(sensitivity_results):
             print(f"    {i + 1} - For a value of {sensitivity_parameter}={result[0]}; Mean permeability={result[1]}, Std dev permeability={result[2]}")
             line = f"{result[0]}, {result[1]}, {result[2]}"
-            montecarloresults.add_sensitivity_line(line)
+            sensitivityresults.add_sensitivity_line(line)
         #Plot the sensitivity result
         plt.figure(figsize=(10, 6))
         simulation.plot_sensitivity(sensitivity_results)
