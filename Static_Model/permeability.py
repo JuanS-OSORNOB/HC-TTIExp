@@ -60,7 +60,9 @@ class ReservoirMonteCarloSimulation:
         for value in parameter_values:
             # Create arrays of constant values for porosity and water saturation from initialized values of the class
             porosity_samples = np.random.normal(self.mean_porosity, self.std_dev_porosity, self.num_simulations)
+            porosity_samples = np.clip(porosity_samples, 0, None) #Physical sense, values below zero are not accepted
             water_saturation_samples = np.random.normal(self.mean_water_saturation, self.std_dev_water_saturation, self.num_simulations)
+            water_saturation_samples = np.clip(water_saturation_samples, 0, None) #Physical sense, values below zero are not accepted
             # Update the parameter being analyzed
             if sensitivity_parameter.lower() == 'phi':
                 porosity_samples = np.full(self.num_simulations, value)
@@ -118,14 +120,14 @@ class Sensitivityresults:
 if __name__ == "__main__":
     ##############################
     #JOB
-    jobname = 'buchado'
+    jobname = 'buchado_1'
     num_simulations = 10000
 
     mean_porosity = 0.145
-    std_dev_porosity = 0.02
+    std_dev_porosity = 0.07
     
-    mean_water_saturation = 1.0
-    std_dev_water_saturation = 0.05
+    mean_water_saturation = 1.00
+    std_dev_water_saturation = 0.08
     ##############################
     montecarloresults = Simulationresults()
     montecarloresults.add_simulation_line(f"#Mean_Perm Std_dev_Perm")
@@ -137,7 +139,9 @@ if __name__ == "__main__":
                                                    mean_water_saturation, std_dev_water_saturation)
         # Run the Monte Carlo simulation
         porosity_samples = np.random.normal(mean_porosity, std_dev_porosity, num_simulations)
+        porosity_samples = np.clip(porosity_samples, 0, None) #Physical sense, values below zero are not accepted
         water_saturation_samples = np.random.normal(mean_water_saturation, std_dev_water_saturation, num_simulations)
+        water_saturation_samples = np.clip(water_saturation_samples, 0, None) #Physical sense, values below zero are not accepted
         simulation.run_simulation(porosity_samples, water_saturation_samples)
         # Analyze, print and write the results of the Monte Carlo simulation
         mean_perm, std_dev_perm = simulation.analyze_results()
@@ -164,5 +168,3 @@ if __name__ == "__main__":
         plt.close()
     montecarloresults.write_simulation_results(simulation.simulationpath)
     sensitivityresults.write_sensitivity_results(simulation.sensitivitypath)
-    
-        
