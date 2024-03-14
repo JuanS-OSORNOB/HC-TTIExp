@@ -31,10 +31,12 @@ class ReservoirMonteCarloSimulation:
     """Timur's 1968 equation: https://petrophysicsequations.blogspot.com/p/permeability-timur-1968-timur-1968-also.html"""
     def timur_equation(self, porosity, water_saturation):
         return (0.93 * porosity**2.2 / water_saturation)**2
+    
     """Compute permeability with Timur's equation"""
     def run_simulation(self, porosity_samples, water_saturation_samples):
         for i in range(self.num_simulations):
             self.permeability_values[i] = self.timur_equation(porosity_samples[i], water_saturation_samples[i])
+
     """Plot the histogram of the simulation"""
     def plot_histogram(self):
         hist_figname = f"hist_run_{run}.png"
@@ -45,13 +47,13 @@ class ReservoirMonteCarloSimulation:
         plt.ylabel('Frecuencia')
         plt.savefig(hist_filepath)
         #plt.show()
+
     """Extract mean and std from permeability simulated values"""
     def analyze_results(self):
         mean_perm = np.mean(self.permeability_values)
         std_dev_perm = np.std(self.permeability_values)
         return mean_perm, std_dev_perm
     
-        
     """Sensitivity analysis: Run the simulation with updated parameter (either Phi or Sw), store and compare"""
     """@parameter_value: Linear space from min to max with step"""
     """@parameter_name: Either phi or sw"""
@@ -117,8 +119,8 @@ class Sensitivityresults:
             for line in self.sens_lines_to_write:
                 file.write(line + '\n')
 
+##############################################################################
 if __name__ == "__main__":
-    ##############################
     #JOB
     jobname = 'buchado_1'
     num_simulations = 10000
@@ -134,14 +136,19 @@ if __name__ == "__main__":
     
     sensitivityresults = Sensitivityresults()
     sensitivityresults.add_sensitivity_line(f"#Value Mean_Perm Std_dev_Perm")
+    ##############################
+    porosity_samples_list = []
+    water_saturation_samples_list = []
     for run in range(1, 11):
         simulation = ReservoirMonteCarloSimulation(jobname, num_simulations, mean_porosity, std_dev_porosity,
                                                    mean_water_saturation, std_dev_water_saturation)
         # Run the Monte Carlo simulation
         porosity_samples = np.random.normal(mean_porosity, std_dev_porosity, num_simulations)
         porosity_samples = np.clip(porosity_samples, 0, None) #Physical sense, values below zero are not accepted
+        porosity_samples_list.append(porosity_samples)
         water_saturation_samples = np.random.normal(mean_water_saturation, std_dev_water_saturation, num_simulations)
         water_saturation_samples = np.clip(water_saturation_samples, 0, None) #Physical sense, values below zero are not accepted
+        water_saturation_samples_list.append(water_saturation_samples)
         simulation.run_simulation(porosity_samples, water_saturation_samples)
         # Analyze, print and write the results of the Monte Carlo simulation
         mean_perm, std_dev_perm = simulation.analyze_results()
@@ -166,5 +173,31 @@ if __name__ == "__main__":
         plt.figure(figsize=(10, 6))
         simulation.plot_sensitivity(sensitivity_results)
         plt.close()
+    
+    path1 = os.path.join(simulation.simulationpath, 'phi_samples')
+
+    if not os.path.exists(path1):
+        #print('PATH DOES NOT EXIST')
+        os.makedirs(path1)
+        #print(path)
+    for i, porosity_samples in enumerate(porosity_samples_list):
+        filename = os.path.join(path1, f'porosity_samples_{i + 1}.txt')
+        with open(filename, 'w') as file:
+            for value in porosity_samples:
+                #porosity = np.array2string(porosity_samples)
+                file.write(str(value) + '\n')
+    file.close()
+
+    path2 = os.path.join(simulation.simulationpath, 'sw_samples')
+    if not os.path.exists(path2):
+        os.makedirs(path2)
+    for i, water_saturation_samples in enumerate(water_saturation_samples_list):
+        filename = os.path.join(path2, f'water_saturation_samples_{i + 1}.txt')
+        with open(filename, 'w') as file:
+            for value in water_saturation_samples:
+                #porosity = np.array2string(porosity_samples)
+                file.write(str(value) + '\n')
+    file.close()
+
     montecarloresults.write_simulation_results(simulation.simulationpath)
     sensitivityresults.write_sensitivity_results(simulation.sensitivitypath)
