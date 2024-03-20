@@ -30,7 +30,7 @@ class ReservoirMonteCarloSimulation:
         
     """Timur's 1968 equation: https://petrophysicsequations.blogspot.com/p/permeability-timur-1968-timur-1968-also.html"""
     def timur_equation(self, porosity, water_saturation):
-        return (0.93 * porosity**2.2 / water_saturation)**2
+        return (93 * (porosity**2.2) / water_saturation)**2
     
     """Compute permeability with Timur's equation"""
     def run_simulation(self, porosity_samples, water_saturation_samples):
@@ -79,10 +79,11 @@ class ReservoirMonteCarloSimulation:
     
     def plot_sensitivity(self, sensitivity_results):
         # Plot sensitivity results
-        plt.plot([result[0] for result in sensitivity_results], [result[1] for result in sensitivity_results], label='Permeabilidad media') #Plot Mean Perm vs sensible value 
-        plt.plot([result[0] for result in sensitivity_results], [result[2] for result in sensitivity_results], label='Desviación típica de Permeabilidad') #Plot Std Dev Perm vs sensible value
+        plt.plot([result[0] for result in sensitivity_results], [result[1] for result in sensitivity_results], label='Permeabilidad media') #Plot Mean Perm vs Sensitivity value 
+        plt.plot([result[0] for result in sensitivity_results], [result[2] for result in sensitivity_results], label='Desviación típica de Permeabilidad') #Plot Std Dev Perm vs Sensitivity value
         plt.title(f'Analisis de sensibilidad de {sensitivity_parameter} - Cuenca Atrato')
         plt.xlabel('Porosidad')
+        plt.ylabel('Permeabilidad media y Desviacion estandar')
         plt.legend()
         figurepath = os.path.join(self.sensitivitypath, sensitivity_parameter)
         if not os.path.exists(figurepath):
@@ -174,12 +175,12 @@ if __name__ == "__main__":
         simulation.plot_sensitivity(sensitivity_results)
         plt.close()
     
-    path1 = os.path.join(simulation.simulationpath, 'phi_samples')
 
+    ########## Writing the Phi ans Sw samples to files ##########
+    path1 = os.path.join(simulation.simulationpath, 'phi_samples')
+    #Phi samples
     if not os.path.exists(path1):
-        #print('PATH DOES NOT EXIST')
         os.makedirs(path1)
-        #print(path)
     for i, porosity_samples in enumerate(porosity_samples_list):
         filename = os.path.join(path1, f'porosity_samples_{i + 1}.txt')
         with open(filename, 'w') as file:
@@ -187,7 +188,7 @@ if __name__ == "__main__":
                 #porosity = np.array2string(porosity_samples)
                 file.write(str(value) + '\n')
     file.close()
-
+    #Sw samples
     path2 = os.path.join(simulation.simulationpath, 'sw_samples')
     if not os.path.exists(path2):
         os.makedirs(path2)
