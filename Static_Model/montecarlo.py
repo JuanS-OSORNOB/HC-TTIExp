@@ -55,6 +55,7 @@ class ReservoirMonteCarloSimulation:
 
     """Plot the histogram of the simulation"""
     def plot_histogram(self, run):
+        plt.figure(figsize=(10, 6))
         hist_figname = f"hist_run_{run}.png"
         hist_filepath = os.path.join(self.simulationpath, hist_figname)
         plt.hist(self.permeability_values, bins=50, color='blue', alpha=0.7)
@@ -62,6 +63,7 @@ class ReservoirMonteCarloSimulation:
         plt.xlabel('Permeabilidad')
         plt.ylabel('Frecuencia')
         plt.savefig(hist_filepath)
+        plt.close()
         #plt.show()
 
     """Extract mean and std from permeability simulated values"""

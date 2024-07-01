@@ -38,9 +38,9 @@ def main():
         montecarloresults.add_simulation_line(line)
         
         # Plot the histogram of permeability values
-        plt.figure(figsize=(10, 6))
+        #plt.figure(figsize=(10, 6))
         simulation.plot_histogram(run)
-        plt.close()
+        #plt.close()
 
         # Perform sensitivity analysis -- CHANGE PARAMETERS
         print(f"    SENSITIVITY ANALYSIS")
