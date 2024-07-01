@@ -1,26 +1,17 @@
 import sys, os
-""" cwd = os.getcwd()
-print(f'Current Working Directory!!: {cwd}')
-utils_path = os.path.join(cwd,'utils')
-print(f'Utils path!!: {utils_path}')
-print(f"Sys path before appending: {sys.path}")
-sys.path.append(utils_path)
-print(f"Sys path after appending: {sys.path}")
-try:
-    from utils.config_lol import Config
-    print("Config imported successfully")
-except ModuleNotFoundError as e:
-    print(f"Error improting config. {e}") """
-
-
-from montecarlo import ReservoirMonteCarloSimulation, Simulationresults, Sensitivityresults, load_config
+from pathlib import Path
+path_root = Path(__file__).parents[1]
+sys.path.append(str(path_root))
+print(sys.path)
+from utils.config import Config
+from montecarlo import ReservoirMonteCarloSimulation, Simulationresults, Sensitivityresults
 import matplotlib.pyplot as plt
 
 def main():
     #JOB --CHANGE PARAMETERS
     cwd = os.getcwd()
     config_path = os.path.join(cwd, 'config.json')
-    config = load_config(config_path)
+    config = Config.load_config(config_path)
 
     simulation = ReservoirMonteCarloSimulation(config)
     
