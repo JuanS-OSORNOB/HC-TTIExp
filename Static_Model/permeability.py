@@ -82,8 +82,8 @@ class ReservoirMonteCarloSimulation:
         plt.plot([result[0] for result in sensitivity_results], [result[1] for result in sensitivity_results], label='Permeabilidad media') #Plot Mean Perm vs Sensitivity value 
         plt.plot([result[0] for result in sensitivity_results], [result[2] for result in sensitivity_results], label='Desviación típica de Permeabilidad') #Plot Std Dev Perm vs Sensitivity value
         plt.title(f'Analisis de sensibilidad de {sensitivity_parameter} - Cuenca Atrato')
-        plt.xlabel('Porosidad')
-        plt.ylabel('Permeabilidad media y Desviacion estandar')
+        plt.xlabel(f'{sensitivity_parameter}')
+        plt.ylabel('Permeabilidad: Media y Desviacion tipica')
         plt.legend()
         figurepath = os.path.join(self.sensitivitypath, sensitivity_parameter)
         if not os.path.exists(figurepath):
@@ -121,16 +121,17 @@ class Sensitivityresults:
                 file.write(line + '\n')
 
 ##############################################################################
+#region Main
 if __name__ == "__main__":
-    #JOB
-    jobname = 'buchado_1'
+    #JOB --CHANGE PARAMETERS
+    jobname = 'fm_clavo'
     num_simulations = 10000
 
-    mean_porosity = 0.145
-    std_dev_porosity = 0.07
+    mean_porosity = 0.12 #No more than 30% for every section
+    std_dev_porosity = 0.02#0.07
     
-    mean_water_saturation = 1.00
-    std_dev_water_saturation = 0.08
+    mean_water_saturation = 0.9
+    std_dev_water_saturation = 0.03#0.08
     ##############################
     montecarloresults = Simulationresults()
     montecarloresults.add_simulation_line(f"#Mean_Perm Std_dev_Perm")
@@ -140,7 +141,7 @@ if __name__ == "__main__":
     ##############################
     porosity_samples_list = []
     water_saturation_samples_list = []
-    for run in range(1, 11):
+    for run in range(1, 26):#--CHANGE NUMBER OF RUNS
         simulation = ReservoirMonteCarloSimulation(jobname, num_simulations, mean_porosity, std_dev_porosity,
                                                    mean_water_saturation, std_dev_water_saturation)
         # Run the Monte Carlo simulation
@@ -161,10 +162,10 @@ if __name__ == "__main__":
         simulation.plot_histogram()
         plt.close()
 
-        # Perform sensitivity analysis
+        # Perform sensitivity analysis -- CHANGE PARAMETERS
         print(f"    SENSITIVITY ANALYSIS")
-        sensitivity_parameter = 'sw'
-        parameter_values = np.linspace(0.45, 0.7, 10)
+        sensitivity_parameter = 'phi'
+        parameter_values = np.linspace(0.06, 0.3, 6) #For Phi usually take between 5 and 40%. For Sw usually take between 40 and 80%.
         sensitivity_results = simulation.sensitivity_analysis(sensitivity_parameter, parameter_values)
         for i, result in enumerate(sensitivity_results):
             print(f"    {i + 1} - For a value of {sensitivity_parameter}={result[0]}; Mean permeability={result[1]}, Std dev permeability={result[2]}")
@@ -202,3 +203,4 @@ if __name__ == "__main__":
 
     montecarloresults.write_simulation_results(simulation.simulationpath)
     sensitivityresults.write_sensitivity_results(simulation.sensitivitypath)
+    #endregion
