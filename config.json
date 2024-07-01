@@ -7,7 +7,7 @@
     "mean_water_saturation":0.3,
     "std_dev_water_saturation":0.1,
     "sensitivity_parameter": "phi",
-    "sentivity_min":0.06,
-    "sensitvity_max": 0.3,
+    "sensitivity_min":0.06,
+    "sensitivity_max": 0.3,
     "sensitivity_freq": 10
 }

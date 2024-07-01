@@ -1,14 +1,14 @@
 import sys, os
-from pathlib import Path
-path_root = Path(__file__).parents[1]
-sys.path.append(str(path_root))
+cwd = os.getcwd()
+print(f"CWD!!: {cwd}")
+sys.path.append(str(cwd))
+
 from utils.config import Config
 from montecarlo import ReservoirMonteCarloSimulation, Simulationresults, Sensitivityresults
 import matplotlib.pyplot as plt
 
 def main():
     #JOB --CHANGE PARAMETERS
-    cwd = os.getcwd()
     config_path = os.path.join(cwd, 'config.json')
     config = Config.load_config(config_path)
 
@@ -22,13 +22,13 @@ def main():
     porosity_samples_list = []
     water_saturation_samples_list = []
     
-    for run in range(1, config['num_runs']):
+    for run in range(1, simulation.num_runs):
         #region Run simulation
         porosity_samples, water_saturation_samples = simulation.generate_samples()
         porosity_samples_list.append(porosity_samples)
         water_saturation_samples_list.append(water_saturation_samples)
         
-        simulation.run_simulation()
+        simulation.run_simulation(porosity_samples, water_saturation_samples)
         #endregion
         
         #region Analyze results
@@ -49,9 +49,9 @@ def main():
         sensitivites = sensitivityresults.perform_sensitivity(simulation)
         
         #Plot the sensitivity result
-        plt.figure(figsize=(10, 6))
-        simulation.plot_sensitivity(sensitivites)
-        plt.close()
+        #plt.figure(figsize=(10, 6))
+        simulation.plot_sensitivity('phi', run)
+        #plt.close()
     
 
     ########## Writing the Phi ans Sw samples to files ##########

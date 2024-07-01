@@ -1,5 +1,4 @@
 """ Monte Carlo simulation for permeability estimation and reservoir upscaling"""
-import json
 import numpy as np
 import matplotlib.pyplot as plt
 import os
@@ -11,6 +10,7 @@ class ReservoirMonteCarloSimulation:
         
         self.jobname = self.config['jobname']
         self.num_simulations = self.config['num_simulations']
+        self.num_runs = self.config['num_runs']
         self.mean_porosity = self.config['mean_porosity']
         self.std_dev_porosity = self.config['std_dev_porosity']
         self.mean_water_saturation = self.config['mean_water_saturation']
@@ -37,19 +37,24 @@ class ReservoirMonteCarloSimulation:
 
     #region Timur's equation
     """Timur's 1968 equation: https://petrophysicsequations.blogspot.com/p/permeability-timur-1968-timur-1968-also.html"""
-    def timur_equation(self, porosity, water_saturation):
+    @staticmethod
+    def timur_equation(porosity, water_saturation):
+        if water_saturation == 0:
+            water_saturation = 0.0001 #Small number to avoid division by zero
         return (93 * (porosity**2.2) / water_saturation)**2
     
     def generate_samples(self):
         porosity_samples = np.random.normal(self.config['mean_porosity'], self.config['std_dev_porosity'], self.config['num_simulations'])
         porosity_samples = np.clip(porosity_samples, 0, None) #Physical sense, values below zero are not accepted
+        
         water_saturation_samples = np.random.normal(self.config['mean_water_saturation'], self.config['std_dev_water_saturation'], self.config['num_simulations'])
         water_saturation_samples = np.clip(water_saturation_samples, 0, None) #Physical sense, values below zero are not accepted
+        
         return porosity_samples, water_saturation_samples
     
     """Compute permeability with Timur's equation"""
-    def run_simulation(self):
-        porosity_samples, water_saturation_samples = self.generate_samples()
+    def run_simulation(self, porosity_samples, water_saturation_samples):
+        #porosity_samples, water_saturation_samples = self.generate_samples()
         for i in range(self.num_simulations):
             self.permeability_values[i] = self.timur_equation(porosity_samples[i], water_saturation_samples[i])
 
@@ -97,8 +102,10 @@ class ReservoirMonteCarloSimulation:
             sensitivity_results.append((value, mean_perm, std_dev_perm))
         return sensitivity_results
     
-    def plot_sensitivity(self, sensitivity_parameter, sensitivity_results, run):
+    def plot_sensitivity(self, sensitivity_parameter, run):
+        sensitivity_results = self.sensitivity_analysis(sensitivity_parameter)
         # Plot sensitivity results
+        plt.figure(figsize=(10, 6))
         plt.plot([result[0] for result in sensitivity_results], [result[1] for result in sensitivity_results], label='Permeabilidad media') #Plot: Mean Perm vs Sensitivity value 
         plt.plot([result[0] for result in sensitivity_results], [result[2] for result in sensitivity_results], label='Desviación típica de Permeabilidad') #Plot: Std Dev Perm vs Sensitivity value
         plt.title(f'Analisis de sensibilidad de {sensitivity_parameter}: {self.jobname} - Cuenca Atrato')
@@ -110,6 +117,7 @@ class ReservoirMonteCarloSimulation:
             os.makedirs(figurepath)
         sensitivity_figname = f'sensitivity_analysis_{sensitivity_parameter}_run_{run}.png'
         plt.savefig(os.path.join(figurepath, sensitivity_figname))
+        plt.close()
         #plt.show()
     #endregion Sensitivity
 
@@ -167,7 +175,3 @@ class Sensitivityresults:
             for line in self.sens_lines_to_write:
                 file.write(line + '\n')
 #endregion results
-def load_config(config_path):
-        with open(config_path, 'r') as f:
-            config = json.load(f)
-        return config
