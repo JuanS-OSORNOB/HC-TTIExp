@@ -2,7 +2,6 @@ import sys, os
 from pathlib import Path
 path_root = Path(__file__).parents[1]
 sys.path.append(str(path_root))
-print(sys.path)
 from utils.config import Config
 from montecarlo import ReservoirMonteCarloSimulation, Simulationresults, Sensitivityresults
 import matplotlib.pyplot as plt
