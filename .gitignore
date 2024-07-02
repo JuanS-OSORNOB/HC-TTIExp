@@ -34,3 +34,5 @@
 # Folders
 /build/
 /.vs/
+
+Static_Model/__pycache__/

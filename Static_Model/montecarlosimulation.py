@@ -83,9 +83,9 @@ class WritingFilesMC:
             file.close()
 
     def write_simulation_results(self, mean_perm_list, std_dev_perm_list):
-        self.add_simulation_line(f"#Value Mean_Perm Std_dev_Perm")
-        for i, (mean_perm, std_dev_perm) in enumerate(zip(mean_perm_list, std_dev_perm_list)):
-            line = f"{mean_perm} {std_dev_perm}"
+        self.add_simulation_line(f"Mean_Perm, Std_dev_Perm")
+        for mean_perm, std_dev_perm in zip(mean_perm_list, std_dev_perm_list):
+            line = f"{mean_perm}, {std_dev_perm}"
             self.add_simulation_line(line)
         
         filename = f'simulation_results.txt'
@@ -95,13 +95,20 @@ class WritingFilesMC:
                 file.write(line + '\n')
 
 class PlottingFilesMC:
-    def __init__(self, simulation):
+    def __init__(self, simulation, writtermc):
+        """Initializer for plotter class.
+
+        Args:
+            simulation (_type_): Instance of class *ReservoirMC*
+            writtermc (_type_): Instance of class *WritingFilesMC*
+        """
         self.simulation = simulation
+        self.writtermc = writtermc
     
     def plot_histogram(self, run):
         plt.figure(figsize=(10, 6))
-        hist_figname = f"hist_run_{run}.png"
-        hist_filepath = os.path.join(WritingFilesMC.simulationpath, hist_figname)
+        hist_figname = f"hist_run_{run + 1}.png"
+        hist_filepath = os.path.join(self.writtermc.simulationpath, hist_figname)
         plt.hist(self.simulation.permeability_values, bins=50, color='blue', alpha=0.7)
         plt.title(f'Distribución de permeabilidad: {self.simulation.jobname} - Cuenca Atrato')
         plt.xlabel('Permeabilidad')
@@ -113,6 +120,9 @@ class PlottingFilesMC:
 #endregion
 #region Sensitivity
 class SensitivityMC:
+    def __init__(self):
+        pass
+    
     @staticmethod
     def sensitivity_analysis(simulation):
         config = simulation.config
@@ -143,51 +153,67 @@ class SensitivityMC:
         return sensitivity_results
 
 class WritingFileSens:
-    def __init__(self):
+    def __init__(self, simulation, sensitivitymc):
+        """_summary_
+
+        Args:
+            simulation (_type_): Instance of class *ReservoirMC*
+            sensitivitymc (_type_): Instance of class *SensitivityMC*
+        """
+        self.simulation = simulation
+        self.config = self.simulation.config
+        self.sensitivitymc = sensitivitymc
         self.sens_lines_to_write = []
+        self.setup_directories()
     
-    def setup_directories(self, simulation):
-        self.sensitivitypath = foldermanagement._create_directory(os.path.join(simulation.filepath, simulation.jobname, 'Sensitivity_results'))
+    def setup_directories(self):
+        self.sensitivitypath = foldermanagement._create_directory(os.path.join(self.simulation.filepath, self.simulation.jobname, 'Sensitivity_results'))
     
     def add_sensitivity_line(self, line):
         self.sens_lines_to_write.append(line)
     
-    def print_sensitivity(self, simulation):
-        config = simulation.config
-        sensitivity_results = SensitivityMC.sensitivity_analysis(simulation)
+    def print_sensitivity(self):
+        sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
         for i, sensitivity_result in enumerate(sensitivity_results):
-            print(f"    {i + 1} - For a value of {config['sensitivity_parameter']}={sensitivity_result[0]}; Mean permeability={sensitivity_result[1]}, Std dev permeability={sensitivity_result[2]}")
+            print(f"    {i + 1} - For a value of {self.config['sensitivity_parameter']}={sensitivity_result[0]}; Mean permeability={sensitivity_result[1]}, Std dev permeability={sensitivity_result[2]}")
 
-    def write_sensitivity(self, simulation):
-        config = simulation.config
-        sensitivity_results = SensitivityMC.sensitivity_analysis(simulation)
-        self.add_sensitivity_line(f"#Value Mean_Perm Std_dev_Perm")
-        for i, sensitivity_result in enumerate(sensitivity_results):
+    def write_sensitivity_results(self):
+        sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
+        self.add_sensitivity_line(f"{self.config['sensitivity_parameter']}, Mean_Perm, Std_dev_Perm")
+        for sensitivity_result in sensitivity_results:
             line = f"{sensitivity_result[0]}, {sensitivity_result[1]}, {sensitivity_result[2]}"
             self.add_sensitivity_line(line)
         
+        directory_path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'])
+        foldermanagement._create_directory(directory_path)
+
         filename = f"sensitivity_results.txt"
-        filepath = os.path.join(self.sensitivitypath, config['sensitivity_parameter'], filename)
+        filepath = os.path.join(directory_path, filename)
         with open(filepath, 'w') as file:
             for line in self.sens_lines_to_write:
                 file.write(line + '\n')
         file.close()
 
 class PlottingFileSens:
-    def plot_sensitivity(self, simulation, sensitivity_parameter, run):
-            sensitivity_results = SensitivityMC.sensitivity_analysis(sensitivity_parameter)
+    def __init__(self, simulation, sensitivitymc, writersens):
+        self.simulation = simulation
+        self.sensitivitymc = sensitivitymc
+        self.config = self.simulation.config
+        self.writersens = writersens
+    
+    def plot_sensitivity(self, run):
+            sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
             # Plot sensitivity results
             plt.figure(figsize=(10, 6))
-            plt.plot([result[0] for result in sensitivity_results], [result[1] for result in sensitivity_results], label='Permeabilidad media') #Plot: Mean Perm vs Sensitivity value 
-            plt.plot([result[0] for result in sensitivity_results], [result[2] for result in sensitivity_results], label='Desviación típica de Permeabilidad') #Plot: Std Dev Perm vs Sensitivity value
-            plt.title(f'Analisis de sensibilidad de {sensitivity_parameter}: {simulation.jobname} - Cuenca Atrato')
-            plt.xlabel(f'{sensitivity_parameter}')
+            plt.plot([result[0] for result in sensitivity_results], [result[1] for result in sensitivity_results], label='Permeabilidad media') #Plot: Mean Perm VS Sensitivity value 
+            plt.plot([result[0] for result in sensitivity_results], [result[2] for result in sensitivity_results], label='Desviación típica de Permeabilidad') #Plot: Std Dev Perm VS Sensitivity value
+            plt.title(f"Analisis de sensibilidad de {self.config['sensitivity_parameter']}: {self.simulation.jobname} - Cuenca Atrato")
+            plt.xlabel(f"{self.config['sensitivity_parameter']}")
             plt.ylabel('Permeabilidad: Media y Desviacion tipica')
             plt.legend()
-            figurepath = os.path.join(WritingFileSens.sensitivitypath, sensitivity_parameter)
-            if not os.path.exists(figurepath):
-                os.makedirs(figurepath)
-            sensitivity_figname = f'sensitivity_analysis_{sensitivity_parameter}_run_{run}.png'
+            figurepath = os.path.join(self.writersens.sensitivitypath, self.config['sensitivity_parameter'])
+            foldermanagement._create_directory(figurepath)
+            sensitivity_figname = f"sensitivity_analysis_{self.config['sensitivity_parameter']}_run_{run + 1}.png"
             plt.savefig(os.path.join(figurepath, sensitivity_figname))
             plt.close()
             #plt.show()
