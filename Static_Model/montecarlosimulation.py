@@ -30,18 +30,6 @@ class ReservoirMC:
     def setup_directories(self):
         self.filepath = foldermanagement._create_directory(os.path.join(cwd, 'Static_Model', self.folder))
 
-    @staticmethod
-    def timur_equation(porosity, water_saturation):
-        """Timur's 1968 equation: https://petrophysicsequations.blogspot.com/p/permeability-timur-1968-timur-1968-also.html
-        """
-    
-        """ if water_saturation == 0:
-            water_saturation = 0.0001 #Small number to avoid division by zero """
-        if water_saturation == 0:
-            water_saturation = 0.1
-        permeability = ((93 * (porosity**2.2))/ water_saturation)**2
-        return permeability
-
     def generate_samples(self):
         porosity_samples = np.random.normal(self.mean_porosity, self.std_dev_porosity, self.num_simulations)
         porosity_samples = np.clip(porosity_samples, 0, None) #Physical sense, values below zero are not accepted
@@ -51,15 +39,27 @@ class ReservoirMC:
         
         return porosity_samples, water_saturation_samples
 
-    #NOTE I'm not using the generated samples from before because this will also be used for sensitivity analysis.
+    #NOTE I'm not using the generated samples from input parameters as function arguments because this method will also be used for sensitivity analysis.
     def run_simulation(self, porosity_samples, water_saturation_samples):
         for i in range(self.num_simulations):
-            self.permeability_values[i] = self.timur_equation(porosity_samples[i], water_saturation_samples[i])
+            self.permeability_values[i] = self.timur_equation(porosity_samples[i], water_saturation_samples[i])#TODO print or write a file to check wtf is going on
+        
+    @staticmethod
+    def timur_equation(porosity, water_saturation):
+        """Timur's 1968 equation: https://petrophysicsequations.blogspot.com/p/permeability-timur-1968-timur-1968-also.html
+        """
+        if water_saturation == 0:
+            water_saturation = 0.1 #Small number to avoid division by zero.
+        permeability = ((93 * (porosity ** 2.2))/ water_saturation) ** 2
+        return permeability
     
     def analyze_results(self):
         mean_perm = np.mean(self.permeability_values)
         std_dev_perm = np.std(self.permeability_values)
         return mean_perm, std_dev_perm
+    
+    def reset_permeability_values(self):
+        self.permeability_values = np.zeros(self.num_simulations)
 
 class WritingFilesMC:
     def __init__(self, simulation):
@@ -87,6 +87,17 @@ class WritingFilesMC:
             with open(filename, 'w') as file:
                 for value in samples:
                     file.write(str(value) + '\n')
+            file.close()
+    
+    def write_timur_in_out(self, phi_samples_list, sw_samples_list, timur_output_list):
+        path = os.path.join(self.simulationpath, 'Timur')
+        foldermanagement._create_directory(path)
+        for i, (phi_samples, sw_samples, timur_output) in enumerate(zip(phi_samples_list, sw_samples_list, timur_output_list)):
+            filename = os.path.join(path, f'timur_output_{i + 1}.csv')
+            with open(filename, 'w') as file:
+                file.write('Phi, Sw, K\n')
+                for phi, sw, timur in zip(phi_samples, sw_samples, timur_output):
+                    file.write(str(phi) + ", " + str(sw) +  ", " + str(timur) + '\n')
             file.close()
 
     def write_simulation_results(self, mean_perm_list, std_dev_perm_list):
@@ -116,7 +127,6 @@ class PlottingFilesMC:
         plt.figure(figsize=(10, 6))
         hist_figname = f"hist_run_{run + 1}.png"
         hist_filepath = os.path.join(self.writtermc.simulationpath, hist_figname)
-        print("10 first permeability values to plot:", self.simulation.permeability_values[:10])
         plt.hist(self.simulation.permeability_values, bins=1000, color='blue', alpha=0.7, density = True)
         plt.title(f'Distribución de permeabilidad: {self.simulation.jobname} - Cuenca Atrato')
         plt.xlabel('Permeabilidad')
@@ -132,31 +142,44 @@ class SensitivityMC:
         pass
     
     @staticmethod
-    def sensitivity_analysis(simulation):
+    def update_parameters(simulation):
+        #NOTE
+        #For Phi usually take between 5 and 40 %.
+        #For Sw usually take between 40 and 80 %.
         config = simulation.config
         parameter_values = np.linspace(config['sensitivity_min'], config['sensitivity_max'], config['sensitivity_freq'])
-        sensitivity_results = []
-        for value in parameter_values:
+        porosity_samples_list, water_saturation_samples_list = [], []
+        for parameter_value in parameter_values:
             # Create arrays of constant values for porosity and water saturation from initialized values of the class
+
             porosity_samples = np.random.normal(simulation.mean_porosity, simulation.std_dev_porosity, simulation.num_simulations)
             porosity_samples = np.clip(porosity_samples, 0, None) #Physical sense, values below zero are not accepted
 
-            water_saturation_samples = np.random.normal(simulation.mean_water_saturation, simulation.std_dev_water_saturation, simulation.num_simulations)
-            water_saturation_samples = np.clip(water_saturation_samples, 0, None) #Physical sense, values below zero are not accepted
+            water_saturation_samples = np.random.normal(simulation.mean_water_saturation, simulation.std_dev_water_saturation, simulation.num_simulations) 
+            water_saturation_samples = np.clip(water_saturation_samples, 0.1, None) #Physical sense, values below zero are not accepted
 
-            #Update parameter being analyzed
+            #Update parameter being analyzed: It will create a vector sample of the same parameter_value with len = num_simu
             if config['sensitivity_parameter'] == 'phi':
-                porosity_samples = np.full(simulation.num_simulations, value)
+                porosity_samples = np.full(simulation.num_simulations, parameter_value)
             elif config['sensitivity_parameter'] == 'sw':
-                water_saturation_samples = np.full(simulation.num_simulations, value)
-            
-            #Run simulation with updated parameter
-            simulation.run_simulation(porosity_samples, water_saturation_samples)
+                water_saturation_samples = np.full(simulation.num_simulations, parameter_value)
 
+            porosity_samples_list.append(porosity_samples)
+            water_saturation_samples_list.append(water_saturation_samples)
+        
+        return parameter_values, porosity_samples_list, water_saturation_samples_list
+
+    @staticmethod
+    def sensitivity_analysis(simulation):
+        parameter_values, porosity_samples_list, water_saturation_samples_list = SensitivityMC.update_parameters(simulation)
+
+        sensitivity_results = []
+        for i, parameter_value in enumerate(parameter_values):
+            #Run simulation with updated parameter
+            simulation.run_simulation(porosity_samples_list[i], water_saturation_samples_list[i])
             #Analyze the results and store them
             mean_perm, std_dev_perm = simulation.analyze_results()
-
-            sensitivity_results.append((value, mean_perm, std_dev_perm))
+            sensitivity_results.append((parameter_value, mean_perm, std_dev_perm))
         
         return sensitivity_results
 
@@ -182,9 +205,33 @@ class WritingFileSens:
     
     def print_sensitivity(self):
         sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
+        print(f"    \nSensitivity Analysis:\n")
         for i, sensitivity_result in enumerate(sensitivity_results):
             print(f"    {i + 1} - For a value of {self.config['sensitivity_parameter']}={sensitivity_result[0]}; Mean permeability={sensitivity_result[1]}, Std dev permeability={sensitivity_result[2]}")
 
+    def write_samples_sens(self):
+        parameter_values, porosity_samples_list, water_saturation_samples_list = SensitivityMC.update_parameters(self.simulation)
+        if self.config['sensitivity_parameter'] == 'phi':
+            phi_samples = self.config['sensitivity_parameter'] + '_samples'
+            path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'], phi_samples)
+            foldermanagement._create_directory(path)
+            for i, porosity_samples in enumerate(porosity_samples_list):
+                filename = os.path.join(path, f'{phi_samples}_{i + 1}.txt')
+                with open(filename, 'w') as file:
+                    for value in porosity_samples:
+                        file.write(str(value) + '\n')
+                file.close()
+        elif self.config['sensitvity_parameter'] == 'sw':
+            sw_samples  = self.config['sensitivity_parameter'] + '_samples'
+            path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'], sw_samples)
+            foldermanagement._create_directory(path)
+            for i, water_saturation_samples in enumerate(water_saturation_samples_list):
+                filename = os.path.join(path, f'{sw_samples}_{i + 1}.txt')
+                with open(filename, 'w') as file:
+                    for value in water_saturation_samples:
+                        file.write(str(value) + '\n')
+                file.close()
+    
     def write_sensitivity_results(self):
         sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
         self.add_sensitivity_line(f"{self.config['sensitivity_parameter']}, Mean_Perm, Std_dev_Perm")

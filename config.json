@@ -2,7 +2,7 @@
     "folder":"MonteCarloSimu",
     "jobname":"Fm_Napipi",
     "num_simulations":10000,
-    "num_runs":10,
+    "num_runs":5,
     "mean_porosity":0.2,
     "std_dev_porosity":0.05,
     "mean_water_saturation":0.3,
