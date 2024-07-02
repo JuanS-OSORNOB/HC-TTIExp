@@ -59,6 +59,7 @@ def main():
     mcfilewriter.write_simulation_results(mean_perm_list, std_dev_perm_list)
     #Write sensitivity to file
     mcsenswriter.write_samples_sens()
+    mcsenswriter.write_timur_sens_in_out()
     mcsenswriter.write_sensitivity_results()
 
 

@@ -42,7 +42,7 @@ class ReservoirMC:
     #NOTE I'm not using the generated samples from input parameters as function arguments because this method will also be used for sensitivity analysis.
     def run_simulation(self, porosity_samples, water_saturation_samples):
         for i in range(self.num_simulations):
-            self.permeability_values[i] = self.timur_equation(porosity_samples[i], water_saturation_samples[i])#TODO print or write a file to check wtf is going on
+            self.permeability_values[i] = self.timur_equation(porosity_samples[i], water_saturation_samples[i])
         
     @staticmethod
     def timur_equation(porosity, water_saturation):
@@ -210,27 +210,42 @@ class WritingFileSens:
             print(f"    {i + 1} - For a value of {self.config['sensitivity_parameter']}={sensitivity_result[0]}; Mean permeability={sensitivity_result[1]}, Std dev permeability={sensitivity_result[2]}")
 
     def write_samples_sens(self):
-        parameter_values, porosity_samples_list, water_saturation_samples_list = SensitivityMC.update_parameters(self.simulation)
-        if self.config['sensitivity_parameter'] == 'phi':
-            phi_samples = self.config['sensitivity_parameter'] + '_samples'
-            path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'], phi_samples)
-            foldermanagement._create_directory(path)
-            for i, porosity_samples in enumerate(porosity_samples_list):
-                filename = os.path.join(path, f'{phi_samples}_{i + 1}.txt')
-                with open(filename, 'w') as file:
-                    for value in porosity_samples:
-                        file.write(str(value) + '\n')
-                file.close()
-        elif self.config['sensitvity_parameter'] == 'sw':
-            sw_samples  = self.config['sensitivity_parameter'] + '_samples'
-            path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'], sw_samples)
-            foldermanagement._create_directory(path)
-            for i, water_saturation_samples in enumerate(water_saturation_samples_list):
-                filename = os.path.join(path, f'{sw_samples}_{i + 1}.txt')
-                with open(filename, 'w') as file:
-                    for value in water_saturation_samples:
-                        file.write(str(value) + '\n')
-                file.close()
+        _, porosity_samples_list, water_saturation_samples_list = SensitivityMC.update_parameters(self.simulation)
+        #Phi samples
+        phi_samples = 'phi_samples'
+        path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'], phi_samples)
+        foldermanagement._create_directory(path)
+        for i, porosity_samples in enumerate(porosity_samples_list):
+            filename = os.path.join(path, f'{phi_samples}_{i + 1}.txt')
+            with open(filename, 'w') as file:
+                for value in porosity_samples:
+                    file.write(str(value) + '\n')
+            file.close()
+        
+        #Sw samples
+        sw_samples  = 'sw_samples'
+        path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'], sw_samples)
+        foldermanagement._create_directory(path)
+        for i, water_saturation_samples in enumerate(water_saturation_samples_list):
+            filename = os.path.join(path, f'{sw_samples}_{i + 1}.txt')
+            with open(filename, 'w') as file:
+                for value in water_saturation_samples:
+                    file.write(str(value) + '\n')
+            file.close()
+
+    def write_timur_sens_in_out(self):
+        _, phi_samples_list, sw_samples_list = SensitivityMC.update_parameters(self.simulation)
+
+        path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'], 'Timur')
+        foldermanagement._create_directory(path)
+        #FIXME Iterate on array of array for sensitivity! Might need to store in a list.
+        for i, (phi_samples, sw_samples, timur_output) in enumerate(zip(phi_samples_list, sw_samples_list, self.simulation.permeability_values)):
+            filename = os.path.join(path, f'timur_output_{i + 1}.csv')
+            with open(filename, 'w') as file:
+                file.write('Phi, Sw, K\n')
+                for phi, sw, timur in zip(phi_samples, sw_samples, timur_output):
+                    file.write(str(phi) + ", " + str(sw) +  ", " + str(timur) + '\n')
+            file.close()
     
     def write_sensitivity_results(self):
         sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
