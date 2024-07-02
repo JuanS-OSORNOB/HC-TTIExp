@@ -27,7 +27,7 @@ class ReservoirMC:
         self.setup_directories()
     
     def setup_directories(self):
-        self.filepath = foldermanagement._create_directory('Monte Carlo')
+        self.filepath = foldermanagement._create_directory(os.path.join(cwd, 'Static_Model', 'MCMCs'))
 
     @staticmethod
     def timur_equation(porosity, water_saturation):
@@ -56,20 +56,20 @@ class ReservoirMC:
 
 class WritingFilesMC:
     def __init__(self, simulation):
+        self.simulation = simulation
         self.simu_lines_to_write = []
-        self.setup_directories(simulation)
+        self.setup_directories()
     
-    def setup_directories(self, simulation):
-        self.simulationpath = foldermanagement._create_directory(os.path.join(simulation.filepath, simulation.jobname, 'Simulation_results'))
+    def setup_directories(self):
+        self.simulationpath = foldermanagement._create_directory(os.path.join(self.simulation.filepath, self.simulation.jobname, 'Simulation_results'))
     
     def add_simulation_line(self, line):
         self.simu_lines_to_write.append(line)
     
-    def print_simulation(self, simulation):
-        mean_perm, std_dev_perm = simulation.analyze_results()
-        for i, mean_perm, std_dev_perm in enumerate(mean_perm, std_dev_perm):
-            print(f"    {i + 1} - Mean permeability={mean_perm[1]}, Std dev permeability={std_dev_perm[2]}")
-    
+    def print_simulation(self, run):
+        mean_perm, std_dev_perm = self.simulation.analyze_results()
+        print(f"RUN {run + 1} - MONTE CARLO SIMULATION RESULTS\n    Mean Permeability: {mean_perm}, Standard Deviation of Permeability: {std_dev_perm}")
+        
     def write_samples(self, parameter, samples_list):
         parameter_samples = parameter + '_samples'
         path = os.path.join(self.simulationpath, parameter_samples)
@@ -82,11 +82,9 @@ class WritingFilesMC:
                     file.write(str(value) + '\n')
             file.close()
 
-    def write_simulation_results(self, simulation):
-        mean_perm, std_dev_perm = simulation.analyze_results()
+    def write_simulation_results(self, mean_perm_list, std_dev_perm_list):
         self.add_simulation_line(f"#Value Mean_Perm Std_dev_Perm")
-        
-        for i, mean_perm, std_dev_perm in enumerate(mean_perm, std_dev_perm):
+        for i, (mean_perm, std_dev_perm) in enumerate(zip(mean_perm_list, std_dev_perm_list)):
             line = f"{mean_perm} {std_dev_perm}"
             self.add_simulation_line(line)
         
@@ -96,14 +94,16 @@ class WritingFilesMC:
             for line in self.simu_lines_to_write:
                 file.write(line + '\n')
 
-
 class PlottingFilesMC:
-    def plot_histogram(self, simulation, run):
+    def __init__(self, simulation):
+        self.simulation = simulation
+    
+    def plot_histogram(self, run):
         plt.figure(figsize=(10, 6))
         hist_figname = f"hist_run_{run}.png"
-        hist_filepath = os.path.join(simulation.simulationpath, hist_figname)
-        plt.hist(simulation.permeability_values, bins=50, color='blue', alpha=0.7)
-        plt.title(f'Distribución de permeabilidad: {simulation.jobname} - Cuenca Atrato')
+        hist_filepath = os.path.join(WritingFilesMC.simulationpath, hist_figname)
+        plt.hist(self.simulation.permeability_values, bins=50, color='blue', alpha=0.7)
+        plt.title(f'Distribución de permeabilidad: {self.simulation.jobname} - Cuenca Atrato')
         plt.xlabel('Permeabilidad')
         plt.ylabel('Frecuencia')
         plt.savefig(hist_filepath)
@@ -172,7 +172,6 @@ class WritingFileSens:
             for line in self.sens_lines_to_write:
                 file.write(line + '\n')
         file.close()
-
 
 class PlottingFileSens:
     def plot_sensitivity(self, simulation, sensitivity_parameter, run):
