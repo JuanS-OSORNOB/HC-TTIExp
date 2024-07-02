@@ -2,9 +2,9 @@ import sys, os
 cwd = os.getcwd()
 print(f"cwd: {cwd}")
 sys.path.append(str(cwd))
-
 from utils.config import Config
 from montecarlosimulation import ReservoirMC, WritingFilesMC, PlottingFilesMC, SensitivityMC, WritingFileSens, PlottingFileSens
+import matplotlib.pyplot as plt
 
 def main():
     config_path = os.path.join(cwd, 'config.json')
@@ -29,7 +29,9 @@ def main():
         std_dev_perm_list.append(std_dev_perm)
         #Plot histogram
         mcplotter = PlottingFilesMC(simulation, mcfilewriter)
+        
         mcplotter.plot_histogram(run)
+        
 
         #Sensitivity
         sensitivitymc = SensitivityMC()

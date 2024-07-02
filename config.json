@@ -1,5 +1,6 @@
 {
-    "jobname":"fm_napipi",
+    "folder":"MonteCarloSimu",
+    "jobname":"Fm_Napipi",
     "num_simulations":10000,
     "num_runs":10,
     "mean_porosity":0.2,
