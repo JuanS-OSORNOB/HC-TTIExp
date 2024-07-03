@@ -15,14 +15,14 @@ class ReservoirMC:
         self.script_dir = os.path.dirname(__file__)
         self.config = config
 
-        self.folder = self.config['folder']
-        self.jobname = self.config['jobname']
-        self.num_simulations = self.config['num_simulations']
-        self.num_runs = self.config['num_runs']
-        self.mean_porosity = self.config['mean_porosity']
-        self.std_dev_porosity = self.config['std_dev_porosity']
-        self.mean_water_saturation = self.config['mean_water_saturation']
-        self.std_dev_water_saturation = self.config['std_dev_water_saturation']
+        self.folder = self.config['simulation']['folder']
+        self.jobname = self.config['simulation']['jobname']
+        self.num_simulations = self.config['simulation']['num_simulations']
+        self.num_runs = self.config['simulation']['num_runs']
+        self.mean_porosity = self.config['simulation']['mean_porosity']
+        self.std_dev_porosity = self.config['simulation']['std_dev_porosity']
+        self.mean_water_saturation = self.config['simulation']['mean_water_saturation']
+        self.std_dev_water_saturation = self.config['simulation']['std_dev_water_saturation']
 
         self.permeability_values = np.zeros(self.num_simulations) #Begin predicted parameter with zero
         self.setup_directories()
@@ -147,7 +147,7 @@ class SensitivityMC:
         #For Phi usually take between 5 and 40 %.
         #For Sw usually take between 40 and 80 %.
         config = simulation.config
-        parameter_values = np.linspace(config['sensitivity_min'], config['sensitivity_max'], config['sensitivity_freq'])
+        parameter_values = np.linspace(config['sensitivity_analysis']['sensitivity_min'], config['sensitivity_analysis']['sensitivity_max'], config['sensitivity_analysis']['sensitivity_freq'])
         porosity_samples_list, water_saturation_samples_list = [], []
         for parameter_value in parameter_values:
             # Create arrays of constant values for porosity and water saturation from initialized values of the class
@@ -159,9 +159,9 @@ class SensitivityMC:
             water_saturation_samples = np.clip(water_saturation_samples, 0.1, None) #Physical sense, values below zero are not accepted
 
             #Update parameter being analyzed: It will create a vector sample of the same parameter_value with len = num_simu
-            if config['sensitivity_parameter'] == 'phi':
+            if config['sensitivity_analysis']['sensitivity_parameter'] == 'phi':
                 porosity_samples = np.full(simulation.num_simulations, parameter_value)
-            elif config['sensitivity_parameter'] == 'sw':
+            elif config['sensitivity_analysis']['sensitivity_parameter'] == 'sw':
                 water_saturation_samples = np.full(simulation.num_simulations, parameter_value)
 
             porosity_samples_list.append(porosity_samples)
@@ -210,13 +210,13 @@ class WritingFileSens:
         _, sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
         print(f"    \nSensitivity Analysis:\n")
         for i, sensitivity_result in enumerate(sensitivity_results):
-            print(f"    {i + 1} - For a value of {self.config['sensitivity_parameter']}={sensitivity_result[0]}; Mean permeability={sensitivity_result[1]}, Std dev permeability={sensitivity_result[2]}")
+            print(f"    {i + 1} - For a value of {self.config['sensitivity_analysis']['sensitivity_parameter']}={sensitivity_result[0]}; Mean permeability={sensitivity_result[1]}, Std dev permeability={sensitivity_result[2]}")
 
     def write_samples_sens(self):
         _, porosity_samples_list, water_saturation_samples_list = SensitivityMC.update_parameters(self.simulation)
         #Phi samples
         phi_samples = 'phi_samples'
-        path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'], phi_samples)
+        path = os.path.join(self.sensitivitypath, self.config['sensitivity_analysis']['sensitivity_parameter'], phi_samples)
         foldermanagement._create_directory(path)
         for i, porosity_samples in enumerate(porosity_samples_list):
             filename = os.path.join(path, f'{phi_samples}_{i + 1}.txt')
@@ -227,7 +227,7 @@ class WritingFileSens:
         
         #Sw samples
         sw_samples  = 'sw_samples'
-        path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'], sw_samples)
+        path = os.path.join(self.sensitivitypath, self.config['sensitivity_analysis']['sensitivity_parameter'], sw_samples)
         foldermanagement._create_directory(path)
         for i, water_saturation_samples in enumerate(water_saturation_samples_list):
             filename = os.path.join(path, f'{sw_samples}_{i + 1}.txt')
@@ -239,7 +239,7 @@ class WritingFileSens:
     def write_timur_sens_in_out(self):
         _, phi_samples_list, sw_samples_list = SensitivityMC.update_parameters(self.simulation)
         all_permeability_values, _ = self.sensitivitymc.sensitivity_analysis(self.simulation)
-        path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'], 'Timur')
+        path = os.path.join(self.sensitivitypath, self.config['sensitivity_analysis']['sensitivity_parameter'], 'Timur')
         foldermanagement._create_directory(path)
         #FIXME Iterate on array of array for sensitivity! Might need to store in a list.
         for i, (phi_samples, sw_samples, timur_output) in enumerate(zip(phi_samples_list, sw_samples_list, all_permeability_values)):
@@ -252,12 +252,12 @@ class WritingFileSens:
     
     def write_sensitivity_results(self):
         _, sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
-        self.add_sensitivity_line(f"{self.config['sensitivity_parameter']}, Mean_Perm, Std_dev_Perm")
+        self.add_sensitivity_line(f"{self.config['sensitivity_analysis']['sensitivity_parameter']}, Mean_Perm, Std_dev_Perm")
         for sensitivity_result in sensitivity_results:
             line = f"{sensitivity_result[0]}, {sensitivity_result[1]}, {sensitivity_result[2]}"
             self.add_sensitivity_line(line)
         
-        directory_path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'])
+        directory_path = os.path.join(self.sensitivitypath, self.config['sensitivity_analysis']['sensitivity_parameter'])
         foldermanagement._create_directory(directory_path)
 
         filename = f"sensitivity_results.csv"
@@ -280,13 +280,13 @@ class PlottingFileSens:
             plt.figure(figsize=(10, 6))
             plt.plot([result[0] for result in sensitivity_results], [result[1] for result in sensitivity_results], label='Permeabilidad media') #Plot: Mean Perm VS Sensitivity value 
             plt.plot([result[0] for result in sensitivity_results], [result[2] for result in sensitivity_results], label='Desviación típica de Permeabilidad') #Plot: Std Dev Perm VS Sensitivity value
-            plt.title(f"Analisis de sensibilidad de {self.config['sensitivity_parameter']}: {self.simulation.jobname} - Cuenca Atrato")
-            plt.xlabel(f"{self.config['sensitivity_parameter']}")
+            plt.title(f"Analisis de sensibilidad de {self.config['sensitivity_analysis']['sensitivity_parameter']}: {self.simulation.jobname} - Cuenca Atrato")
+            plt.xlabel(f"{self.config['sensitivity_analysis']['sensitivity_parameter']}")
             plt.ylabel('Permeabilidad: Media y Desviacion tipica')
             plt.legend()
-            figurepath = os.path.join(self.writersens.sensitivitypath, self.config['sensitivity_parameter'])
+            figurepath = os.path.join(self.writersens.sensitivitypath, self.config['sensitivity_analysis']['sensitivity_parameter'])
             foldermanagement._create_directory(figurepath)
-            sensitivity_figname = f"sensitivity_analysis_{self.config['sensitivity_parameter']}_run_{run + 1}.png"
+            sensitivity_figname = f"sensitivity_analysis_{self.config['sensitivity_analysis']['sensitivity_parameter']}_run_{run + 1}.png"
             plt.savefig(os.path.join(figurepath, sensitivity_figname))
             plt.close()
             #plt.show()

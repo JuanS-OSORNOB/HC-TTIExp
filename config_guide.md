@@ -23,6 +23,8 @@
 ```json
 {
   "simulation": {
+    "folder":"Permeability_Timur",
+    "jobname":"Geologic_Formation",
     "num_runs": 100,
     "num_simulations": 10000,
     "mean_porosity": 0.15,

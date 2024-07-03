@@ -14,7 +14,7 @@ def main():
     porosity_samples_list, water_saturation_samples_list = [], []
     timur_output_list = []
     mean_perm_list, std_dev_perm_list = [], []
-    for run in range(config['num_runs']):
+    for run in range(config['simulation']['num_runs']):
         simulation = ReservoirMC(config)  # Create a new instance for each run
         porosity_samples, water_saturation_samples = simulation.generate_samples()
         porosity_samples_list.append(porosity_samples)
