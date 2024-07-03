@@ -4,11 +4,12 @@ print(f"cwd: {cwd}")
 sys.path.append(str(cwd))
 from utils.config import Config
 from montecarlosimulation import ReservoirMC, WritingFilesMC, PlottingFilesMC, SensitivityMC, WritingFileSens, PlottingFileSens
-
+import json
 
 def main():
     config_path = os.path.join(cwd, 'config.json')
     config = Config.load_config(config_path)
+    
 
     porosity_samples_list, water_saturation_samples_list = [], []
     timur_output_list = []
@@ -62,6 +63,10 @@ def main():
     mcsenswriter.write_timur_sens_in_out()
     mcsenswriter.write_sensitivity_results()
 
+    #Save a copy of the config file used for this simulation
+    config_path_copy = os.path.join(simulation.filepath, simulation.jobname, 'input_config.json')
+    with open(config_path_copy, 'w') as input_config_file:
+        json.dump(config, input_config_file, indent = 4)
 
 if __name__ == '__main__':
     main()
