@@ -1,4 +1,5 @@
 # Configuration Guide
+This guide helps the user properly set parameters for the Monte Carlo simulation of permeability values (that depend on water saturation and porosity of the rock - Timur's equation) necessary for the mapping of properties into a static model.
 
 ## Simulation Parameters
 
