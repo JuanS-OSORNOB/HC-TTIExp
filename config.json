@@ -1,5 +1,5 @@
 {
-    "folder":"MonteCarloSimu",
+    "folder":"PermeabilitySimulation",
     "jobname":"Fm_Napipi",
     "num_simulations":10000,
     "num_runs":5,

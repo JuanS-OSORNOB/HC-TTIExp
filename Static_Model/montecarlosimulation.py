@@ -174,14 +174,17 @@ class SensitivityMC:
         parameter_values, porosity_samples_list, water_saturation_samples_list = SensitivityMC.update_parameters(simulation)
 
         sensitivity_results = []
+        all_permeability_values = []
         for i, parameter_value in enumerate(parameter_values):
             #Run simulation with updated parameter
             simulation.run_simulation(porosity_samples_list[i], water_saturation_samples_list[i])
+            #Store the permeability values of the current run
+            all_permeability_values.append(simulation.permeability_values.copy())
             #Analyze the results and store them
             mean_perm, std_dev_perm = simulation.analyze_results()
             sensitivity_results.append((parameter_value, mean_perm, std_dev_perm))
         
-        return sensitivity_results
+        return all_permeability_values, sensitivity_results
 
 class WritingFileSens:
     def __init__(self, simulation, sensitivitymc):
@@ -204,7 +207,7 @@ class WritingFileSens:
         self.sens_lines_to_write.append(line)
     
     def print_sensitivity(self):
-        sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
+        _, sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
         print(f"    \nSensitivity Analysis:\n")
         for i, sensitivity_result in enumerate(sensitivity_results):
             print(f"    {i + 1} - For a value of {self.config['sensitivity_parameter']}={sensitivity_result[0]}; Mean permeability={sensitivity_result[1]}, Std dev permeability={sensitivity_result[2]}")
@@ -235,11 +238,11 @@ class WritingFileSens:
 
     def write_timur_sens_in_out(self):
         _, phi_samples_list, sw_samples_list = SensitivityMC.update_parameters(self.simulation)
-
+        all_permeability_values, _ = self.sensitivitymc.sensitivity_analysis(self.simulation)
         path = os.path.join(self.sensitivitypath, self.config['sensitivity_parameter'], 'Timur')
         foldermanagement._create_directory(path)
         #FIXME Iterate on array of array for sensitivity! Might need to store in a list.
-        for i, (phi_samples, sw_samples, timur_output) in enumerate(zip(phi_samples_list, sw_samples_list, self.simulation.permeability_values)):
+        for i, (phi_samples, sw_samples, timur_output) in enumerate(zip(phi_samples_list, sw_samples_list, all_permeability_values)):
             filename = os.path.join(path, f'timur_output_{i + 1}.csv')
             with open(filename, 'w') as file:
                 file.write('Phi, Sw, K\n')
@@ -248,7 +251,7 @@ class WritingFileSens:
             file.close()
     
     def write_sensitivity_results(self):
-        sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
+        _, sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
         self.add_sensitivity_line(f"{self.config['sensitivity_parameter']}, Mean_Perm, Std_dev_Perm")
         for sensitivity_result in sensitivity_results:
             line = f"{sensitivity_result[0]}, {sensitivity_result[1]}, {sensitivity_result[2]}"
@@ -272,7 +275,7 @@ class PlottingFileSens:
         self.writersens = writersens
     
     def plot_sensitivity(self, run):
-            sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
+            _, sensitivity_results = self.sensitivitymc.sensitivity_analysis(self.simulation)
             # Plot sensitivity results
             plt.figure(figsize=(10, 6))
             plt.plot([result[0] for result in sensitivity_results], [result[1] for result in sensitivity_results], label='Permeabilidad media') #Plot: Mean Perm VS Sensitivity value 
