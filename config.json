@@ -1,14 +1,14 @@
 {
     "folder":"PermeabilitySimulation",
-    "jobname":"02_Fm_Sierra",
+    "jobname":"06_Fm_Clavo",
     "num_simulations":10000,
     "num_runs":10,
-    "mean_porosity":0.15,
+    "mean_porosity":0.17,
     "std_dev_porosity":0.04,
-    "mean_water_saturation":0.60,
+    "mean_water_saturation":0.55,
     "std_dev_water_saturation":0.10,
     "sensitivity_parameter": "sw",
     "sensitivity_min":0.2,
-    "sensitivity_max": 0.45,
+    "sensitivity_max": 0.40,
     "sensitivity_freq": 10
 }
