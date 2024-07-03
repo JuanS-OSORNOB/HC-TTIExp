@@ -11,7 +11,7 @@
 
 ## Sensitivity Analysis Parameters
 
-- **sensitivity_parameter**: Parameter to analyze for sensitivity. Common values are 'phi' (porosity) and 'sw' (water saturation).
+- **sensitivity_parameter**: Parameter to analyze for sensitivity. Values are either 'phi' (porosity) or 'sw' (water saturation).
 - **sensitivity_min**: Minimum value for the sensitivity analysis. Should be within the realistic range for the parameter.
 - **sensitivity_max**: Maximum value for the sensitivity analysis. Should be within the realistic range for the parameter.
 - **sensitivity_freq**: Number of steps between the minimum and maximum values for the sensitivity analysis. Typical values range from 5 to 20.

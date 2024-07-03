@@ -1,14 +1,14 @@
 {
     "folder":"PermeabilitySimulation",
-    "jobname":"Fm_Napipi",
+    "jobname":"02_Fm_Sierra",
     "num_simulations":10000,
-    "num_runs":5,
-    "mean_porosity":0.2,
-    "std_dev_porosity":0.05,
-    "mean_water_saturation":0.3,
-    "std_dev_water_saturation":0.1,
-    "sensitivity_parameter": "phi",
-    "sensitivity_min":0.06,
-    "sensitivity_max": 0.3,
+    "num_runs":10,
+    "mean_porosity":0.15,
+    "std_dev_porosity":0.04,
+    "mean_water_saturation":0.60,
+    "std_dev_water_saturation":0.10,
+    "sensitivity_parameter": "sw",
+    "sensitivity_min":0.2,
+    "sensitivity_max": 0.45,
     "sensitivity_freq": 10
 }
