@@ -149,7 +149,7 @@ def plot_burial_history_vr(folder_path1, folder_path2, output_fig):
     # Get a list of all files in the folder that match the pattern
     file_list2 = [file for file in os.listdir(folder_path2) if file.startswith("VR_") and file.endswith(".txt")]
     file_list2.sort(key=lambda x: int(x.split("_")[-1].split(".")[0]))
-    print(file_list2)
+    print(f"VR file list:\n{file_list2}")
     all_t = []
     all_Z = []
     for i, file_name in enumerate(file_list2):
@@ -170,7 +170,7 @@ def plot_burial_history_vr(folder_path1, folder_path2, output_fig):
         # Plot Z against t for each file
         plt.scatter(data["t_values"], data["Z_values"], s=1.5)
         plt.plot(data["t_values"], data["Z_values"], linewidth = 0.5, label = f"VR {file_name.split('_')[-1].split('.')[0]}")
-        print( f"{i}) VR {file_name.split('_')[-1].split('.')[0]}")
+        #print( f"{i}) VR {file_name.split('_')[-1].split('.')[0]}")
     # Customize the plot
     plt.title("R0 (%)")
     plt.xlabel("t (m.A.)")
@@ -189,12 +189,12 @@ def plot_burial_history_vr(folder_path1, folder_path2, output_fig):
     plt.savefig(output_fig, dpi=600)
     # Show the plot
     #plt.show()
-def plot_burial_history_vr_fill(folder_path1, folder_path2, output_fig):  
-    # Plot the Ro values filled
+def plot_burial_history_vr_fill(folder_path1, folder_path2, output_fig):
+    #First step: find global t-range and build a common grid
     file_list2 = [file for file in os.listdir(folder_path2) if file.startswith("VR_") and file.endswith(".txt")]
     t_common = None
-    interpolated_Z = []
-    #First pass: find global t-range and build a common grid
+    vr_interfaces = []
+    geol_interfaces = []
     t_all = []
     for file_name in file_list2:
         t_vals, Z_vals = [], []
@@ -207,9 +207,23 @@ def plot_burial_history_vr_fill(folder_path1, folder_path2, output_fig):
                 t_vals.append(t)
                 Z_vals.append(Z)
         t_all.extend(t_vals)
-    #Define common t-grid with high enough resolution
+    #Second step: Define common t-grid with high enough resolution
     t_common = np.linspace(min(t_all), max(t_all), 500)
-    #Interpolate all curves onto the common grid
+    #Third step: Interpolate all curves onto the common grid
+    file_list1_grid = [file for file in os.listdir(folder_path1) if file.startswith("grid_burial_history_layer_") and file.endswith(".txt")]
+    for file_name in file_list1_grid:
+        t_vals, Z_vals = [], []
+        file_path = os.path.join(folder_path1, file_name)
+        with open(file_path, 'r') as file:
+            for line in file:
+                if line.startswith("#"):
+                    continue
+                t, Z = map(float, line.strip().split())
+                t_vals.append(t)
+                Z_vals.append(Z)
+        f_interp = interp1d(t_vals, Z_vals, bounds_error=False, fill_value="extrapolate")
+        geol_interfaces.append(f_interp(t_common))
+
     for file_name in file_list2:
         t_vals, Z_vals = [], []
         file_path = os.path.join(folder_path2, file_name)
@@ -221,12 +235,57 @@ def plot_burial_history_vr_fill(folder_path1, folder_path2, output_fig):
                 t_vals.append(t)
                 Z_vals.append(Z)
         f_interp = interp1d(t_vals, Z_vals, bounds_error=False, fill_value="extrapolate")
-        interpolated_Z.append(f_interp(t_common))
+        vr_interfaces.append(f_interp(t_common))
+    
+    # Move vr_interfaces[9] to position 0
+    item = vr_interfaces.pop(9)  # Remove item at index 9
+    vr_interfaces.insert(0, item)  # Insert it at the beginning to fix re-ordering problem visually identified
+
+    ########## Compute areas individually /begin/ ##########
+    def compute_area(t, bottom_curve, top_curve):
+        height = top_curve - bottom_curve
+        area = np.trapz(height, t)
+        return area
+    # Step 1: compute VR areas
+    vr_areas = []
+    for j in range(len(vr_interfaces) - 1):
+        area = compute_area(t_common, vr_interfaces[j], vr_interfaces[j + 1])
+        vr_areas.append(area)
+    print(f"VR areas=\n{vr_areas}")
+    # Step 2: compute geological areas
+    geol_areas = []
+    for i in range(len(geol_interfaces) - 1):
+        area = compute_area(t_common, geol_interfaces[i], geol_interfaces[i + 1])
+        geol_areas.append(area)
+    print(f"Geological areas=\n{geol_areas}")
+    # Step 3: Compute intersection areas
+    overlap_percentages = np.zeros((len(geol_areas), len(vr_areas)))
+    for i in range(len(geol_interfaces) - 1):
+        geo_bottom = geol_interfaces[i]
+        geo_top = geol_interfaces[i + 1]
+        for j in range(len(vr_interfaces) - 1):
+            vr_bottom = vr_interfaces[j]
+            vr_top = vr_interfaces[j + 1]
+            bottom_overlap = np.maximum(geo_bottom, vr_bottom)
+            top_overlap = np.minimum(geo_top, vr_top)
+            #If no overlap (top < bottom), clip heights to zero
+            overlap_height = np.clip(top_overlap - bottom_overlap, a_min=0, a_max=None)
+            overlap_area = np.trapz(overlap_height, t_common)
+            if geol_areas[i] > 0:
+                overlap_percentages[i, j] = (overlap_area / geol_areas[i]) * 100
+            else:
+                overlap_percentages[i, j] = 0 #Avoid division by zero
+    print(f"Overlap percentages (VR range inside each geological layer):\n{overlap_percentages}")
+    col_sums = np.sum(overlap_percentages, axis = 1)
+    print(f"Just checking column sums {col_sums}. Should be 100%")
+    ########## Compute areas individually /end/ ##########
     
     #Plot and fill between layers
     plt.figure(figsize=(10, 6))
-    n_layers = len(interpolated_Z)
-    print(f"Number of layers = {n_layers}")
+    """ for i in range(len(geol_interfaces)):
+        plt.plot(t_common, geol_interfaces[i], label = f"Layer grid {i}") """
+    """ for i in range(len(vr_interfaces)):
+        plt.plot(t_common, vr_interfaces[i], label = f"Interface {i}") """
     colors = [
     '#001f3f',  # 1. dark blue
     '#0057b7',  # 2. cobalt blue
@@ -270,57 +329,15 @@ def plot_burial_history_vr_fill(folder_path1, folder_path2, output_fig):
 
     #cmap = mcolors.LinearSegmentedColormap.from_list("BlueGreenRed", ["blue", "green", "red"], N= n_layers)
     #cmap = plt.cm.jet
-    """ for i in range(0, len(interpolated_Z)):
-        plt.plot(t_common, interpolated_Z[i], label = f"Interface {i}") """
-    """ plt.plot(t_common, interpolated_Z[0], label = f'Interface [0]')
-    plt.plot(t_common, interpolated_Z[1], label = f'Interface [1]')
-    plt.plot(t_common, interpolated_Z[2], label = f'Interface [2]')
-    plt.plot(t_common, interpolated_Z[3], label = f'Interface [3]')
-    plt.plot(t_common, interpolated_Z[4], label = f'Interface [4]')
-    plt.plot(t_common, interpolated_Z[5], label = f'Interface [5]')
-    plt.plot(t_common, interpolated_Z[6], label = f'Interface [6]')
-    plt.plot(t_common, interpolated_Z[7], label = f'Interface [7]')
-    plt.plot(t_common, interpolated_Z[8], label = f'Interface [8]')
-    plt.plot(t_common, interpolated_Z[9], label = f'Interface [9]')
-    plt.plot(t_common, interpolated_Z[10], label = f'Interface [10]')
-    plt.plot(t_common, interpolated_Z[11], label = f'Interface [11]')
-    plt.plot(t_common, interpolated_Z[12], label = f'Interface [12]')
-    plt.plot(t_common, interpolated_Z[13], label = f'Interface [13]')
-    plt.plot(t_common, interpolated_Z[14], label = f'Interface [14]')
-    plt.plot(t_common, interpolated_Z[15], label = f'Interface [15]')
-    plt.plot(t_common, interpolated_Z[16], label = f'Interface [16]')
-    plt.plot(t_common, interpolated_Z[17], label = f'Interface [17]')
-    plt.plot(t_common, interpolated_Z[18], label = f'Interface [18]') """
-
-
     cmap = mcolors.ListedColormap(colors)
-    plt.fill_between(t_common, interpolated_Z[9], interpolated_Z[0], color = colors[0], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[0], interpolated_Z[1], color = colors[1], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[1], interpolated_Z[2], color = colors[2], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[2], interpolated_Z[3], color = colors[3], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[3], interpolated_Z[4], color = colors[4], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[4], interpolated_Z[5], color = colors[5], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[5], interpolated_Z[6], color = colors[6], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[6], interpolated_Z[7], color = colors[7], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[7], interpolated_Z[8], color = colors[8], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[8], interpolated_Z[10], color = colors[9], alpha = 0.5)#cmap(0) colors[0]
-    #plt.fill_between(t_common, interpolated_Z[9], interpolated_Z[10], color = colors[10], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[10], interpolated_Z[11], color = colors[11], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[11], interpolated_Z[12], color = colors[12], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[12], interpolated_Z[13], color = colors[13], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[13], interpolated_Z[14], color = colors[14], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[14], interpolated_Z[15], color = colors[15], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[15], interpolated_Z[16], color = colors[16], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[16], interpolated_Z[17], color = colors[17], alpha = 0.5)#cmap(0) colors[0]
-    plt.fill_between(t_common, interpolated_Z[17], interpolated_Z[18], color = colors[17], alpha = 0.5)#cmap(0) colors[0]
     # Fill between each pair
-    """ for i in range(1, len(interpolated_Z) - 1):
-        plt.fill_between(t_common, interpolated_Z[i-1], interpolated_Z[i],
-                     color= colors[i], alpha=0.5)#colors[i % len(colors)] cmap(i / (n_layers - 1)) """
+    for i in range(1, len(vr_interfaces) - 1):
+        plt.fill_between(t_common, vr_interfaces[i-1], vr_interfaces[i],
+                     color= colors[i], alpha=0.5)#colors[i % len(colors)] cmap(i / (n_layers - 1))
     
     #Plot burial history
     file_list = [file for file in os.listdir(folder_path1) if file.startswith("burial_history_layer_") and file.endswith(".txt")]
-    print(file_list)
+    print(f"Burial history file list:\n{file_list}")
     # Sort the file list based on the layer number
     file_list.sort(key=lambda x: int(x.split("_")[-1].split(".")[0]))
     for file_name in file_list:
@@ -336,6 +353,7 @@ def plot_burial_history_vr_fill(folder_path1, folder_path2, output_fig):
                 data["Z_values"].append(Z)
         # Plot Z against t for each file
         plt.plot(data["t_values"], data["Z_values"], c = 'k', label=f"Layer {file_name.split('_')[-1].split('.')[0]}")
+    
     # Customize the plot
     plt.title("Historia de enterramiento con R0")
     plt.xlabel("t (m.A.)")
