@@ -272,9 +272,10 @@ def plot_burial_history_vr_fill(folder_path1, folder_path2, output_fig):
             overlap_height = np.clip(top_overlap - bottom_overlap, a_min=0, a_max=None)
             overlap_area = np.trapz(overlap_height, t_common)
             if geol_areas[i] > 0:
-                overlap_percentages[i, j] = (overlap_area / geol_areas[i]) * 100
+                overlap_percentages[i, j] = (overlap_area / geol_areas[i])
             else:
                 overlap_percentages[i, j] = 0 #Avoid division by zero
+    np.set_printoptions(suppress=True, precision=6)
     print(f"Overlap percentages (VR range inside each geological layer):\n{overlap_percentages}")
     col_sums = np.sum(overlap_percentages, axis = 1)
     print(f"Just checking column sums {col_sums}. Should be 100%")
@@ -336,11 +337,12 @@ def plot_burial_history_vr_fill(folder_path1, folder_path2, output_fig):
                      color= colors[i], alpha=0.5)#colors[i % len(colors)] cmap(i / (n_layers - 1))
     
     #Plot burial history
+    labels_layers = ["Fm. Quibó", "Fm. Sierra", "Fm. Napipí", "Fm. Uva", "Fm. Salaquí", "Fm. Clavo"]
     file_list = [file for file in os.listdir(folder_path1) if file.startswith("burial_history_layer_") and file.endswith(".txt")]
     print(f"Burial history file list:\n{file_list}")
     # Sort the file list based on the layer number
     file_list.sort(key=lambda x: int(x.split("_")[-1].split(".")[0]))
-    for file_name in file_list:
+    for i, file_name in enumerate(file_list):
         # Read data from the file
         file_path = os.path.join(folder_path1, file_name)
         data = {"t_values": [], "Z_values": []}
@@ -352,7 +354,7 @@ def plot_burial_history_vr_fill(folder_path1, folder_path2, output_fig):
                 data["t_values"].append(t)
                 data["Z_values"].append(Z)
         # Plot Z against t for each file
-        plt.plot(data["t_values"], data["Z_values"], c = 'k', label=f"Layer {file_name.split('_')[-1].split('.')[0]}")
+        plt.plot(data["t_values"], data["Z_values"], label=labels_layers[i])#f"Layer {file_name.split('_')[-1].split('.')[0]}"
     
     # Customize the plot
     plt.title("Historia de enterramiento con R0")
@@ -383,6 +385,43 @@ def plot_burial_history_vr_fill(folder_path1, folder_path2, output_fig):
     cb.set_label("%R0", rotation=270, labelpad=15)
     #plt.tight_layout()
     plt.savefig(output_fig, dpi=600)
+
+    return overlap_percentages, labels
+#endregion
+#region Exposure time
+def plot_exposuretime(folder_path1, folder_path2, output_fig1, output_fig2):
+    overlap_percentages, labels = plot_burial_history_vr_fill(folder_path1, folder_path2, output_fig1)
+    last_times = [3.3939393939393936, 11.272727272727273, 14.787878787878789, 33.81818181818182, 38.06060606060606, 39.0]
+    """ def compute_exposuretime(percentage, last_time):
+        return percentage * last_time
+    exposuretime = np.vectorize(compute_exposuretime)(overlap_percentages) """
+    exposuretimes = []
+    for i, layers in enumerate(overlap_percentages):
+        exposuretime_layer = []
+        for j, percentage in enumerate(layers):
+            exposuretime = percentage * last_times[i]
+            exposuretime_layer.append(exposuretime)
+        exposuretimes.append(exposuretime_layer)
+    print(f"Exposure time:\n{exposuretimes}")
+
+    fig, axes = plt.subplots(2, 3, figsize =(18, 10), sharey = True, sharex = True)
+    axes = axes.flatten()
+    titles = ["Tiempo de exposición - Fm. Quibdó",
+               "Tiempo de exposición - Fm. Sierra",
+               "Tiempo de exposición - Fm. Napipí",
+               "Tiempo de exposición - Fm. Uva",
+               "Tiempo de exposición - Fm. Salaquí",
+               "Tiempo de exposición - Fm. Clavo"]
+    for i in range(6):
+        axes[i].bar(labels, exposuretimes[i])
+        axes[i].set_title(titles[i])
+        axes[i].set_xlabel("Rango VR0 (%)")
+        axes[i].set_ylabel("Tiempo (mA)")
+        axes[i].tick_params(axis='x', rotation=45)
+    plt.tight_layout()
+    plt.savefig(output_fig2, dpi = 600)
+    #plt.show()
+
 #endregion
 # Specify the path to your folder containing the files
 folder_path_bh = "C:/Users/ecanc/Documents/GitHub/HC-TTIExp/mains/data/burial_history/burial_history_layers/"
@@ -391,7 +430,9 @@ output_folder = "C:/Users/ecanc/Documents/GitHub/HC-TTIExp/mains/data/burial_his
 output_fig = "C:/Users/ecanc/Documents/GitHub/HC-TTIExp/mains/data/burial_history/burial_history_layers_plots/burial_history.png"
 output_fig_vr = "C:/Users/ecanc/Documents/GitHub/HC-TTIExp/mains/data/burial_history/burial_history_layers_plots/burial_history_vr.png"
 output_fig_vr_fill = "C:/Users/ecanc/Documents/GitHub/HC-TTIExp/mains/data/burial_history/burial_history_layers_plots/burial_history_vr_fill.png"
+output_fig_exposuretime = "C:/Users/ecanc/Documents/GitHub/HC-TTIExp/mains/data/burial_history/burial_history_layers_plots/exposuretime.png"
 plot_burial_alllayers(folder_path_bh, output_folder)
 plot_burial_history(folder_path_bh, output_fig)
 plot_burial_history_vr(folder_path_bh, folder_path_vr, output_fig_vr)
-plot_burial_history_vr_fill(folder_path_bh, folder_path_vr, output_fig_vr_fill)
+#plot_burial_history_vr_fill(folder_path_bh, folder_path_vr, output_fig_vr_fill)
+plot_exposuretime(folder_path_bh, folder_path_vr, output_fig_vr_fill, output_fig_exposuretime)
