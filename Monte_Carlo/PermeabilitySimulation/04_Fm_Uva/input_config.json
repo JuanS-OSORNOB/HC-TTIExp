@@ -1,0 +1,18 @@
+{
+    "simulation": {
+        "folder": "PermeabilitySimulation",
+        "jobname": "04_Fm_Uva",
+        "num_simulations": 10000,
+        "num_runs": 10,
+        "mean_porosity": 0.12,
+        "std_dev_porosity": 0.03,
+        "mean_water_saturation": 0.65,
+        "std_dev_water_saturation": 0.08
+    },
+    "sensitivity_analysis": {
+        "sensitivity_parameter": "sw",
+        "sensitivity_min": 0.2,
+        "sensitivity_max": 0.4,
+        "sensitivity_freq": 10
+    }
+}

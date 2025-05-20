@@ -1,0 +1,18 @@
+{
+    "simulation": {
+        "folder": "PermeabilitySimulation",
+        "jobname": "03_Fm_Napipi",
+        "num_simulations": 10000,
+        "num_runs": 10,
+        "mean_porosity": 0.18,
+        "std_dev_porosity": 0.05,
+        "mean_water_saturation": 0.55,
+        "std_dev_water_saturation": 0.1
+    },
+    "sensitivity_analysis": {
+        "sensitivity_parameter": "sw",
+        "sensitivity_min": 0.2,
+        "sensitivity_max": 0.4,
+        "sensitivity_freq": 10
+    }
+}

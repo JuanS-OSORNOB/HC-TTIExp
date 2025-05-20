@@ -3,7 +3,7 @@ cwd = os.getcwd()
 print(f"cwd: {cwd}")
 sys.path.append(str(cwd))
 from utils.config import Config
-from montecarlosimulation import ReservoirMC, WritingFilesMC, PlottingFilesMC, SensitivityMC, WritingFileSens, PlottingFileSens
+from montecarlo import ReservoirMC, WritingFilesMC, PlottingFilesMC, SensitivityMC, WritingFileSens, PlottingFileSens
 import json
 
 def main():
@@ -27,9 +27,9 @@ def main():
         #Print simulation results
         mcfilewriter = WritingFilesMC(simulation)
         mcfilewriter.print_simulation(run)
-        print("\nPorosity samples (first ten): ", porosity_samples[:10])
-        print("Water saturation samples (first ten): ", water_saturation_samples[:10])
-        print("Permeability values (first ten): ", simulation.permeability_values[:10], "\n")
+        #print("\nPorosity samples (first ten): ", porosity_samples[:10])
+        #print("Water saturation samples (first ten): ", water_saturation_samples[:10])
+        #print("Permeability values (first ten): ", simulation.permeability_values[:10], "\n")
 
         #Append to list to write on a file 
         mean_perm, std_dev_perm = simulation.analyze_results()
