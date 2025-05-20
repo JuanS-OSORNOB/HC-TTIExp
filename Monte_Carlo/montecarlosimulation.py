@@ -35,7 +35,7 @@ class ReservoirMC:
         porosity_samples = np.clip(porosity_samples, 0, None) #Physical sense, values below zero are not accepted
         
         water_saturation_samples = np.random.normal(self.mean_water_saturation, self.std_dev_water_saturation, self.num_simulations)
-        water_saturation_samples = np.clip(water_saturation_samples, 0.1, None) #Physical sense, values below zero are not accepted
+        water_saturation_samples = np.clip(water_saturation_samples, 0, None) #Physical sense, values below zero are not accepted
         
         return porosity_samples, water_saturation_samples
 
@@ -49,7 +49,7 @@ class ReservoirMC:
         """Timur's 1968 equation: https://petrophysicsequations.blogspot.com/p/permeability-timur-1968-timur-1968-also.html
         """
         if water_saturation == 0:
-            water_saturation = 0.1 #Small number to avoid division by zero.
+            water_saturation = 0.0001 #Small number to avoid division by zero.
         permeability = ((93 * (porosity ** 2.2))/ water_saturation) ** 2
         return permeability
     
@@ -127,7 +127,7 @@ class PlottingFilesMC:
         plt.figure(figsize=(10, 6))
         hist_figname = f"hist_run_{run + 1}.png"
         hist_filepath = os.path.join(self.writtermc.simulationpath, hist_figname)
-        plt.hist(self.simulation.permeability_values, bins=1000, color='blue', alpha=0.7, density = True)
+        plt.hist(self.simulation.permeability_values, bins=50, color='blue', alpha=0.7, density = False)
         plt.title(f'Distribución de permeabilidad: {self.simulation.jobname} - Cuenca Atrato')
         plt.xlabel('Permeabilidad')
         plt.ylabel('Frecuencia')
