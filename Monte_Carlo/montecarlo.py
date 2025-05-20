@@ -50,7 +50,7 @@ class ReservoirMC:
         """
         if water_saturation == 0:
             water_saturation = 0.0001 #Small number to avoid division by zero.
-        permeability = ((0.93 * (porosity ** 2.2))/ water_saturation) ** 2
+        permeability = ((93 * (porosity ** 2.2))/ water_saturation) ** 2
         return permeability
     
     def analyze_results(self):
@@ -127,11 +127,17 @@ class PlottingFilesMC:
         plt.figure(figsize=(10, 6))
         hist_figname = f"hist_run_{run + 1}.png"
         hist_filepath = os.path.join(self.writtermc.simulationpath, hist_figname)
+        mean_perm, std_dev_perm = self.simulation.analyze_results()
+        plt.axvline(mean_perm, color='red', linestyle='--', linewidth=2, label=f'Media = {mean_perm:.4f}')
+        plt.axvline(mean_perm - std_dev_perm, color='green', linestyle=':', linewidth=2, label=f'-1σ = {mean_perm - std_dev_perm:.4f}')
+        plt.axvline(mean_perm + std_dev_perm, color='green', linestyle=':', linewidth=2, label=f'+1σ = {mean_perm + std_dev_perm:.4f}')
         plt.hist(self.simulation.permeability_values, bins=50, color='blue', alpha=0.7, density = False)
+        #plt.xlim(0, 0.06)
         plt.title(f'Distribución de permeabilidad: {self.simulation.jobname} - Cuenca Atrato')
         plt.xlabel('Permeabilidad (mD)')
         plt.ylabel('Frecuencia')
-        plt.savefig(hist_filepath)
+        plt.legend()
+        plt.savefig(hist_filepath, dpi = 600)
         plt.close()
         #plt.show()
 
